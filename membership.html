@@ -11,42 +11,34 @@
     <h2>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ</h2>
     <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
 
-    <form action="https://getform.io/f/bdrknxnb" method="POST" onsubmit="saveData()">
-      <!-- Replace abcd1234 with YOUR Getform endpoint -->
+   <form id="memberForm">
 
-      <input type="hidden" name="_redirect" value="https://darshan5462-maker.github.io/myewbsite1/thanks.html">
+  <label>ಹೆಸರು</label>
+  <input type="text" name="name" required>
 
-      <label>ಪೂರ್ಣ ಹೆಸರು</label>
-      <input type="text" name="name" required>
+  <label>ಮೊಬೈಲ್</label>
+  <input type="tel" name="phone" required>
 
-      <label>ತಂದೆಯ / ತಾಯಿಯ ಹೆಸರು</label>
-      <input type="text" name="parent_name" required>
+  <label>ವಿಳಾಸ</label>
+  <textarea name="address" required></textarea>
 
-      <label>ಜನ್ಮ ದಿನಾಂಕ</label>
-      <input type="date" name="dob" required>
+  <button type="submit">ಸಲ್ಲಿಸಿ</button>
+</form>
 
-      <label>ಲಿಂಗ</label>
-      <select name="gender" required>
-        <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
-        <option>ಪುರುಷ</option>
-        <option>ಮಹಿಳೆ</option>
-        <option>ಇತರೆ</option>
-      </select>
+<script>
+document.getElementById("memberForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-      <label>ವಿಳಾಸ</label>
-      <textarea name="address" rows="3" required></textarea>
-
-      <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</label>
-      <input type="tel" name="phone" required>
-
-      <label>ಇಮೇಲ್ (ಐಚ್ಛಿಕ)</label>
-      <input type="email" name="email">
-
-      <label>ವೃತ್ತಿ</label>
-      <input type="text" name="occupation">
-
-      <button type="submit">ಸದಸ್ಯತ್ವಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ</button>
-    </form>
+  fetch("https://script.google.com/macros/s/AKfycbyCqaVC8K_0qjf-QsvTfexPxRAsPINl-CdT5nFZ83pPjxyJ92aZrCAhQrit3kvtFULG/exec", {
+    method: "POST",
+    body: new FormData(this)
+  })
+  .then(res => res.json())
+  .then(data => {
+    window.location.href = "card.html?id=" + data.id;
+  });
+});
+</script>
   </section>
   <script>
 function saveData() {
