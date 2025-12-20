@@ -46,6 +46,12 @@
   <p>ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ.</p>
 
   <a href="index.html">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
+  <script>
+    function goToCard() {
+      const params = new URLSearchParams(window.location.search);
+      window.location.href = "card.html?" + params.toString();
+    }
+  </script>
 
 </body>
 </html>
