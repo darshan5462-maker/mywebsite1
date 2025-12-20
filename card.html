@@ -43,9 +43,9 @@
 <script>
   const params = new URLSearchParams(window.location.search);
 
-  document.getElementById("name").innerText = params.get("name");
-  document.getElementById("phone").innerText = params.get("phone");
-  document.getElementById("address").innerText = params.get("address");
+  document.getElementById("name").innerText = localStorage.getItem("name");
+  document.getElementById("phone").innerText = localStorage.getItem("phone");
+  document.getElementById("address").innerText = localStorage.getItem("address");
 
   // auto membership ID
   document.getElementById("mid").innerText = "MJS-" + Math.floor(Math.random()*100000);

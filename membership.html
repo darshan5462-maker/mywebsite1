@@ -11,7 +11,7 @@
     <h2>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ</h2>
     <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
 
-    <form action="https://getform.io/f/bdrknxnb" method="POST">
+    <form action="https://getform.io/f/bdrknxnb" method="POST" onsubmit="saveData()">
       <!-- Replace abcd1234 with YOUR Getform endpoint -->
 
       <input type="hidden" name="_redirect" value="https://darshan5462-maker.github.io/myewbsite1/thanks.html">
@@ -48,6 +48,13 @@
       <button type="submit">ಸದಸ್ಯತ್ವಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ</button>
     </form>
   </section>
+  <script>
+function saveData() {
+  localStorage.setItem("name", document.getElementById("name").value);
+  localStorage.setItem("phone", document.getElementById("phone").value);
+  localStorage.setItem("address", document.getElementById("address").value);
+}
+</script>
 
 </body>
 </html>
