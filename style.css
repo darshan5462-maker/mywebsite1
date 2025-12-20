@@ -1,3 +1,6 @@
+body {
+  font-family: 'Noto Sans Kannada', Arial, sans-serif;
+}
 /*body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -68,9 +71,80 @@ button {
   border: none;
   cursor: pointer;
 }*/
-body {
+ 
+    h1,h3,h4{
+      text-align: center;
+    }
+    nav{
+      text-align: center;
+    }
+    body {
+  margin: 0;
   font-family: Arial, sans-serif;
 }
+
+header {
+  background: #8b0000;
+  color: white;
+  padding: 15px;
+}
+
+nav a {
+  color: white;
+  text-align: center;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.banner {
+    background: orange;
+    margin-top: 2%;
+    padding: 50px;
+    text-align: center;
+
+  
+}
+.ban{
+  background: yellow;
+  margin-top: 2%;
+    padding: 50px;
+    text-align: center;
+}
+
+
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  width: 500px;
+}
+
+.content {
+  padding: 20px;
+}
+
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+div{
+  background-color: aquamarine;
+}
+
+@media (max-width: 600px) {
+  nav {
+    display: block;
+  }
+
+  nav a {
+    display: block;
+    margin: 5px 0;
+  }
+}
+
 
 header {
   background: #8b0000;
@@ -91,8 +165,10 @@ input, textarea {
 
 button {
   background: #8b0000;
+  display: block;
   color: white;
-  padding: 10px;
+  margin: 20px auto;
+  padding: 10px 25px;
   border: none;
   cursor: pointer;
 }
@@ -106,5 +182,145 @@ button {
   color: white;
   text-align: center;
   text-decoration: none;
+  border-radius: 5px;
+}
+
+
+/*#about {
+  padding: 30px;
+  background-color: #f9f9f9;
+}
+
+#about h2 {
+  color: #8b0000;
+  margin-bottom: 15px;
+}
+
+#about h3 {
+  margin-top: 20px;
+  color: #333;
+}
+
+#about ul {
+  margin-left: 20px;
+}
+
+#about li {
+  margin-bottom: 8px;
+}*//* About Section Background */
+#about {
+  padding: 35px 25px;
+  background: linear-gradient(135deg, #fff7e6, #f0f8ff);
+  border-left: 6px solid #8b0000;
+  line-height: 1.9;
+}
+
+/* Main Heading */
+#about h2 {
+  text-align: center;
+  color: #7a0c0c;
+  margin-bottom: 25px;
+  font-size: 26px;
+  background: #ffe4c4;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Sub Headings */
+#about h3 {
+  margin-top: 30px;
+  margin-bottom: 12px;
+  color: #0b5394;
+  font-size: 21px;
+  border-left: 5px solid #0b5394;
+  padding-left: 10px;
+}
+
+/* Paragraph Text */
+#about p {
+  font-size: 16.5px;
+  color: #333;
+  text-align: justify;
+  background: #ffffff;
+  padding: 12px 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Objectives List */
+#about ul {
+  margin-left: 25px;
+  margin-top: 12px;
+  background: #e8f4ff;
+  padding: 15px 20px;
+  border-radius: 8px;
+}
+
+#about ul li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #2f4f4f;
+  list-style-type: "✔  ";
+}
+
+/* Address spacing */
+#about p br {
+  line-height: 2.2;
+}
+
+/* Hover effect */
+#about p:hover,
+#about ul:hover {
+  background-color: #fff0f5;
+  transition: 0.3s ease;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  #about {
+    padding: 25px 15px;
+  }
+
+  #about h2 {
+    font-size: 21px;
+  }
+
+  #about h3 {
+    font-size: 18px;
+  }
+
+  #about p,
+  #about ul li {
+    font-size: 15px;
+  }
+}
+.site-header {
+  text-align: center;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.logo {
+  width: 120px;   /* you can change size */
+  height: auto;
+  margin-bottom: 10px;
+}
+.banner1 {
+  background-image: url("images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  text-align: center;
+}
+
+.banner1 h2 {
+  background: rgba(0,0,0,0.5);
+  padding: 10px 20px;
   border-radius: 5px;
 }
