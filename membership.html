@@ -28,7 +28,7 @@
 <script>
 document.getElementById("memberForm").addEventListener("submit", function(e) {
   e.preventDefault();
-
+         
   fetch("https://script.google.com/macros/s/AKfycbyCqaVC8K_0qjf-QsvTfexPxRAsPINl-CdT5nFZ83pPjxyJ92aZrCAhQrit3kvtFULG/exec", {
     method: "POST",
     body: new FormData(this)

@@ -1,54 +1,51 @@
 <!DOCTYPE html>
 <html lang="kn">
 <head>
-<meta charset="UTF-8">
-<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
-    text-align: center;
-    padding: 30px;
-  }
-  .card {
-    width: 350px;
-    margin: auto;
-    background: white;
-    border: 2px solid #8b0000;
-    border-radius: 12px;
-    padding: 20px;
-  }
-  .card h2 {
-    color: #8b0000;
-  }
-  .field {
-    text-align: left;
-    margin-top: 8px;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f0f0f0;
+      padding: 20px;
+    }
+    .card {
+      max-width: 350px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #999;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    p {
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
 
 <div class="card">
   <h2>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</h2>
-  <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
-
-  <div class="field"><b>ಹೆಸರು:</b> <span id="name"></span></div>
-  <div class="field"><b>ಮೊಬೈಲ್:</b> <span id="phone"></span></div>
-  <div class="field"><b>ವಿಳಾಸ:</b> <span id="address"></span></div>
-  <div class="field"><b>ಸದಸ್ಯ ಸಂಖ್ಯೆ:</b> <span id="mid"></span></div>
-
+  <p><b>ಹೆಸರು:</b> <span id="name">Loading...</span></p>
+  <p><b>ಮೊಬೈಲ್:</b> <span id="phone">Loading...</span></p>
+  <p><b>ವಿಳಾಸ:</b> <span id="address">Loading...</span></p>
 </div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-  document.getElementById("name").innerText = localStorage.getItem("name");
-  document.getElementById("phone").innerText = localStorage.getItem("phone");
-  document.getElementById("address").innerText = localStorage.getItem("address");
-
-  // auto membership ID
-  document.getElementById("mid").innerText = "MJS-" + Math.floor(Math.random()*100000);
+fetch("https://script.google.com/macros/s/AKfycbyCqaVC8K_0qjf-QsvTfexPxRAsPINl-CdT5nFZ83pPjxyJ92aZrCAhQrit3kvtFULG/exec?id=" + id)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("name").innerText = data.name;
+    document.getElementById("phone").innerText = data.phone;
+    document.getElementById("address").innerText = data.address;
+  });
 </script>
 
 </body>
