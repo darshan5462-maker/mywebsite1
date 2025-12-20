@@ -324,3 +324,11 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
 }
+.membership {
+  max-width: 600px;
+  margin: 60px auto;
+  background: #fff8f0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
