@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    text-align: center;
+    padding: 30px;
+  }
+  .card {
+    width: 350px;
+    margin: auto;
+    background: white;
+    border: 2px solid #8b0000;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .card h2 {
+    color: #8b0000;
+  }
+  .field {
+    text-align: left;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</h2>
+  <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
+
+  <div class="field"><b>ಹೆಸರು:</b> <span id="name"></span></div>
+  <div class="field"><b>ಮೊಬೈಲ್:</b> <span id="phone"></span></div>
+  <div class="field"><b>ವಿಳಾಸ:</b> <span id="address"></span></div>
+  <div class="field"><b>ಸದಸ್ಯ ಸಂಖ್ಯೆ:</b> <span id="mid"></span></div>
+
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  document.getElementById("name").innerText = params.get("name");
+  document.getElementById("phone").innerText = params.get("phone");
+  document.getElementById("address").innerText = params.get("address");
+
+  // auto membership ID
+  document.getElementById("mid").innerText = "MJS-" + Math.floor(Math.random()*100000);
+</script>
+
+</body>
+</html>
