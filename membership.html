@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <title>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section class="membership">
+    <h2>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ</h2>
+    <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
+
+    <form action="https://formspree.io/f/xjgbyabq" method="POST">
+      <!-- Replace abcd1234 with YOUR Getform endpoint -->
+
+      <input type="hidden" name="_redirect" value="thanks.html">
+
+      <label>ಪೂರ್ಣ ಹೆಸರು</label>
+      <input type="text" name="name" required>
+
+      <label>ತಂದೆಯ / ತಾಯಿಯ ಹೆಸರು</label>
+      <input type="text" name="parent_name" required>
+
+      <label>ಜನ್ಮ ದಿನಾಂಕ</label>
+      <input type="date" name="dob" required>
+
+      <label>ಲಿಂಗ</label>
+      <select name="gender" required>
+        <option value="">ಆಯ್ಕೆಮಾಡಿ</option>
+        <option>ಪುರುಷ</option>
+        <option>ಮಹಿಳೆ</option>
+        <option>ಇತರೆ</option>
+      </select>
+
+      <label>ವಿಳಾಸ</label>
+      <textarea name="address" rows="3" required></textarea>
+
+      <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ</label>
+      <input type="tel" name="phone" required>
+
+      <label>ಇಮೇಲ್ (ಐಚ್ಛಿಕ)</label>
+      <input type="email" name="email">
+
+      <label>ವೃತ್ತಿ</label>
+      <input type="text" name="occupation">
+
+      <button type="submit">ಸದಸ್ಯತ್ವಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ</button>
+    </form>
+  </section>
+
+</body>
+</html>
