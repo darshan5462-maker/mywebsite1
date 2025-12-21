@@ -44,15 +44,14 @@
 
   <h2>ಧನ್ಯವಾದಗಳು 🙏</h2>
   <p>ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ.</p>
-  <button onclick="goToCard()">ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ ವೀಕ್ಷಿಸಿ</button>
+ <p>ಕಾರ್ಡ್ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...</p>
 
-  <a href="index.html">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
-  <script>
-    function goToCard() {
-      const params = new URLSearchParams(window.location.search);
-      window.location.href = "card.html?" + params.toString();
-    }
-  </script>
+<script>
+const id = localStorage.getItem("member_id");
+setTimeout(()=>{
+  window.location.href = "card.html?id=" + id;
+},3000);
+</script>
 
 </body>
 </html>

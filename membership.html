@@ -21,22 +21,33 @@
 
   <label>ವಿಳಾಸ</label>
   <textarea name="address" required></textarea>
+  <label>ಫೋಟೋ</label>
+<input type="file" id="photo" accept="image/*" required>
 
   <button type="submit">ಸಲ್ಲಿಸಿ</button>
 </form>
-
 <script>
-document.getElementById("memberForm").addEventListener("submit", function(e) {
+document.getElementById("memberForm").addEventListener("submit", function(e){
   e.preventDefault();
-         
-  fetch("https://script.google.com/macros/s/AKfycbyCqaVC8K_0qjf-QsvTfexPxRAsPINl-CdT5nFZ83pPjxyJ92aZrCAhQrit3kvtFULG/exec", {
-    method: "POST",
-    body: new FormData(this)
-  })
-  .then(res => res.json())
-  .then(data => {
-    window.location.href = "card.html?id=" + data.id;
-  });
+
+  const photoFile = document.getElementById("photo").files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    localStorage.setItem("member_photo", reader.result);
+           
+    fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec", {
+      method: "POST",
+      body: new FormData(document.getElementById("memberForm"))
+    })
+    .then(res => res.json())
+    .then(data => {
+      localStorage.setItem("member_id", data.id);
+      window.location.href = "thanks.html";
+    });
+  };
+
+  reader.readAsDataURL(photoFile);
 });
 </script>
   </section>

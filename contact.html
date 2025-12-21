@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="kn">
 <head>
   <meta charset="UTF-8">
@@ -7,9 +7,6 @@
 </head>
 <body>
 
-<header>
-  <h1>ಮಾದರ ಮಹಾಸಭಾ</h1>
-</header>
 
 <section class="content">
   <h2>ಸಂಪರ್ಕಿಸಿ</h2>
@@ -19,7 +16,7 @@
   <p><strong>ಇಮೇಲ್:</strong> rajunaduvinamani49@gmail.com</p>
 
   <h3>ಸಂದೇಶ ಕಳುಹಿಸಿ</h3>
-  <!-- ✅ WORKING EMAIL FORM (Formspree) -->
+  
   <form action="https://getform.io/f/bdrknxnb" method="POST">
 
   <input type="hidden" name="_redirect" value="thank-you.html">
@@ -35,14 +32,112 @@
 </form>
 
 </section>
-
-<!-- ✅ WHATSAPP CHAT BUTTON -->
 <a href="https://wa.me/919019798449" class="whatsapp" target="_blank">
   WhatsApp ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ
 </a>
 
 <a href="index.html">← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
 
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<title>ಸಂಪರ್ಕಿಸಿ</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#eef2f3;
+}
+
+header {
+  background: #8b0000;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.box{
+  max-width:450px;
+  margin:60px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+label{font-weight:bold;}
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:15px;
+}
+button{
+  width:100%;
+  padding:12px;
+  background:#138808;
+  color:#fff;
+  border:none;
+}
+.whatsapp {
+  display: block;
+  max-width:450px;
+  margin: 60px auto;
+ 
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+  <header>
+    ಮಾದರ ಮಹಾಸಭಾ
+  </header>
+
+<div class="box">
+<h2>📞 ಸಂಪರ್ಕಿಸಿ</h2>
+
+<form id="contactForm">
+  <label>ಹೆಸರು</label>
+  <input type="text" name="name" required>
+
+  <label>ಇಮೇಲ್</label>
+  <input type="email" name="email" required>
+
+  <label>ಸಂದೇಶ</label>
+  <textarea name="message" required></textarea>
+
+  <button type="submit">ಸಲ್ಲಿಸಿ</button>
+</form>
+</div>
+<a href="https://wa.me/919019798449" class="whatsapp" target="_blank">
+  WhatsApp ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ
+</a>
+
+<a href="index.html">← ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ</a>
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  fetch("https://script.google.com/macros/s/AKfycbxp7BZFVxXNboTJ0G_eTQv1vjmpg3kxhioZXO0TsY0LKUCrFctAgCnp0pLMKj5r3fu5Yw/exec", {
+    method: "POST",
+    body: new FormData(this)
+  })
+  .then(res => res.json())
+  .then(() => {
+    window.location.href = "thanks1.html";
+  })
+  .catch(() => alert("Submission failed"));
+});
+</script>
 
 </body>
 </html>

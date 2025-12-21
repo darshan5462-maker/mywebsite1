@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<title>ಧನ್ಯವಾದಗಳು</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family: "Segoe UI", Arial;
+  background: linear-gradient(135deg, #ff9933, #ffffff, #138808);
+}
+
+.card{
+  background:#ffffff;
+  padding:40px 30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.25);
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop{
+  from{
+    transform:scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.icon{
+  font-size:60px;
+  margin-bottom:15px;
+}
+
+h2{
+  color:#138808;
+  margin-bottom:10px;
+}
+
+p{
+  color:#444;
+  font-size:15px;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 25px;
+  background:linear-gradient(90deg,#ff9933,#138808);
+  color:#fff;
+  text-decoration:none;
+  border-radius:30px;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 6px 15px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="icon">🙏</div>
+  <h2>ಧನ್ಯವಾದಗಳು</h2>
+  <p>
+    ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ.<br>
+    ನಾವು ಶೀಘ್ರದಲ್ಲೇ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸುತ್ತೇವೆ.
+  </p>
+
+  <a href="index.html" class="btn">ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ</a>
+</div>
+
+</body>
+</html>
