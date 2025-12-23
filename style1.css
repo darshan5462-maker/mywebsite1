@@ -1,0 +1,170 @@
+body{
+  margin:0;
+  font-family:'Noto Sans Kannada', Arial;
+  background:#f4f6f8;
+  color:#333;
+}
+
+/* HEADER */
+.header{
+  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
+  padding:20px;
+  text-align:center;
+}
+
+.header h1{
+  margin:0;
+  font-size:26px;
+}
+
+.header p{
+  margin:5px 0;
+  font-size:14px;
+}
+
+/* NAVBAR */
+.navbar{
+  margin-top:15px;
+}
+
+.navbar a{
+  margin:0 10px;
+  text-decoration:none;
+  color:#000;
+  font-weight:bold;
+}
+
+.navbar a:hover{
+  text-decoration:underline;
+}
+
+/* HERO */
+.hero{
+  background:#138808;
+  color:#fff;
+  padding:50px 20px;
+  text-align:center;
+}
+
+.hero h2{
+  margin:0;
+  font-size:28px;
+}
+
+/* IMAGE */
+.image-section{
+  text-align:center;
+  margin:20px;
+}
+
+.image-section img{
+  width:90%;
+  max-width:700px;
+  border-radius:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* SECTIONS */
+.section{
+  padding:40px 20px;
+  text-align:center;
+}
+
+.section.light{
+  background:#fff;
+}
+
+.section h2{
+  margin-bottom:15px;
+  color:#138808;
+}
+
+.section ul{
+  list-style:none;
+  padding:0;
+}
+
+.section ul li{
+  padding:6px;
+}
+
+/* BUTTON */
+.btn{
+  display:inline-block;
+  padding:12px 25px;
+  background:#ff9933;
+  color:#000;
+  text-decoration:none;
+  border-radius:25px;
+  font-weight:bold;
+}
+
+.btn:hover{
+  background:#138808;
+  color:#fff;
+}
+
+/* FOOTER */
+.footer{
+  background:#222;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+.news p{
+  background:#fff;
+  padding:10px;
+  margin:10px auto;
+  max-width:600px;
+  border-left:5px solid #138808;
+}
+.dropdown{
+  display:inline-block;
+  position:relative;
+}
+
+.dropbtn{
+  background:none;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  background:#fff;
+  min-width:160px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+  z-index:1;
+}
+
+.dropdown-content a{
+  display:block;
+  padding:10px;
+  text-decoration:none;
+  color:#000;
+}
+
+.dropdown-content a:hover{
+  background:#f2f2f2;
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+.html{
+    scroll-behavior: smooth;
+}

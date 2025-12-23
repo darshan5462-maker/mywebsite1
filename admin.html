@@ -5,10 +5,7 @@
 <title>Admin Dashboard</title>
 
 <style>
-body{
-  font-family:Arial;
-  background:#f4f6f8;
-}
+body{font-family:Arial;background:#f4f6f8;}
 .container{
   max-width:800px;
   margin:40px auto;
@@ -16,29 +13,28 @@ body{
   padding:20px;
   border-radius:10px;
 }
-table{
-  width:100%;
-  border-collapse:collapse;
-}
-th, td{
-  border:1px solid #ccc;
-  padding:8px;
-}
-th{
-  background:#138808;
-  color:#fff;
-}
-a{
-  text-decoration:none;
-  color:#138808;
-}
+table{width:100%;border-collapse:collapse;}
+th,td{border:1px solid #ccc;padding:8px;}
+th{background:#138808;color:#fff;}
 </style>
 </head>
 
 <body>
 
+<script>
+const ADMIN_PASSWORD = "admin123";
+const entered = prompt("Enter Admin Password");
+if (entered !== ADMIN_PASSWORD) {
+  document.body.innerHTML = "<h2 style='text-align:center;color:red'>Access Denied</h2>";
+  throw new Error("Unauthorized");
+}
+</script>
+
 <div class="container">
 <h2>👨‍💼 Admin Dashboard</h2>
+
+<input id="searchInput" placeholder="Search by name / phone / ID"
+       style="width:100%;padding:10px;margin-bottom:15px;">
 
 <table>
 <thead>
@@ -49,43 +45,42 @@ a{
   <th>Card</th>
 </tr>
 </thead>
-<tbody id="members">
-</tbody>
+<tbody id="members"></tbody>
 </table>
 </div>
 
 <script>
+let allMembers = [];
+
 fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec?action=all")
   .then(res => res.json())
   .then(data => {
-    let rows = "";
-    data.forEach(m => {
-      rows += `
-        <tr>
-          <td>${m.id}</td>
-          <td>${m.name}</td>
-          <td>${m.phone}</td>
-          <td>
-            <a href="card.html?id=${m.id}" target="_blank">View Card</a>
-          </td>
-        </tr>`;
-    });
-    document.getElementById("members").innerHTML = rows;
+    allMembers = data;
+    render(data);
   });
-</script>
-<script>
-const ADMIN_PASSWORD = "admin123";  // 🔴 change this
 
-const entered = prompt("Enter Admin Password:");
-
-if (entered !== ADMIN_PASSWORD) {
-  document.body.innerHTML = `
-    <h2 style="text-align:center;margin-top:50px;color:red;">
-      ❌ Access Denied
-    </h2>
-  `;
-  throw new Error("Unauthorized");
+function render(list){
+  let rows="";
+  list.forEach(m=>{
+    rows+=`
+      <tr>
+        <td>${m.id}</td>
+        <td>${m.name}</td>
+        <td>${m.phone}</td>
+        <td><a href="card.html?id=${m.id}" target="_blank">View</a></td>
+      </tr>`;
+  });
+  document.getElementById("members").innerHTML = rows;
 }
+
+document.getElementById("searchInput").addEventListener("input",function(){
+  const q=this.value.toLowerCase();
+  render(allMembers.filter(m =>
+    String(m.id).includes(q) ||
+    m.name.toLowerCase().includes(q) ||
+    m.phone.includes(q)
+  ));
+});
 </script>
 
 </body>
