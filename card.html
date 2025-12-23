@@ -277,6 +277,7 @@ button{
   margin:15px auto;
   padding:10px 20px;
 }
+
 </style>
 </head>
 
@@ -286,10 +287,9 @@ button{
   <div class="header">
     ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
     ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
-  </div>
+</div>
 
   <img id="photo" class="photo">
-
   <div class="body">
     <p><b>ಹೆಸರು:</b> <span id="name">loading...</span></p>
     <p><b>ಮೊಬೈಲ್:</b> <span id="phone"></span></p>
@@ -297,6 +297,12 @@ button{
     <p><b>ಸದಸ್ಯ ID:</b> <span id="mid"></span></p>
     <p><b>ಮಾನ್ಯತೆ:</b> 2024 – 2027</p>
   </div>
+    
+
+
+  <div style="text-align:center; margin-top:10px;">
+  <img id="qrcode" alt="QR Code" width="60">
+</div>
 
   <div class="footer">
     ಅಧ್ಯಕ್ಷರ ಸಹಿ ✍<br>
@@ -331,6 +337,28 @@ document.getElementById("address").innerText = d.address;
 function downloadPDF(){
   html2pdf(document.getElementById("card"));
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) {
+    console.error("ID missing in URL");
+    return;
+  }
+
+  const cardUrl =
+    "https://darshan5462-maker.github.io/mywebsite1/card.html?id=" + id;
+
+  const qrImg = document.getElementById("qrcode");
+
+  qrImg.src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
+    encodeURIComponent(cardUrl);
+
+});
 </script>
 
 </body>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#f4f6f8;
+}
+.container{
+  max-width:800px;
+  margin:40px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th, td{
+  border:1px solid #ccc;
+  padding:8px;
+}
+th{
+  background:#138808;
+  color:#fff;
+}
+a{
+  text-decoration:none;
+  color:#138808;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>👨‍💼 Admin Dashboard</h2>
+
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Name</th>
+  <th>Phone</th>
+  <th>Card</th>
+</tr>
+</thead>
+<tbody id="members">
+</tbody>
+</table>
+</div>
+
+<script>
+fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec?action=all")
+  .then(res => res.json())
+  .then(data => {
+    let rows = "";
+    data.forEach(m => {
+      rows += `
+        <tr>
+          <td>${m.id}</td>
+          <td>${m.name}</td>
+          <td>${m.phone}</td>
+          <td>
+            <a href="card.html?id=${m.id}" target="_blank">View Card</a>
+          </td>
+        </tr>`;
+    });
+    document.getElementById("members").innerHTML = rows;
+  });
+</script>
+<script>
+const ADMIN_PASSWORD = "admin123";  // 🔴 change this
+
+const entered = prompt("Enter Admin Password:");
+
+if (entered !== ADMIN_PASSWORD) {
+  document.body.innerHTML = `
+    <h2 style="text-align:center;margin-top:50px;color:red;">
+      ❌ Access Denied
+    </h2>
+  `;
+  throw new Error("Unauthorized");
+}
+</script>
+
+</body>
+</html>
