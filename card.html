@@ -227,7 +227,9 @@ function downloadPDF() {
 
 </body>
 </html> -->
-<!DOCTYPE html>
+
+
+<!--<!DOCTYPE html>
 <html lang="kn">
 <head>
 <meta charset="UTF-8">
@@ -359,6 +361,335 @@ document.addEventListener("DOMContentLoaded", function () {
     encodeURIComponent(cardUrl);
 
 });
+</script>
+
+</body>
+</html>-->
+
+<!--<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ | Membership Card</title>
+
+  <style>
+    body {
+      font-family: "Noto Sans Kannada", Arial, sans-serif;
+      background: #f2f4f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 350px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card-header {
+      background: linear-gradient(90deg, #0d47a1, #1976d2);
+      color: #fff;
+      padding: 15px;
+    }
+
+    .card-header h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .photo {
+      margin-top: 15px;
+    }
+
+    .photo img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #1976d2;
+    }
+
+    .details {
+      padding: 15px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .details p {
+      margin: 6px 0;
+    }
+
+    .details span {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .footer {
+      background: #eeeeee;
+      padding: 10px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .btn {
+      margin: 12px;
+      padding: 10px;
+      width: calc(100% - 24px);
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #0d47a1;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+  <div class="card-header">
+    <h3>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h3>
+  </div>
+
+  <div class="photo">
+    <img id="photo" src="" alt="Member Photo">
+  </div>
+
+  <div class="details">
+    <p>ಹೆಸರು / Name: <span id="name">Loading...</span></p>
+    <p>ಸದಸ್ಯ ID: <span id="mid">Loading...</span></p>
+    <p>ಸದಸ್ಯತ್ವ: <span id="membership">Loading...</span></p>
+    <p>ಮೊಬೈಲ್: <span id="phone">Loading...</span></p>
+  </div>
+
+  <button class="btn" onclick="window.print()">Download / Print</button>
+
+  <div class="footer">
+    Official Membership Card
+  </div>
+</div>
+
+<script>
+  // get saved member ID
+  const id = localStorage.getItem("member_id");
+
+  if (!id) {
+    alert("Member ID not found");
+  }
+
+  fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec?id=" + id)
+    .then(res => res.json())
+    .then(d => {
+      document.getElementById("photo").src = d.photo || "";
+      document.getElementById("name").innerText = d.name || "";
+      document.getElementById("mid").innerText = id;
+      document.getElementById("membership").innerText = d.membership || "";
+      document.getElementById("phone").innerText = d.phone || "";
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Failed to load card data");
+    });
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:"Noto Sans Kannada", Arial;
+  background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* CARD */
+.card{
+  width:360px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  overflow:hidden;
+}
+
+/* HEADER */
+.card-header{
+  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
+  text-align:center;
+  padding:14px;
+}
+
+.card-header h2{
+  margin:0;
+  font-size:16px;
+  font-weight:bold;
+}
+
+/* BODY */
+.card-body{
+  padding:20px;
+  font-size:14px;
+}
+
+.card-body p{
+  margin:8px 0;
+}
+
+.label{
+  font-weight:bold;
+}
+
+/* PHOTO */
+.photo{
+  text-align:center;
+  margin-bottom:10px;
+}
+.photo img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #138808;
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#ddd;
+  margin:10px auto;
+}
+
+/* QR */
+.qr{
+  text-align:center;
+  margin-top:10px;
+}
+
+/* FOOTER */
+.card-footer{
+  background:#f2f2f2;
+  text-align:center;
+  padding:10px;
+  font-size:12px;
+}
+
+/* BUTTON */
+button{
+  margin-top:15px;
+  padding:10px 20px;
+  background:#138808;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  font-size:15px;
+  cursor:pointer;
+}
+button:hover{
+  background:#0e6f06;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+  <div class="card-header">
+    <h2>
+      ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
+      ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
+    </h2>
+  </div>
+
+  <div class="card-body">
+
+    <div class="photo">
+      <img id="photo" src="" alt="Member Photo">
+    </div>
+
+    <p><span class="label">ಹೆಸರು / Name:</span> <span id="name">Loading...</span></p>
+    <p><span class="label">ಮೊಬೈಲ್ / Phone:</span> <span id="phone">Loading...</span></p>
+    <p><span class="label">ವಿಳಾಸ / Address:</span> <span id="address">Loading...</span></p>
+    <p><span class="label">ಸದಸ್ಯ ID:</span> <span id="mid">Loading...</span></p>
+    <p><span class="label">ಸದಸ್ಯತ್ವ:</span> <span id="membership">Loading...</span></p>
+
+    <div class="qr">
+      <img id="qr" width="50">
+      <div style="font-size:12px;">Scan for verification</div>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    ಮಾನ್ಯ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್
+  </div>
+
+</div>
+
+<button onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
+
+<!-- PDF LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+/* GET MEMBER ID FROM URL */
+const id = new URLSearchParams(window.location.search).get("id");
+
+if(!id){
+  alert("Member ID not found");
+}
+
+/* FETCH DATA */
+fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec?id=" + id)
+.then(res => res.json())
+.then(data => {
+  document.getElementById("name").innerText = data.name || "";
+  document.getElementById("phone").innerText = data.phone || "";
+  document.getElementById("address").innerText = data.address || "";
+  document.getElementById("membership").innerText = data.membership || "";
+  document.getElementById("mid").innerText = id;
+  document.getElementById("photo").src = data.photo || "";
+
+  /* QR CODE */
+  const qrData = window.location.origin + "/verify.html?id=" + id;
+  document.getElementById("qr").src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
+});
+</script>
+
+<script>
+function downloadPDF(){
+  html2pdf()
+    .set({
+      margin:0.3,
+      filename:"Membership_Card_" + id + ".pdf",
+      image:{type:"jpeg",quality:0.98},
+      html2canvas:{scale:2},
+      jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
+    })
+    .from(document.getElementById("card"))
+    .save();
+}
 </script>
 
 </body>

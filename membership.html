@@ -115,27 +115,33 @@
 </form>
 </div>
 
+
 <script>
 document.getElementById("memberForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const f = this;   // ✅ FIX: define f properly
-
+  const f = this;
   const data = new FormData(f);
 
-  fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec", {
-    method: "POST",
-    body: data
-  })
-  .then(res => res.json())
-  .then(d => {
-    alert("Submitted Successfully");
-    window.location.href = "thanks.html";
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Submission failed");
-  });
+  const photoFile = document.getElementById("photo").files[0];
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    data.append("photo_base64", reader.result);
+
+    fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec", {
+      method: "POST",
+      body: data
+    })
+    .then(res => res.json())
+    .then(d => {
+      localStorage.setItem("member_id", d.id);
+      window.location.href = "thanks.html";
+    })
+    .catch(err => alert("Upload failed"));
+  };
+
+  reader.readAsDataURL(photoFile);
 });
 </script>
 <script>
