@@ -9,57 +9,279 @@
    <header>
    ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
   </header>
+  <div class="form-container">
+    <h2>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ / Membership Form</h2>
+<form id="memberForm" enctype="multipart/form-data">
 
-  <section class="membership">
-    <h2>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ</h2>
-    <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
+  <label>ಫೋಟೋ / Photo</label>
+  <input type="file" id="photo" accept="image/*" required>
 
-   <form id="memberForm">
-
-  <label>ಹೆಸರು</label>
+  <label>ಹೆಸರು / Name</label>
   <input type="text" name="name" required>
+ <label>ತಂದೆ / ಪತಿ ಹೆಸರು / Father / Husband Name</label>
+<input type="text" name="father_husband_name" id="father_husband_name" required>
 
-  <label>ಮೊಬೈಲ್</label>
+  <label>ಲಿಂಗ / Gender</label>
+  <select name="gender" required>
+    <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+    <option>ಪುರುಷ / Male</option>
+    <option>ಮಹಿಳೆ / Female</option>
+    <option>ಇತರೆ / Other</option>
+  </select>
+
+  <label>ಜನ್ಮ ದಿನಾಂಕ / Date of Birth</label>
+  <input type="date" name="dob" required>
+
+  <label>ವರ್ಗ / Category</label>
+<select id="category" name="category" required>
+  <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Category</option>
+  <option value="SC">SC</option>
+  <option value="ST">ST</option>
+  <option value="OBC">OBC</option>
+  <option value="General">General</option>
+</select>
+
+<label>ಜಾತಿ / Caste</label>
+<select id="caste" name="caste" required>
+  <option value="">ಮೊದಲು ವರ್ಗ ಆಯ್ಕೆಮಾಡಿ / Select category first</option>
+</select>
+
+  <label>ಶಿಕ್ಷಣ / Qualification</label>
+  <input type="text" name="qualification">
+
+  <label>ವೃತ್ತಿ / Profession</label>
+  <input type="text" name="profession">
+
+  <label>ಪ್ರಸ್ತುತ ವಿಳಾಸ / Current Address</label>
+  <textarea name="current_address" id="currentAddress" required></textarea>
+<div class="checkbox-row">
+  <input type="checkbox" id="sameAddress">
+  <span>ಶಾಶ್ವತ ವಿಳಾಸವೂ ಇದೇ / Same as Permanent Address</span>
+</div>
+  <label>ಶಾಶ್ವತ ವಿಳಾಸ / Permanent Address</label>
+  <textarea name="permanent_address" id="permanentAddress" required></textarea>
+
+  <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ / Mobile Number</label>
   <input type="tel" name="phone" required>
 
-  <label>ವಿಳಾಸ</label>
-  <textarea name="address" required></textarea>
-  <label>ಫೋಟೋ</label>
-<input type="file" id="photo" accept="image/*" required>
+  <label>ಪಂಚಾಯತ್ ಹೆಸರು / Panchayat Name</label>
+  <input type="text" name="panchayat">
 
-  <button type="submit">ಸಲ್ಲಿಸಿ</button>
+  <label>ಇಮೇಲ್ ಐಡಿ / Email ID</label>
+  <input type="email" name="email">
+
+  <label>ಆಧಾರ್ ಸಂಖ್ಯೆ / Aadhaar Number</label>
+  <input type="text" name="aadhaar" id="aadhaar" maxlength="12" required>
+
+  <label>ಜಿಲ್ಲೆ / District</label>
+<select id="district" name="district" required>
+  <option value="">ಆಯ್ಕೆಮಾಡಿ / Select District</option>
+</select>
+
+<label>ತಾಲೂಕು / Taluk</label>
+<select id="taluk" name="taluk" required>
+  <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>
+</select>
+<h3>ಸದಸ್ಯತ್ವ ವರ್ಗ / Membership Type</h3>
+
+<label>ಸದಸ್ಯತ್ವದ ವಿಧ ಆಯ್ಕೆಮಾಡಿ / Select Membership Type</label>
+<select name="membership_type" id="membership_type" required>
+  <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+
+  <option value="Life Member">
+    ಆಜೀವ ಸದಸ್ಯತ್ವ (Life Member) – ರೂ.2000/- ಅಥವಾ ಅದಕ್ಕಿಂತ ಹೆಚ್ಚು
+  </option>
+
+  <option value="Annual Member">
+    ವಾರ್ಷಿಕ ಸದಸ್ಯತ್ವ (Annual Member) – ರೂ.500/-
+  </option>
+
+  <option value="General Member">
+    ಸಾಮಾನ್ಯ ಸದಸ್ಯತ್ವ (General Member) – ರೂ.200/-
+  </option>
+</select>
+
+<p>
+  <strong>ಶುಲ್ಕ / Amount:</strong>
+  ₹<span id="feeAmount">0</span>
+</p>
+
+<label>UTR / Transaction ID</label>
+<input type="text" name="transaction_id" id="transaction_id"
+       placeholder="ಪಾವತಿ ನಂತರ UTR ನಮೂದಿಸಿ / Enter UTR after payment"
+       required>
+
+  <button type="submit">ಸದಸ್ಯತ್ವ ಸಲ್ಲಿಸಿ / Submit Membership</button>
 </form>
+</div>
+
 <script>
 document.getElementById("memberForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const photoFile = document.getElementById("photo").files[0];
-  const reader = new FileReader();
+  const f = this;   // ✅ FIX: define f properly
 
-  reader.onload = function(){
-    localStorage.setItem("member_photo", reader.result);
-           
-    fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec", {
-      method: "POST",
-      body: new FormData(document.getElementById("memberForm"))
-    })
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem("member_id", data.id);
-      window.location.href = "thanks.html";
-    });
-  };
+  const data = new FormData(f);
 
-  reader.readAsDataURL(photoFile);
+  fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec", {
+    method: "POST",
+    body: data
+  })
+  .then(res => res.json())
+  .then(d => {
+    alert("Submitted Successfully");
+    window.location.href = "thanks.html";
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Submission failed");
+  });
 });
 </script>
-  </section>
-  <script>
-function saveData() {
-  localStorage.setItem("name", document.getElementById("name").value);
-  localStorage.setItem("phone", document.getElementById("phone").value);
-  localStorage.setItem("address", document.getElementById("address").value);
-}
+<script>
+/* District → Taluk */
+const taluks = {
+  Belagavi:["Athani","Chikkodi","Gokak"],
+  Vijayapura:["Indi","Basavana Bagewadi"],
+  Bagalkot:["Bagalkot","Jamkhandi"]
+};
+
+document.getElementById("district").onchange = function(){
+  const t = document.getElementById("taluk");
+  t.innerHTML = '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>';
+  taluks[this.value]?.forEach(v=>{
+    t.innerHTML += `<option>${v}</option>`;
+  });
+};
+
+/* Same Address */
+document.getElementById("sameAddress").onchange = function(){
+  if(this.checked){
+    document.getElementById("permanentAddress").value =
+      document.getElementById("currentAddress").value;
+  }
+};
+
+/* Aadhaar validation */
+document.getElementById("aadhaar").oninput = function(){
+  this.value = this.value.replace(/\D/g,"").slice(0,12);
+};
+</script>
+<script>
+const districtTalukMap = {
+  "Bagalkot": ["Bagalkot","Badami","Bilagi","Hungund","Jamkhandi","Mudhol"],
+  "Ballari": ["Ballari","Hospet","Hagaribommanahalli","Hadagalli","Kudligi","Sandur","Siruguppa"],
+  "Belagavi": ["Athani","Bailhongal","Belagavi","Chikkodi","Gokak","Hukkeri","Khanapur","Raibag","Ramdurg","Saundatti"],
+  "Bengaluru Rural": ["Devanahalli","Doddaballapura","Hoskote","Nelamangala"],
+  "Bengaluru Urban": ["Anekal","Bengaluru North","Bengaluru East","Bengaluru South","Yelahanka"],
+  "Bidar": ["Aurad","Basavakalyan","Bhalki","Bidar","Chitgoppa","Humnabad"],
+  "Chamarajanagar": ["Chamarajanagar","Gundlupet","Kollegal","Yelandur"],
+  "Chikkaballapur": ["Bagepalli","Chikkaballapur","Chintamani","Gauribidanur","Gudibanda","Sidlaghatta"],
+  "Chikkamagaluru": ["Chikkamagaluru","Kadur","Koppa","Mudigere","Narasimharajapura","Sringeri","Tarikere"],
+  "Chitradurga": ["Challakere","Chitradurga","Hiriyur","Holalkere","Hosadurga","Molakalmuru"],
+  "Dakshina Kannada": ["Bantwal","Belthangady","Mangaluru","Moodabidri","Puttur","Sullia"],
+  "Davanagere": ["Channagiri","Davanagere","Harihar","Honnali","Jagalur","Nyamati"],
+  "Dharwad": ["Dharwad","Hubballi","Kalghatgi","Kundgol","Navalgund"],
+  "Gadag": ["Gadag","Mundargi","Nargund","Ron","Shirhatti"],
+  "Hassan": ["Alur","Arakalgud","Belur","Channarayapatna","Hassan","Holenarasipura","Sakleshpur"],
+  "Haveri": ["Byadgi","Hangal","Haveri","Hirekerur","Ranebennur","Savanur","Shiggaon"],
+  "Kalaburagi": ["Afzalpur","Aland","Chincholi","Chittapur","Kalaburagi","Jewargi","Sedam"],
+  "Kodagu": ["Madikeri","Somwarpet","Virajpet"],
+  "Kolar": ["Bangarpet","Kolar","Malur","Mulbagal","Srinivaspur"],
+  "Koppal": ["Gangavathi","Koppal","Kushtagi","Yelburga"],
+  "Mandya": ["Krishnarajpet","Maddur","Malavalli","Mandya","Nagamangala","Pandavapura","Srirangapatna"],
+  "Mysuru": ["Hunsur","Krishnarajanagara","Mysuru","Nanjangud","Piriyapatna","Tirumakudal-Narsipur"],
+  "Raichur": ["Devadurga","Lingasugur","Manvi","Raichur","Sindhanur"],
+  "Ramanagara": ["Channapatna","Kanakapura","Magadi","Ramanagara"],
+  "Shivamogga": ["Bhadravati","Hosanagara","Sagar","Shikaripura","Shivamogga","Soraba","Thirthahalli"],
+  "Tumakuru": ["Chikkanayakanahalli","Gubbi","Koratagere","Kunigal","Madhugiri","Pavagada","Sira","Tiptur","Tumakuru"],
+  "Udupi": ["Brahmavara","Byndoor","Karkala","Kundapura","Udupi"],
+  "Uttara Kannada": ["Ankola","Bhatkal","Haliyal","Honnavar","Karwar","Kumta","Mundgod","Siddapur","Sirsi","Yellapur"],
+  "Vijayapura": ["Basavana Bagewadi","Indi","Muddebihal","Sindagi","Vijayapura"],
+  "Yadgir": ["Gurmitkal","Shahapur","Yadgir"]
+};
+
+/* Populate districts */
+const districtSelect = document.getElementById("district");
+const talukSelect = document.getElementById("taluk");
+
+Object.keys(districtTalukMap).forEach(d => {
+  const opt = document.createElement("option");
+  opt.value = d;
+  opt.textContent = d;
+  districtSelect.appendChild(opt);
+});
+
+/* Populate taluks on change */
+districtSelect.addEventListener("change", function(){
+  talukSelect.innerHTML = '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>';
+  (districtTalukMap[this.value] || []).forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t;
+    opt.textContent = t;
+    talukSelect.appendChild(opt);
+  });
+});
+</script>
+<script>
+const casteData = {
+  SC: [
+    "ಆದಿ ಜಾಂಬವ / Adi Jambava",
+    "ಮಾದಿಗ / Madiga",
+    "ಮಾದರ / Madara",
+    "ಚಲವಾದಿ / Chalavadi",
+    "ಹೊಲೆಯ / Holeya",
+    "ಭೋವಿ / Bhovi"
+  ],
+  ST: [
+    "ವಾಲ್ಮೀಕಿ / Valmiki",
+    "ನಾಯಕ / Nayaka",
+    "ಲಂಬಾಣಿ / Lambani",
+    "ಗೋಂಡ / Gonda"
+  ],
+  OBC: [
+    "ಕುರುಬ / Kuruba",
+    "ಒಕ್ಕಲಿಗ / Vokkaliga",
+    "ಲಿಂಗಾಯತ / Lingayat",
+    "ಕೊರಮ / Korama",
+    "ಕೊರಚ / Koracha"
+  ],
+  General: [
+    "ಬ್ರಾಹ್ಮಣ / Brahmin",
+    "ಕ್ಷತ್ರಿಯ / Kshatriya",
+    "ವೈಶ್ಯ / Vaishya",
+    "ಮುಸ್ಲಿಂ / Muslim",
+    "ಕ್ರಿಶ್ಚಿಯನ್ / Christian"
+  ]
+};
+
+const categorySelect = document.getElementById("category");
+const casteSelect = document.getElementById("caste");
+
+categorySelect.addEventListener("change", function(){
+  casteSelect.innerHTML = '<option value="">ಜಾತಿ ಆಯ್ಕೆಮಾಡಿ / Select Caste</option>';
+
+  if(casteData[this.value]){
+    casteData[this.value].forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      casteSelect.appendChild(opt);
+    });
+  }
+});
+</script>
+<script>
+const feeMap = {
+  "Life Member": 2000,
+  "Annual Member": 500,
+  "General Member": 200
+};
+
+document.getElementById("membership_type").addEventListener("change", function(){
+  document.getElementById("feeAmount").innerText =
+    feeMap[this.value] || 0;
+});
 </script>
 
 </body>

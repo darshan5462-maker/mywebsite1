@@ -160,30 +160,29 @@ function showPDF() {
 </head>
 
 <body>
-
-<!-- 🔹 HEADER -->
+ 
 <header class="header">
-  <div class="header-content">
-    <h1>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h1>
-    <p>ನಂದಗಾoವ್ | ತಾಲ್ಲೂಕು: ಅಥಣಿ | ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ</p>
-  </div>
+  <div class="top-bar">
 
-<nav class="navbar">
-  <a href="index.html">ಮುಖಪುಟ</a>
-
-  <div class="dropdown">
-    <button class="dropbtn">ನಮ್ಮ ಬಗ್ಗೆ ▾</button>
-    <div class="dropdown-content">
-      <a href="about.html">ಸಂಘ ಪರಿಚಯ</a>
-      <a href="#object">ಉದ್ದೇಶಗಳು</a>
-      <a href="#leadership">ನಾಯಕತ್ವ</a>
+    <div class="title-box">
+      <h1 class="logo">
+        ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
+        ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
+      </h1>
+          <p>ನಂದಗಾoವ್ | ತಾಲ್ಲೂಕು: ಅಥಣಿ | ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ</p>
     </div>
+
+    <div class="menu-icon" id="menuIcon">☰</div>
   </div>
 
-  <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
-  <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
-  <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
-</nav>
+  <nav id="navMenu" class="nav-menu">
+    <a href="index.html">ಮುಖಪುಟ</a>
+    <a href="#about">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="#leadership">ನಾಯಕತ್ವ</a>
+    <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+    <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+    <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+  </nav>
 </header>
 
 <!-- 🔹 HERO SECTION -->
@@ -322,6 +321,11 @@ function showPDF() {
   <p>© 2025 ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
   <p>All Rights Reserved</p>
 </footer>
+<script>
+document.getElementById("menuIcon").addEventListener("click", function () {
+  document.getElementById("navMenu").classList.toggle("show");
+});
+</script>
 
 </body>
 </html>
