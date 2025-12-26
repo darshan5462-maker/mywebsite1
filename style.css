@@ -332,3 +332,124 @@ button {
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.15);
 }
+
+/* hnfjnmngfhhjgjhghgjnghngh */
+/* PAGE BASE */
+body{
+  margin:0;
+  padding:0;
+  font-family: "Noto Sans Kannada", Arial, sans-serif;
+  background:#f2f4f7;
+  color:#222;
+}
+
+/* FORM CONTAINER */
+.form-container{
+  max-width:800px;
+  margin:30px auto;
+  background:#ffffff;
+  padding:25px 30px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* FORM TITLE */
+.form-container h2{
+  text-align:center;
+  color:#138808;
+  margin-bottom:20px;
+}
+
+/* LABELS */
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:5px;
+  font-weight:600;
+  font-size:15px;
+}
+
+/* INPUTS */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #ccc;
+  border-radius:6px;
+  font-size:14px;
+  outline:none;
+  transition:0.3s;
+  box-sizing:border-box;
+}
+
+/* TEXTAREA */
+textarea{
+  resize:vertical;
+  min-height:80px;
+}
+
+/* INPUT FOCUS */
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#138808;
+  box-shadow:0 0 0 2px rgba(19,136,8,0.15);
+}
+
+/* FILE INPUT */
+input[type="file"]{
+  border:1px solid #ccc;
+  padding:6px;
+  border-radius:6px;
+  background:#fafafa;
+}
+
+/* CHECKBOX ROW */
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  margin-top:10px;
+  gap:8px;
+  font-size:14px;
+}
+
+/* BUTTON */
+button{
+  margin-top:25px;
+  width:100%;
+  padding:12px;
+  font-size:16px;
+  font-weight:bold;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  background:linear-gradient(90deg,#ff9933,#138808);
+  color:#fff;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.02);
+  box-shadow:0 6px 15px rgba(0,0,0,0.25);
+}
+
+/* TWO COLUMN LAYOUT (DESKTOP) */
+@media(min-width:768px){
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+}
+
+/* MOBILE */
+@media(max-width:767px){
+  .form-container{
+    margin:15px;
+    padding:20px;
+  }
+}
