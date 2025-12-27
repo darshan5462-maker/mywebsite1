@@ -1,27 +1,161 @@
 <!DOCTYPE html>
-<html lang="kn">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ಗ್ಯಾಲರಿ</title>
-<link rel="stylesheet" href="style1.css">
+<title>Gallery</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f4f4f4;
+}
+
+/* HEADER */
+h2{
+  text-align:center;
+  margin:20px 0;
+}
+
+/* FILTER BUTTONS */
+.filter-btns{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.filter-btns button{
+  padding:8px 16px;
+  margin:5px;
+  border:none;
+  background:#1976d2;
+  color:#fff;
+  cursor:pointer;
+  border-radius:6px;
+}
+
+.filter-btns button:hover{
+  background:#0d47a1;
+}
+
+/* GALLERY GRID */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+.gallery img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition:transform 0.3s;
+}
+
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+/* HIDE */
+.hide{
+  display:none;
+}
+
+/* FULL IMAGE POPUP */
+#popup{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+#popup img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:10px;
+}
+</style>
 </head>
 
 <body>
 
-<header class="header">
-  <h1>📸 ಗ್ಯಾಲರಿ</h1>
-  <nav class="navbar">
-    <a href="index.html">ಮುಖಪುಟ</a>
-    <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
-  </nav>
-</header>
+<h2>Gallery</h2>
 
-<section class="gallery">
-  <img src="g1.jpg">
-  <img src="g2.jpg">
-  <img src="g3.jpg">
-  <img src="g4.jpg">
-</section>
+<!-- FILTER BUTTONS -->
+<div class="filter-btns">
+  <button onclick="filterImages('all')">All</button>
+  <button onclick="filterImages('events')">Events</button>
+  <button onclick="filterImages('meetings')">Meetings</button>
+  <button onclick="filterImages('celebrations')">Celebrations</button>
+  <button onclick="filterImages('programs')">Programs</button>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery">
+
+  <!-- EVENTS -->
+  <img src="images/events/e1.jpeg" class="img events">
+  <img src="images/events/e2.jpeg" class="img events">
+  <img src="images/events/e3.jpeg" class="img events">
+  <img src="images/events/e4.jpeg" class="img events">
+
+  <!-- MEETINGS -->
+  <img src="images/meetings/meet1.jpeg" class="img meetings">
+  <img src="images/meetings/meet2.jpeg" class="img meetings">
+  <img src="images/meetings/meet3.jpeg" class="img meetings">
+  <img src="images/meetings/meet4.jpeg" class="img meetings">
+  <img src="images/meetings/meet5.jpeg" class="img meetings">
+  <img src="images/meetings/meet6.jpeg" class="img meetings">
+  <img src="images/meetings/meet7.jpeg" class="img meetings">
+
+  <!-- CELEBRATIONS -->
+  <img src="images/celebrations/cel1.jpeg" class="img celebrations">
+  <img src="images/celebrations/cel2.jpeg" class="img celebrations">
+   <img src="images/celebrations/cel3.jpeg" class="img celebrations">
+   <img src="images/celebrations/cel4.jpeg" class="img celebrations">
+   <img src="images/celebrations/cel5.jpeg" class="img celebrations">
+
+  <!-- PROGRAMS -->
+  <img src="images/programs/p1.jpeg" class="img programs">
+  <img src="images/programs/p2.jpeg" class="img programs">
+   <img src="images/programs/p3.jpeg" class="img programs">
+    <img src="images/programs/p4.jpeg" class="img programs">
+     <img src="images/programs/p5.jpeg" class="img programs">
+
+</div>
+
+<!-- POPUP -->
+<div id="popup" onclick="this.style.display='none'">
+  <img id="popup-img">
+</div>
+
+<script>
+function filterImages(category){
+  const images = document.querySelectorAll(".img");
+
+  images.forEach(img=>{
+    img.classList.remove("hide");
+    if(category !== "all" && !img.classList.contains(category)){
+      img.classList.add("hide");
+    }
+  });
+}
+
+/* CLICK TO VIEW LARGE */
+document.querySelectorAll(".gallery img").forEach(img=>{
+  img.onclick = ()=>{
+    document.getElementById("popup").style.display="flex";
+    document.getElementById("popup-img").src = img.src;
+  };
+});
+</script>
 
 </body>
 </html>
