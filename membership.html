@@ -14,7 +14,7 @@
 <form id="memberForm" enctype="multipart/form-data">
 
   <label>ಫೋಟೋ / Photo</label>
-  <input type="file" id="photo" accept="image/*" required>
+  <input type="file" id="photo" name="photo" accept="image/*" required>
 
   <label>ಹೆಸರು / Name</label>
   <input type="text" name="name" required>
@@ -115,35 +115,52 @@
 </form>
 </div>
 
-
 <script>
 document.getElementById("memberForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const f = this;
-  const data = new FormData(f);
+  const form = document.getElementById("memberForm");
+  const photoInput = document.getElementById("photo");
 
-  const photoFile = document.getElementById("photo").files[0];
+  if (!photoInput.files.length) {
+    alert("Please select photo");
+    return;
+  }
+
   const reader = new FileReader();
 
-  reader.onload = function(){
-    data.append("photo_base64", reader.result);
+  reader.onload = function () {
+    const base64Photo = reader.result.split(",")[1];
+
+    const data = new FormData(form);
+    data.append("action", "membership");
+    data.append("photo", base64Photo);
+    data.append("photoType", photoInput.files[0].type);
 
     fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec", {
       method: "POST",
       body: data
     })
     .then(res => res.json())
-    .then(d => {
-      localStorage.setItem("member_id", d.id);
-      window.location.href = "thanks.html";
+    .then(res => {
+      console.log(res);
+      if(res.status === "success"){
+        window.location.href = "thanks.html?id=" + res.id;
+      } else {
+        alert("Error saving data");
+      }
     })
-    .catch(err => alert("Upload failed"));
+    .catch(err => {
+      console.error(err);
+      alert("Upload failed");
+    });
   };
 
-  reader.readAsDataURL(photoFile);
+  reader.readAsDataURL(photoInput.files[0]);
 });
 </script>
+
+    
 <script>
 /* District → Taluk */
 const taluks = {
