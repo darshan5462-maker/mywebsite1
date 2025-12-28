@@ -83,6 +83,7 @@
   <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>
 </select>
 <h3>ಸದಸ್ಯತ್ವ ವರ್ಗ / Membership Type</h3>
+<input type="hidden" name="membership_fee" id="membership_fee">
 
 <label>ಸದಸ್ಯತ್ವದ ವಿಧ ಆಯ್ಕೆಮಾಡಿ / Select Membership Type</label>
 <select name="membership_type" id="membership_type" required>
@@ -137,19 +138,20 @@ document.getElementById("memberForm").addEventListener("submit", function(e){
     data.append("photo", base64Photo);
     data.append("photoType", photoInput.files[0].type);
 
-    fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxWknOVhux0fGiSjmU_TxR1lQW7E_bWS4NoZs-s4pzI5Vm-_C2qXIiBXskyNtDh__2z/exec", {
       method: "POST",
       body: data
     })
     .then(res => res.json())
     .then(res => {
-      console.log(res);
-      if(res.status === "success"){
-        window.location.href = "thanks.html?id=" + res.id;
-      } else {
-        alert("Error saving data");
-      }
-    })
+  console.log("SERVER RESPONSE:", res);
+
+  if (res.status === "success") {
+    window.location.href = "thanks.html?id=" + res.id;
+  } else {
+    alert("Server error:\n" + (res.error || "Unknown error"));
+  }
+})
     .catch(err => {
       console.error(err);
       alert("Upload failed");
@@ -302,8 +304,9 @@ const feeMap = {
 };
 
 document.getElementById("membership_type").addEventListener("change", function(){
-  document.getElementById("feeAmount").innerText =
-    feeMap[this.value] || 0;
+  const fee = feeMap[this.value] || 0;
+  document.getElementById("feeAmount").innerText = fee;
+  document.getElementById("membership_fee").value = fee; // 🔴 IMPORTANT
 });
 </script>
 
