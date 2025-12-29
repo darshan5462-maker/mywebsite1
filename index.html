@@ -319,12 +319,17 @@ function showPDF() {
 <!-- 🔹 FOOTER -->
 <footer class="footer">
   <p>© 2025 ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</p>
-  <p>All Rights Reserved| Developed by <a href="https://shadowquantdynamics.com">ShadowQuant Tech</a></p>
+  <p>All Rights Reserved| Developed by <a href="https://shadowquantdynamics.com" class="dynamics">ShadowQuant Dynamics</a></p>
 </footer>
 <script>
 document.getElementById("menuIcon").addEventListener("click", function () {
   document.getElementById("navMenu").classList.toggle("show");
 });
+</script>
+<script>
+  document.getElementById("menuIcon").onclick = function () {
+    document.getElementById("navMenu").classList.toggle("show");
+  };
 </script>
 
 </body>
