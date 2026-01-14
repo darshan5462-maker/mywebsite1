@@ -195,7 +195,7 @@ body{
 /* ✅ text */
 .title-box{
   flex: 1;
-  text-align:left; /* because logo on left */
+  text-align:center; /* because logo on left */
 }
 
 .logo-title{
