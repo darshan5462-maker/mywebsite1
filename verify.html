@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ಸದಸ್ಯ ಪರಿಶೀಲನೆ / Member Verification</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green:#138808;
+  --orange:#ff9933;
+  --bg:#eef2f7;
+  --dark:#111;
+  --muted:#666;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:"Noto Sans Kannada", Arial;
+  background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 55%, #e6edf5 100%);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:18px 12px;
+  color:var(--dark);
+}
+
+.container{
+  width:100%;
+  max-width:520px;
+}
+
+.header{
+  background: linear-gradient(90deg, rgba(255,153,51,1) 0%, rgba(255,255,255,1) 50%, rgba(19,136,8,1) 100%);
+  border-radius:16px;
+  padding:14px 14px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(16,24,40,0.12);
+  border:1px solid rgba(0,0,0,0.06);
+}
+
+.header h1{
+  margin:0;
+  font-size:15px;
+  font-weight:900;
+  line-height:1.25;
+}
+
+.header p{
+  margin:5px 0 0;
+  font-size:12px;
+  font-weight:700;
+}
+
+.card{
+  margin-top:14px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 14px 40px rgba(16,24,40,0.14);
+  border:1px solid rgba(0,0,0,0.05);
+  overflow:hidden;
+}
+
+.statusBar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 14px;
+  background:#f7f9fc;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  gap:10px;
+}
+
+.status{
+  font-weight:900;
+  font-size:13px;
+}
+
+.badge{
+  font-weight:900;
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.10);
+  background:#fff;
+}
+
+.badge.ok{
+  color:var(--green);
+  border-color:rgba(19,136,8,0.25);
+  background:rgba(19,136,8,0.08);
+}
+
+.badge.fail{
+  color:#b00020;
+  border-color:rgba(176,0,32,0.25);
+  background:rgba(176,0,32,0.08);
+}
+
+.body{
+  padding:14px;
+}
+
+.profile{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.profile img{
+  width:86px;
+  height:86px;
+  border-radius:14px;
+  object-fit:cover;
+  background:#e9eef5;
+  border:2px solid rgba(19,136,8,0.18);
+}
+
+.name{
+  font-size:15px;
+  font-weight:900;
+  margin:0;
+}
+
+.small{
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+}
+
+.grid{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+
+.row{
+  padding:10px 12px;
+  border:1px solid rgba(0,0,0,0.08);
+  border-radius:12px;
+  background:#fff;
+}
+
+.label{
+  font-size:12px;
+  font-weight:900;
+  color:#222;
+}
+
+.value{
+  margin-top:4px;
+  font-size:13px;
+  font-weight:700;
+  color:#111;
+  word-wrap:break-word;
+}
+
+.footer{
+  margin-top:14px;
+  text-align:center;
+  font-size:11px;
+  color:#444;
+}
+
+.loading{
+  text-align:center;
+  padding:22px 12px;
+  font-weight:900;
+}
+
+.actions{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+  cursor:pointer;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:900;
+  transition:0.2s;
+  width:100%;
+}
+
+.btn.primary{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 10px 18px rgba(19,136,8,0.20);
+}
+
+.btn.primary:hover{
+  transform:translateY(-1px);
+  background:#0f6b06;
+}
+
+.btn.secondary{
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.12);
+  color:#111;
+}
+
+.btn.secondary:hover{
+  background:#f2f6fb;
+}
+
+@media(min-width:480px){
+  .btn{ width:auto; }
+  .grid{ grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>
+      ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
+      ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
+    </h1>
+    <p>ಸದಸ್ಯ ಪರಿಶೀಲನೆ / Member Verification</p>
+  </div>
+
+  <div class="card">
+    <div class="statusBar">
+      <div class="status" id="statusText">ಮಾಹಿತಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...</div>
+      <div class="badge" id="badge">Loading</div>
+    </div>
+
+    <div class="body" id="bodyContent">
+      <div class="loading" id="loadingBox">
+        ಸದಸ್ಯ ಮಾಹಿತಿ ಪಡೆಯಲಾಗುತ್ತಿದೆ... / Loading...
+      </div>
+
+      <div id="memberBox" style="display:none;">
+        <div class="profile">
+          <img id="photo" src="" alt="Photo">
+          <div>
+            <p class="name" id="name">--</p>
+            <p class="small">ಸದಸ್ಯ ID: <span id="mid">--</span></p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="row">
+            <div class="label">ಮೊಬೈಲ್ / Phone</div>
+            <div class="value" id="phone">--</div>
+          </div>
+
+          <div class="row">
+            <div class="label">ಸದಸ್ಯತ್ವ / Membership</div>
+            <div class="value" id="membership">--</div>
+          </div>
+
+          <div class="row" style="grid-column:1/-1;">
+            <div class="label">ವಿಳಾಸ / Address</div>
+            <div class="value" id="address">--</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="openCardBtn">ಕಾರ್ಡ್ ತೆರೆಯಿರಿ / Open Card</button>
+          <button class="btn secondary" onclick="window.print()">Print</button>
+        </div>
+
+      </div>
+
+      <div id="errorBox" style="display:none;">
+        <div class="loading" style="color:#b00020;">
+          ಸದಸ್ಯ ದಾಖಲೆ ದೊರಕಲಿಲ್ಲ ❌<br>
+          <span style="font-size:12px; color:#666; font-weight:700;">
+            Member record not found
+          </span>
+        </div>
+
+        <div class="actions">
+          <button class="btn secondary" onclick="window.location.href='index.html'">
+            ಮುಖಪುಟಕ್ಕೆ ಹೋಗಿ / Go Home
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 | ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ | Secure Verification
+  </div>
+
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgyaJ2NmnG2hRUFKLKPyl5r_iyBG_qRJdjUqEKKDBXi2ah0xmH4PDC-sq8k4lw1brR/exec";
+
+const id = new URLSearchParams(window.location.search).get("id");
+
+const statusText = document.getElementById("statusText");
+const badge = document.getElementById("badge");
+
+const loadingBox = document.getElementById("loadingBox");
+const memberBox = document.getElementById("memberBox");
+const errorBox = document.getElementById("errorBox");
+
+if(!id){
+  statusText.innerText = "ID missing";
+  badge.className = "badge fail";
+  badge.innerText = "Not Verified";
+  loadingBox.style.display = "none";
+  errorBox.style.display = "block";
+} else {
+
+  fetch(SCRIPT_URL + "?id=" + encodeURIComponent(id))
+    .then(res => res.json())
+    .then(data => {
+
+      if(data.status === "error" || data.error){
+        throw new Error(data.error || "Not found");
+      }
+
+      // ✅ Verified
+      statusText.innerText = "✅ ಪರಿಶೀಲನೆ ಯಶಸ್ವಿ / Verified Member";
+      badge.className = "badge ok";
+      badge.innerText = "Verified";
+
+      document.getElementById("mid").innerText = id;
+      document.getElementById("name").innerText = data.name || "--";
+      document.getElementById("phone").innerText = data.phone || "--";
+      document.getElementById("address").innerText = data.address || "--";
+      document.getElementById("membership").innerText = data.membership || "--";
+
+      document.getElementById("photo").src =
+        data.photo || "https://via.placeholder.com/110x110.png?text=Photo";
+
+      // Open card button
+      document.getElementById("openCardBtn").onclick = function(){
+        window.location.href = "card.html?id=" + encodeURIComponent(id);
+      };
+
+      loadingBox.style.display = "none";
+      memberBox.style.display = "block";
+
+    })
+    .catch(err => {
+      console.error(err);
+      statusText.innerText = "❌ ಪರಿಶೀಲನೆ ವಿಫಲ / Verification Failed";
+      badge.className = "badge fail";
+      badge.innerText = "Not Verified";
+
+      loadingBox.style.display = "none";
+      errorBox.style.display = "block";
+    });
+}
+</script>
+
+</body>
+</html>

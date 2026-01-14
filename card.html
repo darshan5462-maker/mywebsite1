@@ -509,144 +509,377 @@ document.addEventListener("DOMContentLoaded", function () {
 <html lang="kn">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --green:#138808;
+  --orange:#ff9933;
+  --dark:#1d1d1d;
+  --muted:#666;
+  --card:#ffffff;
+  --bg:#eef2f7;
+}
+
+*{ box-sizing:border-box; }
+
 body{
   margin:0;
   font-family:"Noto Sans Kannada", Arial;
-  background:linear-gradient(135deg,#f5f7fa,#c3cfe2);
+  background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 55%, #e6edf5 100%);
+  min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
+  padding:22px 12px;
+  color:var(--dark);
 }
 
-/* CARD */
+.wrap{
+  width:100%;
+  max-width:420px;
+}
+
+/* ===== CARD ===== */
 .card{
-  width:360px;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  background:var(--card);
+  border-radius:18px;
   overflow:hidden;
+  box-shadow:0 14px 40px rgba(16,24,40,0.18);
+  border:1px solid rgba(0,0,0,0.05);
 }
 
-/* HEADER */
-.card-header{
-  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
+/* ===== TOP STRIP ===== */
+.card-top{
+  padding:14px 16px;
+  background: linear-gradient(90deg, rgba(255,153,51,1) 0%, rgba(255,255,255,1) 50%, rgba(19,136,8,1) 100%);
   text-align:center;
-  padding:14px;
+  position:relative;
 }
 
-.card-header h2{
+.card-top h2{
   margin:0;
-  font-size:16px;
-  font-weight:bold;
+  font-size:15px;
+  font-weight:800;
+  line-height:1.25;
 }
 
-/* BODY */
+.card-top .sub{
+  margin:4px 0 0;
+  font-size:12px;
+  color:#111;
+  font-weight:600;
+}
+
+/* Logo circle (optional) */
+.badge{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  color:var(--green);
+  border:2px solid rgba(0,0,0,0.08);
+}
+
+/* ===== BODY ===== */
 .card-body{
-  padding:20px;
-  font-size:14px;
+  padding:16px 16px 14px;
 }
 
-.card-body p{
+/* Layout */
+.info{
+  display:grid;
+  grid-template-columns: 1fr 130px;
+  gap:14px;
+  align-items:start;
+}
+
+.photoBox{
+  width:130px;
+  text-align:center;
+}
+
+.photo{
+  width:110px;
+  height:110px;
+  border-radius:14px;
+  object-fit:cover;
+  border:3px solid rgba(19,136,8,0.25);
+  background:#e9eef5;
+}
+
+.midPill{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  background:rgba(19,136,8,0.09);
+  color:var(--green);
+  border:1px solid rgba(19,136,8,0.15);
+}
+
+/* Fields */
+.field{
   margin:8px 0;
+  line-height:1.35;
 }
 
 .label{
-  font-weight:bold;
+  font-weight:800;
+  color:#222;
+  font-size:13px;
 }
 
-/* PHOTO */
-.photo{
-  text-align:center;
-  margin-bottom:10px;
-}
-.photo img{
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  object-fit:cover;
-  border:3px solid #138808;
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:#ddd;
-  margin:10px auto;
+.value{
+  font-weight:600;
+  color:#111;
+  font-size:13px;
 }
 
-/* QR */
-.qr{
-  text-align:center;
-  margin-top:10px;
+.muted{
+  color:var(--muted);
 }
 
-/* FOOTER */
-.card-footer{
-  background:#f2f2f2;
-  text-align:center;
-  padding:10px;
+/* Membership type highlight */
+.membershipTag{
+  display:inline-block;
+  margin-top:6px;
+  padding:6px 10px;
+  border-radius:10px;
   font-size:12px;
+  font-weight:800;
+  background: rgba(255,153,51,0.14);
+  border:1px solid rgba(255,153,51,0.25);
 }
 
-/* BUTTON */
-button{
-  margin-top:15px;
-  padding:10px 20px;
-  background:#138808;
-  color:#fff;
-  border:none;
-  border-radius:6px;
-  font-size:15px;
-  cursor:pointer;
+/* ===== QR AREA ===== */
+.qrArea{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px dashed rgba(0,0,0,0.16);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
-button:hover{
-  background:#0e6f06;
+
+.qrBox{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.qrBox img{
+  width:78px;
+  height:78px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.12);
+  background:#fff;
+  padding:6px;
+}
+
+.qrText{
+  font-size:12px;
+  color:#333;
+}
+
+.qrText strong{
+  display:block;
+  font-size:12px;
+  margin-bottom:3px;
+}
+
+.signature{
+  text-align:right;
+  font-size:11px;
+  color:#444;
+}
+.signature .line{
+  margin-top:26px;
+  border-top:1px solid rgba(0,0,0,0.18);
+  width:120px;
+  margin-left:auto;
+}
+.signature span{
+  display:block;
+  margin-top:6px;
+  font-weight:700;
+}
+
+/* ===== FOOTER ===== */
+.card-footer{
+  padding:10px 16px;
+  background:#f7f9fc;
+  border-top:1px solid rgba(0,0,0,0.06);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  color:#444;
+}
+
+.secure{
+  color:var(--green);
+  font-weight:800;
+}
+
+/* ===== BUTTONS ===== */
+.actions{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+  cursor:pointer;
+  padding:12px 14px;
+  border-radius:12px;
+  font-size:14px;
+  font-weight:800;
+  transition:0.2s;
+  width:100%;
+}
+
+.btn.primary{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 10px 18px rgba(19,136,8,0.22);
+}
+
+.btn.primary:hover{
+  transform:translateY(-1px);
+  background:#0f6b06;
+}
+
+.btn.secondary{
+  background:#fff;
+  border:1px solid rgba(0,0,0,0.12);
+  color:#111;
+}
+
+.btn.secondary:hover{
+  background:#f2f6fb;
+}
+
+@media(min-width:480px){
+  .btn{ width:auto; }
+}
+
+/* Loading text */
+.loading{
+  text-align:center;
+  padding:22px 10px;
+  font-weight:800;
+  color:#222;
+}
+.small{
+  font-size:12px;
+  color:#666;
+  font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
+<div class="wrap">
 
-  <div class="card-header">
-    <h2>
-      ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
-      ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
-    </h2>
-  </div>
-
-  <div class="card-body">
-
-    <div class="photo">
-      <img id="photo" src="" alt="Member Photo">
+  <div class="card" id="card">
+    <div class="card-top">
+      <div class="badge">A</div>
+      <h2>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h2>
+      <div class="sub">ಮಾನ್ಯ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ / Membership Card</div>
     </div>
 
-    <p><span class="label">ಹೆಸರು / Name:</span> <span id="name">Loading...</span></p>
-    <p><span class="label">ಮೊಬೈಲ್ / Phone:</span> <span id="phone">Loading...</span></p>
-    <p><span class="label">ವಿಳಾಸ / Address:</span> <span id="address">Loading...</span></p>
-    <p><span class="label">ಸದಸ್ಯ ID:</span> <span id="mid">Loading...</span></p>
-    <p><span class="label">ಸದಸ್ಯತ್ವ:</span> <span id="membership">Loading...</span></p>
+    <div class="card-body">
+      <div id="loading" class="loading">
+        ಮಾಹಿತಿ ಪಡೆಯಲಾಗುತ್ತಿದೆ... / Loading Member Data...
+        <div class="small">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ</div>
+      </div>
 
-    <div class="qr">
-      <img id="qr" width="50">
-      <div style="font-size:12px;">Scan for verification</div>
+      <div id="content" style="display:none;">
+        <div class="info">
+          <!-- Left info -->
+          <div>
+            <div class="field">
+              <div class="label">ಹೆಸರು / Name</div>
+              <div class="value" id="name">--</div>
+            </div>
+
+            <div class="field">
+              <div class="label">ಮೊಬೈಲ್ / Phone</div>
+              <div class="value" id="phone">--</div>
+            </div>
+
+            <div class="field">
+              <div class="label">ವಿಳಾಸ / Address</div>
+              <div class="value muted" id="address">--</div>
+            </div>
+
+            <div class="field">
+              <div class="label">ಸದಸ್ಯತ್ವ / Membership</div>
+              <div class="membershipTag" id="membership">--</div>
+            </div>
+          </div>
+
+          <!-- Right photo -->
+          <div class="photoBox">
+            <img id="photo" class="photo" src="" alt="Member Photo"
+              onerror="this.src='https://via.placeholder.com/110x110.png?text=Photo'">
+
+            <div class="midPill">ID: <span id="mid">--</span></div>
+          </div>
+        </div>
+
+        <!-- QR + Signature -->
+        <div class="qrArea">
+          <div class="qrBox">
+            <img id="qr" alt="QR Code">
+            <div class="qrText">
+              <strong>Scan for verification</strong>
+              ಪರಿಶೀಲನೆಗಾಗಿ QR Scan ಮಾಡಿ
+            </div>
+          </div>
+
+          <div class="signature">
+            <div class="line"></div>
+            <span>ಅಧ್ಯಕ್ಷರ ಸಹಿ</span>
+            <div class="muted">Authorized Sign</div>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <div class="card-footer">
+      <div>© 2026 | ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</div>
+      <div class="secure">✔ Verified</div>
+    </div>
   </div>
 
-  <div class="card-footer">
-    ಮಾನ್ಯ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್
+  <div class="actions">
+    <button class="btn primary" onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
+    <button class="btn secondary" onclick="window.print()">Print</button>
   </div>
 
 </div>
-
-<button onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
 
 <!-- PDF LIBRARY -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -654,37 +887,52 @@ button:hover{
 <script>
 /* GET MEMBER ID FROM URL */
 const id = new URLSearchParams(window.location.search).get("id");
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgyaJ2NmnG2hRUFKLKPyl5r_iyBG_qRJdjUqEKKDBXi2ah0xmH4PDC-sq8k4lw1brR/exec";
 
 if(!id){
   alert("Member ID not found");
 }
 
-/* FETCH DATA */
-fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec?id=" + id)
-.then(res => res.json())
-.then(data => {
-  document.getElementById("name").innerText = data.name || "";
-  document.getElementById("phone").innerText = data.phone || "";
-  document.getElementById("address").innerText = data.address || "";
-  document.getElementById("membership").innerText = data.membership || "";
-  document.getElementById("mid").innerText = id;
-  document.getElementById("photo").src = data.photo || "";
+/* FETCH MEMBER DATA */
+fetch(SCRIPT_URL + "?id=" + encodeURIComponent(id))
+  .then(res => res.json())
+  .then(data => {
 
-  /* QR CODE */
-  const qrData = window.location.origin + "/verify.html?id=" + id;
-  document.getElementById("qr").src =
-    "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
-});
-</script>
+    if(data.status === "error"){
+      throw new Error(data.error || "Unknown error");
+    }
 
-<script>
+    document.getElementById("name").innerText = data.name || "--";
+    document.getElementById("phone").innerText = data.phone || "--";
+    document.getElementById("address").innerText = data.address || "--";
+    document.getElementById("membership").innerText = data.membership || "--";
+    document.getElementById("mid").innerText = id;
+
+    // Photo fallback
+    document.getElementById("photo").src = data.photo || "https://via.placeholder.com/110x110.png?text=Photo";
+
+    /* QR CODE => verify.html?id= */
+    const qrData = window.location.origin + "/verify.html?id=" + id;
+    document.getElementById("qr").src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(qrData);
+
+    // Show content
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("content").style.display = "block";
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("loading").innerHTML =
+      "ಮಾಹಿತಿ ಪಡೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ ❌<br><span class='small'>" + err.message + "</span>";
+  });
+
 function downloadPDF(){
   html2pdf()
     .set({
-      margin:0.3,
+      margin:0.2,
       filename:"Membership_Card_" + id + ".pdf",
       image:{type:"jpeg",quality:0.98},
-      html2canvas:{scale:2},
+      html2canvas:{scale:2, useCORS:true},
       jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
     })
     .from(document.getElementById("card"))

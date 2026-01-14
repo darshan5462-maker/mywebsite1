@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<DOCTYPE html>
 <html lang="kn">
 <head>
   <meta charset="UTF-8">
@@ -307,6 +307,269 @@ document.getElementById("membership_type").addEventListener("change", function()
   const fee = feeMap[this.value] || 0;
   document.getElementById("feeAmount").innerText = fee;
   document.getElementById("membership_fee").value = fee; // 🔴 IMPORTANT
+});
+</script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <title>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header>
+  ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
+</header>
+
+<div class="form-container">
+  <h2>ಸದಸ್ಯತ್ವ ಅರ್ಜಿ / Membership Form</h2>
+
+  <form id="memberForm">
+
+    <label>ಫೋಟೋ / Photo</label>
+    <input type="file" id="photo" name="photo_file" accept="image/*" required>
+
+    <label>ಹೆಸರು / Name</label>
+    <input type="text" name="name" required>
+
+    <label>ತಂದೆ / ಪತಿ ಹೆಸರು / Father / Husband Name</label>
+    <input type="text" name="father_husband_name" required>
+
+    <label>ಲಿಂಗ / Gender</label>
+    <select name="gender" required>
+      <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+      <option value="ಪುರುಷ / Male">ಪುರುಷ / Male</option>
+      <option value="ಮಹಿಳೆ / Female">ಮಹಿಳೆ / Female</option>
+      <option value="ಇತರೆ / Other">ಇತರೆ / Other</option>
+    </select>
+
+    <label>ಜನ್ಮ ದಿನಾಂಕ / Date of Birth</label>
+    <input type="date" name="dob" required>
+
+    <label>ವರ್ಗ / Category</label>
+    <select id="category" name="category" required>
+      <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Category</option>
+      <option value="SC">SC</option>
+      <option value="ST">ST</option>
+      <option value="OBC">OBC</option>
+      <option value="General">General</option>
+    </select>
+
+    <label>ಜಾತಿ / Caste</label>
+    <select id="caste" name="caste" required>
+      <option value="">ಮೊದಲು ವರ್ಗ ಆಯ್ಕೆಮಾಡಿ / Select category first</option>
+    </select>
+
+    <label>ಶಿಕ್ಷಣ / Qualification</label>
+    <input type="text" name="qualification">
+
+    <label>ವೃತ್ತಿ / Profession</label>
+    <input type="text" name="profession">
+
+    <label>ಪ್ರಸ್ತುತ ವಿಳಾಸ / Current Address</label>
+    <textarea name="current_address" id="currentAddress" required></textarea>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="sameAddress">
+      <span>ಶಾಶ್ವತ ವಿಳಾಸವೂ ಇದೇ / Same as Permanent Address</span>
+    </div>
+
+    <label>ಶಾಶ್ವತ ವಿಳಾಸ / Permanent Address</label>
+    <textarea name="permanent_address" id="permanentAddress" required></textarea>
+
+    <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ / Mobile Number</label>
+    <input type="tel" name="phone" required>
+
+    <label>ಪಂಚಾಯತ್ ಹೆಸರು / Panchayat Name</label>
+    <input type="text" name="panchayat">
+
+    <label>ಇಮೇಲ್ ಐಡಿ / Email ID</label>
+    <input type="email" name="email">
+
+    <label>ಆಧಾರ್ ಸಂಖ್ಯೆ / Aadhaar Number</label>
+    <input type="text" name="aadhaar" id="aadhaar" maxlength="12" required>
+
+    <label>ಜಿಲ್ಲೆ / District</label>
+    <select id="district" name="district" required>
+      <option value="">ಆಯ್ಕೆಮಾಡಿ / Select District</option>
+    </select>
+
+    <label>ತಾಲೂಕು / Taluk</label>
+    <select id="taluk" name="taluk" required>
+      <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>
+    </select>
+
+    <h3>ಸದಸ್ಯತ್ವ ವರ್ಗ / Membership Type</h3>
+    <input type="hidden" name="membership_fee" id="membership_fee" value="0">
+
+    <label>ಸದಸ್ಯತ್ವದ ವಿಧ ಆಯ್ಕೆಮಾಡಿ / Select Membership Type</label>
+    <select name="membership_type" id="membership_type" required>
+      <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+
+      <option value="Life Member">
+        ಆಜೀವ ಸದಸ್ಯತ್ವ (Life Member) – ರೂ.2000/- ಅಥವಾ ಅದಕ್ಕಿಂತ ಹೆಚ್ಚು
+      </option>
+
+      <option value="Annual Member">
+        ವಾರ್ಷಿಕ ಸದಸ್ಯತ್ವ (Annual Member) – ರೂ.500/-
+      </option>
+
+      <option value="General Member">
+        ಸಾಮಾನ್ಯ ಸದಸ್ಯತ್ವ (General Member) – ರೂ.200/-
+      </option>
+    </select>
+
+    <p>
+      <strong>ಶುಲ್ಕ / Amount:</strong> ₹<span id="feeAmount">0</span>
+    </p>
+
+    <label>UTR / Transaction ID</label>
+    <input type="text" name="transaction_id" id="transaction_id"
+           placeholder="ಪಾವತಿ ನಂತರ UTR ನಮೂದಿಸಿ / Enter UTR after payment"
+           required>
+
+    <button type="submit">ಸದಸ್ಯತ್ವ ಸಲ್ಲಿಸಿ / Submit Membership</button>
+  </form>
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgyaJ2NmnG2hRUFKLKPyl5r_iyBG_qRJdjUqEKKDBXi2ah0xmH4PDC-sq8k4lw1brR/exec";
+
+document.getElementById("memberForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const form = document.getElementById("memberForm");
+  const photoInput = document.getElementById("photo");
+
+  if (!photoInput.files.length) {
+    alert("ಫೋಟೋ ಆಯ್ಕೆಮಾಡಿ / Please select photo");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    const base64Photo = reader.result.split(",")[1];
+
+    const data = new FormData(form);
+    data.append("photo", base64Photo);
+    data.append("photoType", photoInput.files[0].type);
+
+    fetch(SCRIPT_URL, { method: "POST", body: data })
+      .then(res => res.json())
+      .then(res => {
+        console.log("SERVER RESPONSE:", res);
+
+        if (res.status === "success") {
+          window.location.href = "thanks.html?id=" + res.id;
+        } else {
+          alert("Server error:\n" + (res.error || "Unknown error"));
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Upload failed");
+      });
+  };
+
+  reader.readAsDataURL(photoInput.files[0]);
+});
+</script>
+
+<script>
+/* ✅ Aadhaar validation */
+document.getElementById("aadhaar").addEventListener("input", function(){
+  this.value = this.value.replace(/\D/g,"").slice(0,12);
+});
+
+/* ✅ Same address copy (works correctly) */
+document.getElementById("sameAddress").addEventListener("change", function(){
+  const current = document.getElementById("currentAddress");
+  const permanent = document.getElementById("permanentAddress");
+
+  if(this.checked){
+    permanent.value = current.value;
+    current.addEventListener("input", () => permanent.value = current.value);
+  }
+});
+</script>
+
+<script>
+/* ✅ District → Taluk Map */
+const districtTalukMap = {
+  "Bagalkot": ["Bagalkot","Badami","Bilagi","Hungund","Jamkhandi","Mudhol"],
+  "Belagavi": ["Athani","Bailhongal","Belagavi","Chikkodi","Gokak","Hukkeri","Khanapur","Raibag","Ramdurg","Saundatti"],
+  "Vijayapura": ["Basavana Bagewadi","Indi","Muddebihal","Sindagi","Vijayapura"],
+  "Haveri": ["Byadgi","Hangal","Haveri","Hirekerur","Ranebennur","Savanur","Shiggaon"],
+  "Ballari": ["Ballari","Hospet","Hagaribommanahalli","Hadagalli","Kudligi","Sandur","Siruguppa"],
+  "Dharwad": ["Dharwad","Hubballi","Kalghatgi","Kundgol","Navalgund"],
+  "Gadag": ["Gadag","Mundargi","Nargund","Ron","Shirhatti"],
+  "Koppal": ["Gangavathi","Koppal","Kushtagi","Yelburga"],
+  "Raichur": ["Devadurga","Lingasugur","Manvi","Raichur","Sindhanur"],
+  "Yadgir": ["Gurmitkal","Shahapur","Yadgir"]
+};
+
+const districtSelect = document.getElementById("district");
+const talukSelect = document.getElementById("taluk");
+
+/* Populate district list */
+Object.keys(districtTalukMap).forEach(d => {
+  const opt = document.createElement("option");
+  opt.value = d;
+  opt.textContent = d;
+  districtSelect.appendChild(opt);
+});
+
+/* Populate taluk list */
+districtSelect.addEventListener("change", function(){
+  talukSelect.innerHTML = '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>';
+  (districtTalukMap[this.value] || []).forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t;
+    opt.textContent = t;
+    talukSelect.appendChild(opt);
+  });
+});
+</script>
+
+<script>
+/* ✅ Category → Caste */
+const casteData = {
+  SC: ["ಆದಿ ಜಾಂಬವ / Adi Jambava","ಮಾದಿಗ / Madiga","ಮಾದರ / Madara","ಚಲವಾದಿ / Chalavadi","ಹೊಲೆಯ / Holeya","ಭೋವಿ / Bhovi"],
+  ST: ["ವಾಲ್ಮೀಕಿ / Valmiki","ನಾಯಕ / Nayaka","ಲಂಬಾಣಿ / Lambani","ಗೋಂಡ / Gonda"],
+  OBC: ["ಕುರುಬ / Kuruba","ಒಕ್ಕಲಿಗ / Vokkaliga","ಲಿಂಗಾಯತ / Lingayat","ಕೊರಮ / Korama","ಕೊರಚ / Koracha"],
+  General: ["ಬ್ರಾಹ್ಮಣ / Brahmin","ಕ್ಷತ್ರಿಯ / Kshatriya","ವೈಶ್ಯ / Vaishya","ಮುಸ್ಲಿಂ / Muslim","ಕ್ರಿಶ್ಚಿಯನ್ / Christian"]
+};
+
+document.getElementById("category").addEventListener("change", function(){
+  const casteSelect = document.getElementById("caste");
+  casteSelect.innerHTML = '<option value="">ಜಾತಿ ಆಯ್ಕೆಮಾಡಿ / Select Caste</option>';
+
+  (casteData[this.value] || []).forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    casteSelect.appendChild(opt);
+  });
+});
+</script>
+
+<script>
+/* ✅ Membership fee map */
+const feeMap = {
+  "Life Member": 2000,
+  "Annual Member": 500,
+  "General Member": 200
+};
+
+document.getElementById("membership_type").addEventListener("change", function(){
+  const fee = feeMap[this.value] || 0;
+  document.getElementById("feeAmount").innerText = fee;
+  document.getElementById("membership_fee").value = fee;
 });
 </script>
 
