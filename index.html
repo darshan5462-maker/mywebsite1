@@ -348,19 +348,23 @@ menuIcon.addEventListener("click", () => {
 <body>
 
 <header class="header1">
-  <div class="top-bar1">
+
+  <div class="header-row">
+    <!-- ✅ Logo left -->
+    <img src="logo.png" alt="Logo" class="header-logo">
+
+    <!-- ✅ H1 content -->
     <div class="title-box">
-      <h1 class="logo">
+      <h1 class="logo-title">
         ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
         ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
       </h1>
-      <p>ನಂದಗಾoವ್ | ತಾಲ್ಲೂಕು: ಅಥಣಿ | ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ</p>
+      <p class="sub-title">ನಂದಗಾoವ್ | ತಾಲ್ಲೂಕು: ಅಥಣಿ | ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ</p>
     </div>
-
-    <div class="menu-icon" id="menuIcon">☰</div>
   </div>
 
-  <nav id="navMenu" class="nav-menu">
+  <!-- ✅ Linear Navigation -->
+  <nav class="nav-linear">
     <a href="index.html">ಮುಖಪುಟ</a>
     <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
     <a href="#leadership">ನಾಯಕತ್ವ</a>
@@ -368,7 +372,10 @@ menuIcon.addEventListener("click", () => {
     <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
     <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
   </nav>
+
 </header>
+
+
 
 <!-- 🔹 HERO SECTION -->
 <section class="hero">
@@ -508,14 +515,7 @@ menuIcon.addEventListener("click", () => {
   </p>
 </footer>
 
-<script>
-const menuIcon = document.getElementById("menuIcon");
-const navMenu  = document.getElementById("navMenu");
 
-menuIcon.addEventListener("click", () => {
-  navMenu.classList.toggle("show");
-});
-</script>
 
 </body>
 </html>

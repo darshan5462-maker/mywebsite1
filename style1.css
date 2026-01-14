@@ -11,26 +11,8 @@ body{
 }
 
 /* ===== HEADER1 ===== */
-.header1{
-  background:linear-gradient(90deg,#f07a03,#ffffff,#138808);
-  text-align:center;
-  position:sticky;
-  top: 0;
-  z-index: 99999;
-  box-shadow:0 4px 15px rgba(0,0,0,0.15);
-}
 
-.top-bar1{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:10px 15px;
-}
 
-.title-box{
-  flex:1;
-  text-align:center;
-}
 
 .logo{
   margin:0;
@@ -39,13 +21,6 @@ body{
 }
 
 /* Desktop nav */
-.nav-menu{
-  display:flex;
-  justify-content:center;
-  gap:18px;
-  padding:12px 0;
-  font-size:18px;
-}
 
 .nav-menu a{
   text-decoration:none;
@@ -70,9 +45,7 @@ body{
     display:block;
   }
 
-  .title-box{
-    text-align:left;
-  }
+  
 
   .nav-menu{
     display:none;
@@ -190,4 +163,95 @@ body{
 
 .dynamics{
   color:skyblue;
+}
+/* ✅ HEADER WITH LOGO + LINEAR NAV */
+
+/* ✅ HEADER WITH LOGO + LINEAR NAV */
+.header1{
+  background:linear-gradient(90deg,#f07a03,#ffffff,#138808);
+  position:sticky;
+  top:0;
+  z-index:99999;
+  box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+/* ✅ logo + h1 same line */
+.header-row{
+  display:flex;
+  align-items:center;
+  
+  gap:14px;
+  padding:12px 14px;
+}
+
+.header-logo{
+  width:70px;
+  height:70px;
+  object-fit:contain;
+  background:transparent;
+  flex: 0 0 auto;
+}
+
+/* ✅ text */
+.title-box{
+  flex: 1;
+  text-align:left; /* because logo on left */
+}
+
+.logo-title{
+  margin:0;
+  font-size:20px;
+  font-weight:800;
+  line-height:1.25;
+}
+
+.sub-title{
+  margin:4px 0 0;
+  font-size:13px;
+  font-weight:700;
+}
+
+/* ✅ nav linear */
+.nav-linear{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:10px 10px 14px;
+  background:rgba(255,255,255,0.55);
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+.nav-linear a{
+  text-decoration:none;
+  font-weight:800;
+  color:#000;
+  padding:8px 12px;
+  border-radius:10px;
+  transition:0.2s;
+}
+
+.nav-linear a:hover{
+  background:rgba(0,0,0,0.08);
+}
+
+/* ✅ Mobile responsive */
+@media(max-width:768px){
+  .header-row{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .title-box{
+    text-align:center;
+  }
+
+  .header-logo{
+    width:60px;
+    height:60px;
+  }
+
+  .logo-title{
+    font-size:18px;
+  }
 }
