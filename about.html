@@ -83,6 +83,73 @@
     .obj-list li{
       margin-bottom:10px;
     }
+    /* ===== MEMBER DETAILS SECTION ===== */
+.member-sub{
+  max-width:800px;
+  margin:0 auto 20px;
+  color:#444;
+  font-weight:600;
+}
+
+.member-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:10px;
+}
+
+.member-card{
+  background:#fff;
+  border-radius:16px;
+  padding:18px 16px;
+  box-shadow:0 10px 26px rgba(0,0,0,0.12);
+  border:1px solid rgba(0,0,0,0.06);
+  text-align:center;
+  transition:0.2s;
+  position:relative;
+  overflow:hidden;
+}
+
+.member-card:hover{
+  transform:translateY(-3px);
+}
+
+.member-no{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:#138808;
+  color:#fff;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+
+.member-name{
+  font-size:16px;
+  font-weight:800;
+  margin-top:10px;
+  color:#111;
+}
+
+.member-post{
+  margin-top:10px;
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(255,153,51,0.18);
+  border:1px solid rgba(255,153,51,0.35);
+  font-weight:900;
+  font-size:13px;
+  color:#000;
+}
+
 
     @media(max-width:750px){
       .info-grid{grid-template-columns:1fr;}
@@ -125,6 +192,59 @@
         </div>
       </div>
     </div>
+    <section class="section light" id="members">
+  <h2>ಕಾರ್ಯಕಾರಿ ಸಮಿತಿ / Member Details</h2>
+  <p class="member-sub">
+    ಸಂಘದ ಕಾರ್ಯಕಾರಿ ಸಮಿತಿಯ ಸದಸ್ಯರ ವಿವರಗಳು
+  </p>
+
+  <div class="member-grid">
+
+    <div class="member-card">
+      <div class="member-no">1</div>
+      <div class="member-name">ಶ್ರೀ. ರಾಜು ನಾಗಪ್ಪ ನಡವಿನಮನಿ</div>
+      <div class="member-post">ಅಧ್ಯಕ್ಷರು</div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-no">2</div>
+      <div class="member-name">ಶ್ರೀ. ಸೋಮೇಶ ಯಮುನಪ್ಪ ಹುಡೇಮನಿ</div>
+      <div class="member-post">ಉಪಾಧ್ಯಕ್ಷರು</div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-no">3</div>
+      <div class="member-name">ಶ್ರೀ. ಬಸನ ಶ್ರೀಕಾಂತ ಪವಾರ</div>
+      <div class="member-post">ಪ್ರಧಾನ ಕಾರ್ಯದರ್ಶಿ</div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-no">4</div>
+      <div class="member-name">ಶ್ರೀ. ಪರಶುರಾಮ ನಾಗಪ್ಪ ನಡವಿನಮನಿ</div>
+      <div class="member-post">ಸಚಿವರು</div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-no">5</div>
+      <div class="member-name">ಶ್ರೀ. ಶಿವಾನಂದ ಭೀಮರಾವ ಮಾದರ</div>
+      <div class="member-post">ಸಚಿವರು</div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-no">6</div>
+      <div class="member-name">ಶ್ರೀ. ಸಾಗರ ಶ್ರೀಕಾಂತ ನಡವಿನಮನಿ</div>
+      <div class="member-post">ಸಚಿವರು</div>
+    </div>
+
+    <div class="member-card">
+      <div class="member-no">7</div>
+      <div class="member-name">ಶ್ರೀ. ಸುಬಾಶ ಶ್ರೀಕಾಂತ ನಡವಿನಮನಿ</div>
+      <div class="member-post">ಸಚಿವರು</div>
+    </div>
+
+  </div>
+</section>
+
 
     <!-- OBJECTIVES -->
     <div class="card">
