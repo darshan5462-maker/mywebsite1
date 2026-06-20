@@ -47,10 +47,11 @@
  <p>ಕಾರ್ಡ್ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...</p>
 
 <script>
-const id = localStorage.getItem("member_id");
-setTimeout(()=>{
-  window.location.href = "card.html?id=" + id;
-},3000);
+const id = new URLSearchParams(window.location.search).get("id");
+
+setTimeout(() => {
+  window.location.href = "card.html?id=" + encodeURIComponent(id);
+}, 3000);
 </script>
 
 </body>
