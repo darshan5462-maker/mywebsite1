@@ -605,27 +605,7 @@ villageSelect.addEventListener("change", () => {
 
 });
 
-const districtSelect = document.getElementById("district");
-const talukSelect = document.getElementById("taluk");
 
-/* Populate district list */
-Object.keys(districtTalukMap).forEach(d => {
-  const opt = document.createElement("option");
-  opt.value = d;
-  opt.textContent = d;
-  districtSelect.appendChild(opt);
-});
-
-/* Populate taluk list */
-districtSelect.addEventListener("change", function(){
-  talukSelect.innerHTML = '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>';
-  (districtTalukMap[this.value] || []).forEach(t => {
-    const opt = document.createElement("option");
-    opt.value = t;
-    opt.textContent = t;
-    talukSelect.appendChild(opt);
-  });
-});
 </script>
 
 <script>
