@@ -842,8 +842,10 @@ body{
 
           <!-- Right photo -->
           <div class="photoBox">
-            <img id="photo" class="photo" src="" alt="Member Photo"
-              onerror="this.src='https://via.placeholder.com/110x110.png?text=Photo'">
+            <img id="photo"
+                 class="photo"
+                 src=""
+                 alt="Member Photo">
 
             <div class="midPill">ID: <span id="mid">--</span></div>
           </div>
@@ -897,6 +899,9 @@ if(!id){
 fetch(SCRIPT_URL + "?id=" + encodeURIComponent(id))
   .then(res => res.json())
   .then(data => {
+    console.log("Member Data:", data);
+    console.log("Photo URL:", data.photo);
+    console.log("Converted URL:", convertDriveUrl(data.photo));
 
     if(data.status === "error"){
       throw new Error(data.error || "Unknown error");
@@ -909,7 +914,8 @@ fetch(SCRIPT_URL + "?id=" + encodeURIComponent(id))
     document.getElementById("mid").innerText = id;
 
     // Photo fallback
-    document.getElementById("photo").src = data.photo || "https://via.placeholder.com/110x110.png?text=Photo";
+    document.getElementById("photo").src =
+    convertDriveUrl(data.photo);
 
     /* QR CODE => verify.html?id= */
     const qrData = window.location.origin + "/verify.html?id=" + id;
