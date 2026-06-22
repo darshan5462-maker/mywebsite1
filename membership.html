@@ -385,8 +385,7 @@ document.getElementById("membership_type").addEventListener("change", function()
     <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ / Mobile Number</label>
     <input type="tel" name="phone" required>
 
-    <label>ಪಂಚಾಯತ್ ಹೆಸರು / Panchayat Name</label>
-    <input type="text" name="panchayat">
+    
 
     <label>ಇಮೇಲ್ ಐಡಿ / Email ID</label>
     <input type="email" name="email">
@@ -403,6 +402,18 @@ document.getElementById("membership_type").addEventListener("change", function()
     <select id="taluk" name="taluk" required>
       <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>
     </select>
+
+    <label>ಗ್ರಾಮ / Village</label>
+    <select id="village" name="village" required>
+     <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Village</option>
+    </select>
+    <label>ಗ್ರಾಮ ಪಂಚಾಯತ್ / Gram Panchayat</label>
+<input
+  type="text"
+  id="panchayat"
+  name="panchayat"
+  readonly
+  required>
 
     <h3>ಸದಸ್ಯತ್ವ ವರ್ಗ / Membership Type</h3>
     <input type="hidden" name="membership_fee" id="membership_fee" value="0">
@@ -504,18 +515,95 @@ document.getElementById("sameAddress").addEventListener("change", function(){
 
 <script>
 /* ✅ District → Taluk Map */
-const districtTalukMap = {
-  "Bagalkot": ["Bagalkot","Badami","Bilagi","Hungund","Jamkhandi","Mudhol"],
-  "Belagavi": ["Athani","Bailhongal","Belagavi","Chikkodi","Gokak","Hukkeri","Khanapur","Raibag","Ramdurg","Saundatti"],
-  "Vijayapura": ["Basavana Bagewadi","Indi","Muddebihal","Sindagi","Vijayapura"],
-  "Haveri": ["Byadgi","Hangal","Haveri","Hirekerur","Ranebennur","Savanur","Shiggaon"],
-  "Ballari": ["Ballari","Hospet","Hagaribommanahalli","Hadagalli","Kudligi","Sandur","Siruguppa"],
-  "Dharwad": ["Dharwad","Hubballi","Kalghatgi","Kundgol","Navalgund"],
-  "Gadag": ["Gadag","Mundargi","Nargund","Ron","Shirhatti"],
-  "Koppal": ["Gangavathi","Koppal","Kushtagi","Yelburga"],
-  "Raichur": ["Devadurga","Lingasugur","Manvi","Raichur","Sindhanur"],
-  "Yadgir": ["Gurmitkal","Shahapur","Yadgir"]
-};
+const districtSelect =
+document.getElementById("district");
+
+const talukSelect =
+document.getElementById("taluk");
+
+const villageSelect =
+document.getElementById("village");
+
+const panchayatInput =
+document.getElementById("panchayat");
+
+Object.keys(districtTalukMap).forEach(d => {
+
+  const option =
+  document.createElement("option");
+
+  option.value = d;
+  option.textContent = d;
+
+  districtSelect.appendChild(option);
+
+});
+
+districtSelect.addEventListener("change", () => {
+
+  talukSelect.innerHTML =
+  '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>';
+
+  villageSelect.innerHTML =
+  '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Village</option>';
+
+  panchayatInput.value = "";
+
+  (districtTalukMap[districtSelect.value] || [])
+  .forEach(t => {
+
+    const option =
+    document.createElement("option");
+
+    option.value = t;
+    option.textContent = t;
+
+    talukSelect.appendChild(option);
+
+  });
+
+});
+
+talukSelect.addEventListener("change", () => {
+
+  villageSelect.innerHTML =
+  '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Village</option>';
+
+  const villages =
+  villageDatabase.filter(v =>
+    v.district === districtSelect.value &&
+    v.taluk === talukSelect.value
+  );
+
+  villages.forEach(v => {
+
+    const option =
+    document.createElement("option");
+
+    option.value = v.village;
+    option.textContent = v.village;
+
+    villageSelect.appendChild(option);
+
+  });
+
+});
+
+villageSelect.addEventListener("change", () => {
+
+  const record =
+  villageDatabase.find(v =>
+    v.district === districtSelect.value &&
+    v.taluk === talukSelect.value &&
+    v.village === villageSelect.value
+  );
+
+  if(record){
+    panchayatInput.value =
+    record.panchayat;
+  }
+
+});
 
 const districtSelect = document.getElementById("district");
 const talukSelect = document.getElementById("taluk");
@@ -576,6 +664,8 @@ document.getElementById("membership_type").addEventListener("change", function()
   document.getElementById("membership_fee").value = fee;
 });
 </script>
+  <script src="taluks.js"></script>
+<script src="villages.js"></script>
 
 </body>
 </html>
