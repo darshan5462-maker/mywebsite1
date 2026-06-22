@@ -1,67 +1,33 @@
-// villages.js
-
 let villageDatabase = [];
 
 async function loadVillages() {
 
   try {
 
-    const response = await fetch("Karnataka_Villages.csv");
+    const response =
+      await fetch("Karnataka_Villages.csv");
 
-    if (!response.ok) {
-      throw new Error("CSV file not found");
-    }
+    const csvText =
+      await response.text();
 
-    const csvText = await response.text();
-
-    const rows = csvText.split(/\r?\n/);
-
-    if (rows.length < 2) {
-      console.error("CSV empty");
-      return;
-    }
-
-    const headers = rows[0].split(",");
-
-    const districtIndex =
-      headers.findIndex(h =>
-        h.trim().toLowerCase().includes("district")
-      );
-
-    const talukIndex =
-      headers.findIndex(h =>
-        h.trim().toLowerCase().includes("sub district")
-      );
-
-    const villageIndex =
-      headers.findIndex(h =>
-        h.trim().toLowerCase().includes("village")
-      );
-
-    const panchayatIndex =
-      headers.findIndex(h =>
-        h.trim().toLowerCase().includes("gram panchayat")
-      );
+    const rows =
+      csvText.split(/\r?\n/);
 
     rows.slice(1).forEach(row => {
 
-      if (!row.trim()) return;
-
       const cols = row.split(",");
+
+      if(cols.length < 12) return;
 
       villageDatabase.push({
 
-        district:
-          cols[districtIndex]?.trim() || "",
+        district: cols[3]?.trim(),
 
-        taluk:
-          cols[talukIndex]?.trim() || "",
+        taluk: cols[5]?.trim(),
 
-        village:
-          cols[villageIndex]?.trim() || "",
+        village: cols[7]?.trim(),
 
-        panchayat:
-          cols[panchayatIndex]?.trim() || ""
+        panchayat: cols[11]?.trim()
 
       });
 
@@ -72,12 +38,14 @@ async function loadVillages() {
       villageDatabase.length
     );
 
-  } catch (err) {
-
-    console.error(
-      "Village Database Error:",
-      err
+    console.log(
+      "Sample:",
+      villageDatabase[0]
     );
+
+  } catch(err) {
+
+    console.error(err);
 
   }
 
