@@ -366,10 +366,52 @@ document.getElementById("membership_type").addEventListener("change", function()
     </select>
 
     <label>ಶಿಕ್ಷಣ / Qualification</label>
-    <input type="text" name="qualification">
+<select name="qualification" required>
+    <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Qualification</option>
+    <option>ಅಕ್ಷರಜ್ಞಾನವಿಲ್ಲ / Illiterate</option>
+    <option>ಪ್ರಾಥಮಿಕ ಶಿಕ್ಷಣ / Primary School</option>
+    <option>ಪ್ರೌಢ ಶಿಕ್ಷಣ / High School</option>
+    <option>SSLC</option>
+    <option>PUC</option>
+    <option>ITI</option>
+    <option>ಡಿಪ್ಲೊಮಾ / Diploma</option>
+    <option>ಪದವಿ / Bachelor's Degree</option>
+    <option>ಸ್ನಾತಕೋತ್ತರ / Master's Degree</option>
+    <option>ಎಂಜಿನಿಯರಿಂಗ್ / Engineering</option>
+    <option>ವೈದ್ಯಕೀಯ / Medical</option>
+    <option>ಕಾನೂನು / Law</option>
+    <option>Ph.D</option>
+    <option>ಇತರೆ / Other</option>
+</select>
 
     <label>ವೃತ್ತಿ / Profession</label>
-    <input type="text" name="profession">
+<select name="profession" id="profession" required>
+    <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Profession</option>
+
+    <option>ರೈತ / Farmer</option>
+    <option>ಕೃಷಿ ಕೂಲಿ / Agricultural Labour</option>
+    <option>ಸರ್ಕಾರಿ ನೌಕರ / Government Employee</option>
+    <option>ಖಾಸಗಿ ನೌಕರ / Private Employee</option>
+    <option>ಶಿಕ್ಷಕ / Teacher</option>
+    <option>ಉಪನ್ಯಾಸಕ / Lecturer</option>
+    <option>ಪ್ರಾಧ್ಯಾಪಕ / Professor</option>
+    <option>ವಿದ್ಯಾರ್ಥಿ / Student</option>
+    <option>ವ್ಯಾಪಾರಿ / Business</option>
+    <option>ಸ್ವಯಂ ಉದ್ಯೋಗ / Self Employed</option>
+    <option>ಉದ್ಯಮಿ / Entrepreneur</option>
+    <option>ವೈದ್ಯ / Doctor</option>
+    <option>ನರ್ಸ್ / Nurse</option>
+    <option>ಇಂಜಿನಿಯರ್ / Engineer</option>
+    <option>ವಕೀಲ / Advocate</option>
+    <option>ಪೊಲೀಸ್ / Police</option>
+    <option>ಸೈನಿಕ / Defence</option>
+    <option>ಡ್ರೈವರ್ / Driver</option>
+    <option>ಕಟ್ಟಡ ಕಾರ್ಮಿಕ / Construction Worker</option>
+    <option>ಮನೆಮಗಳು / Homemaker</option>
+    <option>ನಿವೃತ್ತ / Retired</option>
+    <option>ನಿರುದ್ಯೋಗಿ / Unemployed</option>
+    <option>ಇತರೆ / Other</option>
+</select>
 
     <label>ಪ್ರಸ್ತುತ ವಿಳಾಸ / Current Address</label>
     <textarea name="current_address" id="currentAddress" required></textarea>
