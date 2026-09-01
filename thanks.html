@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <title>ಧನ್ಯವಾದಗಳು</title>
+  <style>
+    body {
+      text-align: center;
+      padding: 60px;
+      font-family: 'Arial', sans-serif;
+      background: #f0f8ff; /* light blue background */
+      color: #333;
+    }
+
+    h2 {
+      color: #2e8b57; /* sea green */
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #2e8b57;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    a:hover {
+      background-color: #3cb371; /* medium sea green */
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>ಧನ್ಯವಾದಗಳು 🙏</h2>
+  <p>ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ.</p>
+ <p>ಕಾರ್ಡ್ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...</p>
+
+<script>
+const id = localStorage.getItem("member_id");
+setTimeout(()=>{
+  window.location.href = "card.html?id=" + id;
+},3000);
+</script>
+
+</body>
+</html>

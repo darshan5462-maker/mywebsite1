@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        Admin Panel
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="active">Gallery Management</a>
+        <a href="#">Settings</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="topbar">
+        <button id="logoutBtn">Logout</button>
+      </div>
+
+      <div class="content-area">
+        <div class="card">
+          <h2>Upload New Photo</h2>
+          <form id="uploadForm">
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="photoTitle" required>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="photoCategory" required>
+                <option value="events">Events</option>
+                <option value="meetings">Meetings</option>
+                <option value="celebrations">Celebrations</option>
+                <option value="programs">Programs</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Image File</label>
+              <input type="file" id="photoFile" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn-sm btn-publish" style="padding: 10px 20px;" id="uploadBtn">Upload & Publish</button>
+          </form>
+          <div id="uploadStatus" style="margin-top: 10px; font-weight: bold;"></div>
+        </div>
+
+        <div class="card">
+          <h2>Gallery Items</h2>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="galleryTableBody">
+                <tr>
+                  <td colspan="5">Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { supabase } from '../src/supabaseClient.js';
+
+    // Auth Protection
+    async function checkAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = 'login.html';
+      }
+    }
+    checkAuth();
+
+    // Logout
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      window.location.href = 'login.html';
+    });
+
+    // Load Gallery Items
+    async function loadGalleryItems() {
+      const tbody = document.getElementById('galleryTableBody');
+      const { data, error } = await supabase
+        .from('gallery')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching gallery:', error);
+        tbody.innerHTML = '<tr><td colspan="5">Error loading data.</td></tr>';
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No items found.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = '';
+      data.forEach(item => {
+        const tr = document.createElement('tr');
+        
+        let imageUrl = item.image_url;
+        if(item.storage_path && import.meta.env.VITE_SUPABASE_URL) {
+            const { data: urlData } = supabase.storage.from('gallery_images').getPublicUrl(item.storage_path);
+            imageUrl = urlData.publicUrl;
+        }
+
+        tr.innerHTML = `
+          <td><img src="${imageUrl}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
+          <td>${item.title}</td>
+          <td>${item.category}</td>
+          <td>${item.is_published ? '<span style="color: green;">Published</span>' : '<span style="color: red;">Hidden</span>'}</td>
+          <td>
+            <button class="btn-sm btn-publish toggle-btn" data-id="${item.id}" data-status="${item.is_published}">${item.is_published ? 'Unpublish' : 'Publish'}</button>
+            <button class="btn-sm btn-delete delete-btn" data-id="${item.id}" data-path="${item.storage_path}">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Attach event listeners for delete and toggle
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', togglePublish);
+      });
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', deleteItem);
+      });
+    }
+
+    // Upload New Photo
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('photoTitle').value;
+      const category = document.getElementById('photoCategory').value;
+      const fileInput = document.getElementById('photoFile');
+      const file = fileInput.files[0];
+      const btn = document.getElementById('uploadBtn');
+      const status = document.getElementById('uploadStatus');
+
+      if (!file) return;
+
+      btn.disabled = true;
+      status.style.color = '#333';
+      status.textContent = 'Uploading image...';
+
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `${category}/${fileName}`;
+
+        // 1. Upload to Storage
+        const { error: uploadError } = await supabase.storage
+          .from('gallery_images')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        status.textContent = 'Saving to database...';
+
+        // 2. Save to Database
+        const { error: dbError } = await supabase.from('gallery').insert([{
+          title,
+          category,
+          storage_path: filePath,
+          image_url: 'storage', // placeholder
+          is_published: true
+        }]);
+
+        if (dbError) throw dbError;
+
+        status.style.color = 'green';
+        status.textContent = 'Successfully uploaded!';
+        document.getElementById('uploadForm').reset();
+        
+        // Reload table
+        loadGalleryItems();
+
+      } catch (error) {
+        console.error(error);
+        status.style.color = 'red';
+        status.textContent = 'Error: ' + error.message;
+      } finally {
+        btn.disabled = false;
+        setTimeout(() => { status.textContent = ''; }, 3000);
+      }
+    });
+
+    // Toggle Publish Status
+    async function togglePublish(e) {
+      const id = e.target.getAttribute('data-id');
+      const isPublished = e.target.getAttribute('data-status') === 'true';
+      
+      const { error } = await supabase
+        .from('gallery')
+        .update({ is_published: !isPublished })
+        .eq('id', id);
+
+      if (!error) loadGalleryItems();
+    }
+
+    // Delete Item
+    async function deleteItem(e) {
+      if (!confirm('Are you sure you want to delete this photo?')) return;
+      
+      const id = e.target.getAttribute('data-id');
+      const path = e.target.getAttribute('data-path');
+
+      // Delete from storage
+      if (path) {
+        await supabase.storage.from('gallery_images').remove([path]);
+      }
+
+      // Delete from DB
+      const { error } = await supabase.from('gallery').delete().eq('id', id);
+
+      if (!error) loadGalleryItems();
+    }
+
+    // Init
+    loadGalleryItems();
+  </script>
+</body>
+</html>

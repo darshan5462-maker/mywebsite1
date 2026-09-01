@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ಸದಸ್ಯತ್ವ | Membership</title>
+  <meta name="description" content="ಸಂಘದ ಸದಸ್ಯತ್ವಕ್ಕೆ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-container {
+      background: var(--white);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+    }
+    .form-container label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .form-container input[type="text"],
+    .form-container input[type="email"],
+    .form-container input[type="tel"],
+    .form-container input[type="date"],
+    .form-container select,
+    .form-container textarea {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .form-container input:focus,
+    .form-container select:focus,
+    .form-container textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(240, 122, 3, 0.1);
+    }
+    .form-container input[type="file"] {
+      padding: 10px 0;
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .fee-display {
+      background: #e8f4ff;
+      color: #0b5394;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Organization Logo" onerror="this.src='https://via.placeholder.com/60?text=Logo'">
+        <div class="logo-text">
+          <h1>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h1>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">ಮುಖಪುಟ</a>
+        <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+        <a href="leadership.html">ನಾಯಕತ್ವ</a>
+        <a href="membership.html" class="active">ಸದಸ್ಯತ್ವ</a>
+        <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+        <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Open Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <button class="close-menu" id="close-menu-btn" aria-label="Close Menu">&times;</button>
+    <a href="index.html">ಮುಖಪುಟ</a>
+    <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="leadership.html">ನಾಯಕತ್ವ</a>
+    <a href="membership.html" class="active">ಸದಸ್ಯತ್ವ</a>
+    <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+    <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="section" style="background: var(--primary-color); color: white; padding: 60px 0; text-align: center;">
+    <div class="container">
+      <h2 style="color: white; margin-bottom: 0;">ಸದಸ್ಯತ್ವ ಅರ್ಜಿ / Membership Form</h2>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container">
+      <div class="form-container">
+        <form id="memberForm">
+          
+          <label>ಫೋಟೋ / Photo</label>
+          <input type="file" id="photo" name="photo_file" accept="image/*" required>
+
+          <div class="form-grid">
+            <div>
+              <label>ಹೆಸರು / Name</label>
+              <input type="text" name="name" required>
+            </div>
+            <div>
+              <label>ತಂದೆ / ಪತಿ ಹೆಸರು / Father / Husband Name</label>
+              <input type="text" name="father_husband_name" required>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label>ಲಿಂಗ / Gender</label>
+              <select name="gender" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+                <option value="ಪುರುಷ / Male">ಪುರುಷ / Male</option>
+                <option value="ಮಹಿಳೆ / Female">ಮಹಿಳೆ / Female</option>
+                <option value="ಇತರೆ / Other">ಇತರೆ / Other</option>
+              </select>
+            </div>
+            <div>
+              <label>ಜನ್ಮ ದಿನಾಂಕ / Date of Birth</label>
+              <input type="date" name="dob" required>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label>ವರ್ಗ / Category</label>
+              <select id="category" name="category" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Category</option>
+                <option value="SC">SC</option>
+                <option value="ST">ST</option>
+                <option value="OBC">OBC</option>
+                <option value="General">General</option>
+              </select>
+            </div>
+            <div>
+              <label>ಜಾತಿ / Caste</label>
+              <select id="caste" name="caste" required>
+                <option value="">ಮೊದಲು ವರ್ಗ ಆಯ್ಕೆಮಾಡಿ / Select category first</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label>ಶಿಕ್ಷಣ / Qualification</label>
+              <input type="text" name="qualification">
+            </div>
+            <div>
+              <label>ವೃತ್ತಿ / Profession</label>
+              <input type="text" name="profession">
+            </div>
+          </div>
+
+          <label>ಪ್ರಸ್ತುತ ವಿಳಾಸ / Current Address</label>
+          <textarea name="current_address" id="currentAddress" rows="3" required></textarea>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="sameAddress">
+            <span>ಶಾಶ್ವತ ವಿಳಾಸವೂ ಇದೇ / Same as Permanent Address</span>
+          </div>
+
+          <label>ಶಾಶ್ವತ ವಿಳಾಸ / Permanent Address</label>
+          <textarea name="permanent_address" id="permanentAddress" rows="3" required></textarea>
+
+          <div class="form-grid">
+            <div>
+              <label>ಮೊಬೈಲ್ ಸಂಖ್ಯೆ / Mobile Number</label>
+              <input type="tel" name="phone" required>
+            </div>
+            <div>
+              <label>ಇಮೇಲ್ ಐಡಿ / Email ID</label>
+              <input type="email" name="email">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label>ಆಧಾರ್ ಸಂಖ್ಯೆ / Aadhaar Number</label>
+              <input type="text" name="aadhaar" id="aadhaar" maxlength="12" required>
+            </div>
+            <div>
+              <label>ಪಂಚಾಯತ್ ಹೆಸರು / Panchayat Name</label>
+              <input type="text" name="panchayat">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <label>ಜಿಲ್ಲೆ / District</label>
+              <select id="district" name="district" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ / Select District</option>
+              </select>
+            </div>
+            <div>
+              <label>ತಾಲೂಕು / Taluk</label>
+              <select id="taluk" name="taluk" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>
+              </select>
+            </div>
+          </div>
+
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+
+          <h3 style="margin-bottom: 15px; color: var(--secondary-color);">ಸದಸ್ಯತ್ವ ವರ್ಗ / Membership Type</h3>
+          
+          <input type="hidden" name="membership_fee" id="membership_fee" value="0">
+          <label>ಸದಸ್ಯತ್ವದ ವಿಧ ಆಯ್ಕೆಮಾಡಿ / Select Membership Type</label>
+          <select name="membership_type" id="membership_type" required>
+            <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+            <option value="Life Member">ಆಜೀವ ಸದಸ್ಯತ್ವ (Life Member) – ರೂ.2000/- ಅಥವಾ ಅದಕ್ಕಿಂತ ಹೆಚ್ಚು</option>
+            <option value="Annual Member">ವಾರ್ಷಿಕ ಸದಸ್ಯತ್ವ (Annual Member) – ರೂ.500/-</option>
+            <option value="General Member">ಸಾಮಾನ್ಯ ಸದಸ್ಯತ್ವ (General Member) – ರೂ.200/-</option>
+          </select>
+
+          <div class="fee-display">
+            ಶುಲ್ಕ / Amount: ₹<span id="feeAmount">0</span>
+          </div>
+
+          <label>UTR / Transaction ID</label>
+          <input type="text" name="transaction_id" id="transaction_id" placeholder="ಪಾವತಿ ನಂತರ UTR ನಮೂದಿಸಿ / Enter UTR after payment" required>
+
+          <button type="submit" class="btn-primary" style="width: 100%; margin-top: 30px; font-size: 1.1rem; padding: 15px;">ಸದಸ್ಯತ್ವ ಸಲ್ಲಿಸಿ / Submit Membership</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h3>
+          <p>ಸಮುದಾಯದ ಅಭಿವೃದ್ಧಿಗೆ ನಮ್ಮ ಸಂಕಲ್ಪ.</p>
+        </div>
+        <div>
+          <h3>ವಿಳಾಸ</h3>
+          <p>ನಂದಗಾಂವ್,<br>ತಾಲ್ಲೂಕು: ಅಥಣಿ,<br>ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ,<br>ಕರ್ನಾಟಕ, ಭಾರತ</p>
+        </div>
+        <div>
+          <h3>ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು</h3>
+          <a href="index.html">ಮುಖಪುಟ</a>
+          <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+          <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+          <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+        </div>
+        <div>
+          <h3>ಸಂಪರ್ಕ</h3>
+          <p>📞 +91 XXXXXXXXXX</p>
+          <p>✉️ example@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation & Copyright
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const body = document.body;
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      overlay.style.display = 'block';
+      body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      overlay.style.display = 'none';
+      body.style.overflow = 'auto';
+    }
+
+    hamburgerBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Form Logic
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgyaJ2NmnG2hRUFKLKPyl5r_iyBG_qRJdjUqEKKDBXi2ah0xmH4PDC-sq8k4lw1brR/exec";
+
+    document.getElementById("memberForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const form = document.getElementById("memberForm");
+      const photoInput = document.getElementById("photo");
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      if (!photoInput.files.length) {
+        alert("ಫೋಟೋ ಆಯ್ಕೆಮಾಡಿ / Please select photo");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Processing... / ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...";
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const base64Photo = reader.result.split(",")[1];
+        const data = new FormData(form);
+        data.append("photo", base64Photo);
+        data.append("photoType", photoInput.files[0].type);
+
+        fetch(SCRIPT_URL, { method: "POST", body: data })
+          .then(res => res.json())
+          .then(res => {
+            if (res.status === "success") {
+              window.location.href = "thanks.html?id=" + res.id;
+            } else {
+              alert("Server error:\n" + (res.error || "Unknown error"));
+              submitBtn.disabled = false;
+              submitBtn.textContent = "ಸದಸ್ಯತ್ವ ಸಲ್ಲಿಸಿ / Submit Membership";
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            alert("Upload failed. Please try again.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "ಸದಸ್ಯತ್ವ ಸಲ್ಲಿಸಿ / Submit Membership";
+          });
+      };
+      reader.readAsDataURL(photoInput.files[0]);
+    });
+
+    document.getElementById("aadhaar").addEventListener("input", function(){
+      this.value = this.value.replace(/\D/g,"").slice(0,12);
+    });
+
+    document.getElementById("sameAddress").addEventListener("change", function(){
+      const current = document.getElementById("currentAddress");
+      const permanent = document.getElementById("permanentAddress");
+      if(this.checked){
+        permanent.value = current.value;
+        current.addEventListener("input", () => permanent.value = current.value);
+      }
+    });
+
+    const districtTalukMap = {
+      "Bagalkot": ["Bagalkot","Badami","Bilagi","Hungund","Jamkhandi","Mudhol"],
+      "Belagavi": ["Athani","Bailhongal","Belagavi","Chikkodi","Gokak","Hukkeri","Khanapur","Raibag","Ramdurg","Saundatti"],
+      "Vijayapura": ["Basavana Bagewadi","Indi","Muddebihal","Sindagi","Vijayapura"],
+      "Haveri": ["Byadgi","Hangal","Haveri","Hirekerur","Ranebennur","Savanur","Shiggaon"],
+      "Ballari": ["Ballari","Hospet","Hagaribommanahalli","Hadagalli","Kudligi","Sandur","Siruguppa"],
+      "Dharwad": ["Dharwad","Hubballi","Kalghatgi","Kundgol","Navalgund"],
+      "Gadag": ["Gadag","Mundargi","Nargund","Ron","Shirhatti"],
+      "Koppal": ["Gangavathi","Koppal","Kushtagi","Yelburga"],
+      "Raichur": ["Devadurga","Lingasugur","Manvi","Raichur","Sindhanur"],
+      "Yadgir": ["Gurmitkal","Shahapur","Yadgir"]
+    };
+
+    const districtSelect = document.getElementById("district");
+    const talukSelect = document.getElementById("taluk");
+    Object.keys(districtTalukMap).forEach(d => {
+      const opt = document.createElement("option");
+      opt.value = d;
+      opt.textContent = d;
+      districtSelect.appendChild(opt);
+    });
+    districtSelect.addEventListener("change", function(){
+      talukSelect.innerHTML = '<option value="">ಆಯ್ಕೆಮಾಡಿ / Select Taluk</option>';
+      (districtTalukMap[this.value] || []).forEach(t => {
+        const opt = document.createElement("option");
+        opt.value = t;
+        opt.textContent = t;
+        talukSelect.appendChild(opt);
+      });
+    });
+
+    const casteData = {
+      SC: ["ಆದಿ ಜಾಂಬವ / Adi Jambava","ಮಾದಿಗ / Madiga","ಮಾದರ / Madara","ಚಲವಾದಿ / Chalavadi","ಹೊಲೆಯ / Holeya","ಭೋವಿ / Bhovi"],
+      ST: ["ವಾಲ್ಮೀಕಿ / Valmiki","ನಾಯಕ / Nayaka","ಲಂಬಾಣಿ / Lambani","ಗೋಂಡ / Gonda"],
+      OBC: ["ಕುರುಬ / Kuruba","ಒಕ್ಕಲಿಗ / Vokkaliga","ಲಿಂಗಾಯತ / Lingayat","ಕೊರಮ / Korama","ಕೊರಚ / Koracha"],
+      General: ["ಬ್ರಾಹ್ಮಣ / Brahmin","ಕ್ಷತ್ರಿಯ / Kshatriya","ವೈಶ್ಯ / Vaishya","ಮುಸ್ಲಿಂ / Muslim","ಕ್ರಿಶ್ಚಿಯನ್ / Christian"]
+    };
+
+    document.getElementById("category").addEventListener("change", function(){
+      const casteSelect = document.getElementById("caste");
+      casteSelect.innerHTML = '<option value="">ಜಾತಿ ಆಯ್ಕೆಮಾಡಿ / Select Caste</option>';
+      (casteData[this.value] || []).forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c;
+        casteSelect.appendChild(opt);
+      });
+    });
+
+    const feeMap = {
+      "Life Member": 2000,
+      "Annual Member": 500,
+      "General Member": 200
+    };
+    document.getElementById("membership_type").addEventListener("change", function(){
+      const fee = feeMap[this.value] || 0;
+      document.getElementById("feeAmount").innerText = fee;
+      document.getElementById("membership_fee").value = fee;
+    });
+  </script>
+</body>
+</html>

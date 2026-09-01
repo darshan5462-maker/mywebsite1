@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ಗ್ಯಾಲರಿ | Gallery</title>
+  <meta name="description" content="ಸಂಘದ ಕಾರ್ಯಕ್ರಮಗಳು ಮತ್ತು ಚಟುವಟಿಕೆಗಳ ಗ್ಯಾಲರಿ.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filter-btns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border: 1px solid var(--primary-color);
+      background: transparent;
+      color: var(--primary-color);
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary-color);
+      color: var(--white);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      aspect-ratio: 4/3;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: white;
+      padding: 20px 15px 10px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+    
+    /* Loading and Empty State */
+    .loading-state, .empty-state {
+      text-align: center;
+      padding: 50px 0;
+      font-size: 1.2rem;
+      color: var(--text-light);
+    }
+    
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+    .lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Organization Logo" onerror="this.src='https://via.placeholder.com/60?text=Logo'">
+        <div class="logo-text">
+          <h1>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h1>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">ಮುಖಪುಟ</a>
+        <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+        <a href="leadership.html">ನಾಯಕತ್ವ</a>
+        <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+        <a href="gallery.html" class="active">ಗ್ಯಾಲರಿ</a>
+        <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Open Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <button class="close-menu" id="close-menu-btn" aria-label="Close Menu">&times;</button>
+    <a href="index.html">ಮುಖಪುಟ</a>
+    <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="leadership.html">ನಾಯಕತ್ವ</a>
+    <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+    <a href="gallery.html" class="active">ಗ್ಯಾಲರಿ</a>
+    <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="section" style="background: var(--primary-color); color: white; padding: 60px 0; text-align: center;">
+    <div class="container">
+      <h2 style="color: white; margin-bottom: 0;">ಗ್ಯಾಲರಿ / Gallery</h2>
+      <p style="font-size: 1.2rem; margin-top: 10px;">ಸಂಘದ ವಿವಿಧ ಕಾರ್ಯಕ್ರಮಗಳು ಹಾಗೂ ಚಟುವಟಿಕೆಗಳ ಛಾಯಾಚಿತ್ರಗಳು</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container">
+      
+      <div class="filter-btns" id="filter-container">
+        <button class="filter-btn active" data-filter="all">ಎಲ್ಲಾ / All</button>
+        <button class="filter-btn" data-filter="events">ಕಾರ್ಯಕ್ರಮಗಳು / Events</button>
+        <button class="filter-btn" data-filter="meetings">ಸಭೆಗಳು / Meetings</button>
+        <button class="filter-btn" data-filter="celebrations">ಆಚರಣೆಗಳು / Celebrations</button>
+        <button class="filter-btn" data-filter="programs">ಯೋಜನೆಗಳು / Programs</button>
+      </div>
+
+      <div id="loading-state" class="loading-state">
+        ಚಿತ್ರಗಳನ್ನು ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ... / Loading images...
+      </div>
+
+      <div id="empty-state" class="empty-state hidden">
+        ಯಾವುದೇ ಚಿತ್ರಗಳು ಲಭ್ಯವಿಲ್ಲ. / No images found.
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Dynamic content will be injected here -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Full Screen Image">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h3>
+          <p>ಸಮುದಾಯದ ಅಭಿವೃದ್ಧಿಗೆ ನಮ್ಮ ಸಂಕಲ್ಪ.</p>
+        </div>
+        <div>
+          <h3>ವಿಳಾಸ</h3>
+          <p>ನಂದಗಾಂವ್,<br>ತಾಲ್ಲೂಕು: ಅಥಣಿ,<br>ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ,<br>ಕರ್ನಾಟಕ, ಭಾರತ</p>
+        </div>
+        <div>
+          <h3>ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು</h3>
+          <a href="index.html">ಮುಖಪುಟ</a>
+          <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+          <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+          <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+        </div>
+        <div>
+          <h3>ಸಂಪರ್ಕ</h3>
+          <p>📞 +91 XXXXXXXXXX</p>
+          <p>✉️ example@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation & Copyright
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const body = document.body;
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      overlay.style.display = 'block';
+      body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      overlay.style.display = 'none';
+      body.style.overflow = 'auto';
+    }
+    hamburgerBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+  </script>
+
+  <script type="module">
+    import { supabase } from './src/supabaseClient.js';
+
+    const galleryGrid = document.getElementById('gallery-grid');
+    const loadingState = document.getElementById('loading-state');
+    const emptyState = document.getElementById('empty-state');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    // Lightbox elements
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    let allImages = [];
+
+    // Fallback static images in case Supabase is not configured yet
+    const fallbackImages = [
+      { id: 1, title: 'Event 1', category: 'events', image_url: 'e1.jpeg' },
+      { id: 2, title: 'Meeting 1', category: 'meetings', image_url: 'meet1.jpeg' },
+      { id: 3, title: 'Celebration 1', category: 'celebrations', image_url: 'cel1.jpeg' },
+      { id: 4, title: 'Program 1', category: 'programs', image_url: 'p1.jpeg' }
+    ];
+
+    async function loadGallery() {
+      try {
+        if(import.meta.env.VITE_SUPABASE_URL === 'YOUR_SUPABASE_URL' || !import.meta.env.VITE_SUPABASE_URL) {
+          console.warn("Supabase not configured, using local fallback images.");
+          allImages = fallbackImages;
+        } else {
+          const { data, error } = await supabase
+            .from('gallery')
+            .select('*')
+            .eq('is_published', true)
+            .order('sort_order', { ascending: true })
+            .order('created_at', { ascending: false });
+
+          if (error) throw error;
+          allImages = data || [];
+        }
+
+        loadingState.classList.add('hidden');
+        
+        if (allImages.length === 0) {
+          emptyState.classList.remove('hidden');
+        } else {
+          renderGallery(allImages);
+        }
+      } catch (err) {
+        console.error('Error loading gallery:', err);
+        loadingState.classList.add('hidden');
+        emptyState.textContent = "ಗ್ಯಾಲರಿ ಲೋಡ್ ಮಾಡುವಲ್ಲಿ ದೋಷ ಉಂಟಾಗಿದೆ. (Error loading gallery)";
+        emptyState.classList.remove('hidden');
+      }
+    }
+
+    function renderGallery(images) {
+      galleryGrid.innerHTML = '';
+      if(images.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      images.forEach(img => {
+        const item = document.createElement('div');
+        item.className = `gallery-item ${img.category}`;
+        
+        // Handle Supabase Storage URL or local fallback URL
+        let finalImageUrl = img.image_url;
+        if(img.storage_path && import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            const { data } = supabase.storage.from('gallery_images').getPublicUrl(img.storage_path);
+            finalImageUrl = data.publicUrl;
+        }
+
+        item.innerHTML = `
+          <img src="${finalImageUrl}" alt="${img.title || 'Gallery Image'}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+          <div class="gallery-caption">${img.title || ''}</div>
+        `;
+
+        item.addEventListener('click', () => {
+          openLightbox(finalImageUrl, img.title);
+        });
+
+        galleryGrid.appendChild(item);
+      });
+    }
+
+    // Filtering logic
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+
+        const filter = e.target.getAttribute('data-filter');
+        if (filter === 'all') {
+          renderGallery(allImages);
+        } else {
+          const filtered = allImages.filter(img => img.category === filter);
+          renderGallery(filtered);
+        }
+      });
+    });
+
+    // Lightbox logic
+    function openLightbox(src, caption) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = caption || '';
+      lightbox.classList.add('active');
+      body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      body.style.overflow = 'auto';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Initialize
+    loadGallery();
+  </script>
+</body>
+</html>

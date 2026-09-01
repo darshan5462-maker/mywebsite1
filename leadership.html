@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ನಾಯಕತ್ವ | Leadership</title>
+  <meta name="description" content="ಸಂಘದ ಕಾರ್ಯಕಾರಿ ಸಮಿತಿ ಮತ್ತು ನಾಯಕತ್ವದ ವಿವರಗಳು.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .leader-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+    .leader-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .leader-no {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--primary-color);
+      color: var(--white);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .leader-avatar {
+      width: 100px;
+      height: 100px;
+      background: #e8f4ff;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #0b5394;
+    }
+    .leader-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 5px;
+    }
+    .leader-role {
+      display: inline-block;
+      padding: 5px 15px;
+      background: rgba(19, 136, 8, 0.1);
+      color: var(--secondary-color);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Organization Logo" onerror="this.src='https://via.placeholder.com/60?text=Logo'">
+        <div class="logo-text">
+          <h1>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h1>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">ಮುಖಪುಟ</a>
+        <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+        <a href="leadership.html" class="active">ನಾಯಕತ್ವ</a>
+        <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+        <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+        <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Open Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <button class="close-menu" id="close-menu-btn" aria-label="Close Menu">&times;</button>
+    <a href="index.html">ಮುಖಪುಟ</a>
+    <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="leadership.html" class="active">ನಾಯಕತ್ವ</a>
+    <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+    <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+    <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="section" style="background: var(--primary-color); color: white; padding: 60px 0; text-align: center;">
+    <div class="container">
+      <h2 style="color: white; margin-bottom: 0;">ನಾಯಕತ್ವ / Leadership</h2>
+      <p style="font-size: 1.2rem; margin-top: 10px;">ಸಂಘದ ಕಾರ್ಯಕಾರಿ ಸಮಿತಿಯ ಸದಸ್ಯರ ವಿವರಗಳು</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container">
+      
+      <div class="leadership-grid">
+        <div class="leader-card">
+          <div class="leader-no">1</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ರಾಜು ನಾಗಪ್ಪ ನಡವಿನಮನಿ</div>
+          <div class="leader-role">ಅಧ್ಯಕ್ಷರು</div>
+        </div>
+
+        <div class="leader-card">
+          <div class="leader-no">2</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ಸೋಮೇಶ ಯಮನಪ್ಪ ಹಾದಿಮನಿ</div>
+          <div class="leader-role">ಉಪಾಧ್ಯಕ್ಷರು</div>
+        </div>
+
+        <div class="leader-card">
+          <div class="leader-no">3</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ಸಚಿನ್ ಶ್ರೀಕಾಂತ್ ಹಳಾಲ್</div>
+          <div class="leader-role">ಪ್ರಧಾನ ಕಾರ್ಯದರ್ಶಿ</div>
+        </div>
+
+        <div class="leader-card">
+          <div class="leader-no">4</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ಪರಶುರಾಮ ನಾಗಪ್ಪ ನಡವಿನಮನಿ</div>
+          <div class="leader-role">ಸಚಿವರು</div>
+        </div>
+
+        <div class="leader-card">
+          <div class="leader-no">5</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ಶಿವಾನಂದ ಭೂಪಾಲ್ ಮಾದರ</div>
+          <div class="leader-role">ಸಚಿವರು</div>
+        </div>
+
+        <div class="leader-card">
+          <div class="leader-no">6</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ಸಾಗರ ಶ್ರೀಕಾಂತ ನಡವಿನಮನಿ</div>
+          <div class="leader-role">ಸಚಿವರು</div>
+        </div>
+
+        <div class="leader-card">
+          <div class="leader-no">7</div>
+          <div class="leader-avatar">👤</div>
+          <div class="leader-name">ಶ್ರೀ. ಸುಶಾಂತ್ ಶ್ರೀಕಾಂತ ನಡವಿನಮನಿ</div>
+          <div class="leader-role">ಸಚಿವರು</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h3>
+          <p>ಸಮುದಾಯದ ಅಭಿವೃದ್ಧಿಗೆ ನಮ್ಮ ಸಂಕಲ್ಪ.</p>
+        </div>
+        <div>
+          <h3>ವಿಳಾಸ</h3>
+          <p>ನಂದಗಾಂವ್,<br>ತಾಲ್ಲೂಕು: ಅಥಣಿ,<br>ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ,<br>ಕರ್ನಾಟಕ, ಭಾರತ</p>
+        </div>
+        <div>
+          <h3>ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು</h3>
+          <a href="index.html">ಮುಖಪುಟ</a>
+          <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+          <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+          <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+        </div>
+        <div>
+          <h3>ಸಂಪರ್ಕ</h3>
+          <p>📞 +91 XXXXXXXXXX</p>
+          <p>✉️ example@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const body = document.body;
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      overlay.style.display = 'block';
+      body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      overlay.style.display = 'none';
+      body.style.overflow = 'auto';
+    }
+
+    hamburgerBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+body {
+  font-family: Arial;
+  background: #f0f0f0;
+  text-align: center;
+}
+
+.card {
+  width: 320px;
+  margin: 40px auto;
+  padding: 20px;
+  background: linear-gradient(135deg,#ff9933,#ffffff,#138808);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+button {
+  padding: 10px 20px;
+  color: brown;
+  font-size: 16px;
+  cursor: pointer;
+}

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ಸಂಪರ್ಕಿಸಿ | Contact Us</title>
+  <meta name="description" content="ಸಂಘವನ್ನು ಸಂಪರ್ಕಿಸಿ.">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .contact-info {
+      background: var(--white);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-info h3 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .contact-icon {
+      background: rgba(240, 122, 3, 0.1);
+      color: var(--primary-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-text h4 {
+      margin-bottom: 5px;
+      color: var(--text-dark);
+    }
+    .contact-text p, .contact-text a {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+    
+    .contact-form {
+      background: var(--white);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(240, 122, 3, 0.1);
+    }
+    .map-container {
+      width: 100%;
+      height: 350px;
+      margin-top: 40px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Notification */
+    #form-message {
+      display: none;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+    #form-message.success {
+      display: block;
+      background: rgba(19, 136, 8, 0.1);
+      color: var(--secondary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-info, .contact-form {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-container">
+        <img src="logo.png" alt="Organization Logo" onerror="this.src='https://via.placeholder.com/60?text=Logo'">
+        <div class="logo-text">
+          <h1>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h1>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">ಮುಖಪುಟ</a>
+        <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+        <a href="leadership.html">ನಾಯಕತ್ವ</a>
+        <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+        <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+        <a href="contact.html" class="active">ಸಂಪರ್ಕಿಸಿ</a>
+      </nav>
+      <button class="hamburger" id="hamburger-btn" aria-label="Open Menu">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+  <nav class="mobile-menu" id="mobile-menu">
+    <button class="close-menu" id="close-menu-btn" aria-label="Close Menu">&times;</button>
+    <a href="index.html">ಮುಖಪುಟ</a>
+    <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+    <a href="leadership.html">ನಾಯಕತ್ವ</a>
+    <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
+    <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+    <a href="contact.html" class="active">ಸಂಪರ್ಕಿಸಿ</a>
+  </nav>
+
+  <!-- Page Header -->
+  <section class="section" style="background: var(--primary-color); color: white; padding: 60px 0; text-align: center;">
+    <div class="container">
+      <h2 style="color: white; margin-bottom: 0;">ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ / Contact Us</h2>
+      <p style="font-size: 1.2rem; margin-top: 10px;">ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳು ಹಾಗೂ ಸಲಹೆಗಳಿಗಾಗಿ ಸಂಪರ್ಕಿಸಿ</p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="section">
+    <div class="container">
+      
+      <div class="contact-grid">
+        
+        <!-- Contact Information -->
+        <div class="contact-info">
+          <h3>ಸಂಪರ್ಕದ ವಿವರಗಳು / Details</h3>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-text">
+              <h4>ವಿಳಾಸ / Address</h4>
+              <p>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್ ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ<br>
+                 ನಂದಗಾಂವ್, ತಾಲ್ಲೂಕು: ಅಥಣಿ,<br>
+                 ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ, ಕರ್ನಾಟಕ
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-text">
+              <h4>ಫೋನ್ / Phone</h4>
+              <!-- Configuration placeholder for admin -->
+              <p>+91 <span data-config="contact_phone">XXXXXXXXXX</span></p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-text">
+              <h4>ಇಮೇಲ್ / Email</h4>
+              <!-- Configuration placeholder for admin -->
+              <a href="mailto:example@gmail.com" data-config="contact_email">example@gmail.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-text">
+              <h4>WhatsApp</h4>
+              <!-- Configuration placeholder for admin -->
+              <p>+91 <span data-config="whatsapp_phone">XXXXXXXXXX</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+          <h3>ಸಂದೇಶ ಕಳುಹಿಸಿ / Send Message</h3>
+          
+          <div id="form-message">ಸಂದೇಶ ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ! / Message sent successfully!</div>
+
+          <form id="contactForm">
+            <label>ಹೆಸರು / Name</label>
+            <input type="text" name="name" required placeholder="ನಿಮ್ಮ ಹೆಸರು">
+
+            <label>ಇಮೇಲ್ / Email</label>
+            <input type="email" name="email" required placeholder="ನಿಮ್ಮ ಇಮೇಲ್">
+            
+            <label>ಫೋನ್ / Phone</label>
+            <input type="tel" name="phone" required placeholder="ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ">
+
+            <label>ಸಂದೇಶ / Message</label>
+            <textarea name="message" rows="5" required placeholder="ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ..."></textarea>
+
+            <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px;">ಕಳುಹಿಸಿ / Send</button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Map -->
+      <div class="map-container">
+        <!-- Default map pointing to Athani -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122247.16857106093!2d74.9669562699298!3d16.730303666276852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc13cf67484df6d%3A0xeab4e1d1ebcfa4e7!2sAthani%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1709292837493!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h3>
+          <p>ಸಮುದಾಯದ ಅಭಿವೃದ್ಧಿಗೆ ನಮ್ಮ ಸಂಕಲ್ಪ.</p>
+        </div>
+        <div>
+          <h3>ವಿಳಾಸ</h3>
+          <p>ನಂದಗಾಂವ್,<br>ತಾಲ್ಲೂಕು: ಅಥಣಿ,<br>ಜಿಲ್ಲೆ: ಬೆಳಗಾವಿ,<br>ಕರ್ನಾಟಕ, ಭಾರತ</p>
+        </div>
+        <div>
+          <h3>ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು</h3>
+          <a href="index.html">ಮುಖಪುಟ</a>
+          <a href="about.html">ನಮ್ಮ ಬಗ್ಗೆ</a>
+          <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
+          <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+        </div>
+        <div>
+          <h3>ಸಂಪರ್ಕ</h3>
+          <p>📞 +91 XXXXXXXXXX</p>
+          <p>✉️ example@gmail.com</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    const body = document.body;
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      overlay.style.display = 'block';
+      body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      overlay.style.display = 'none';
+      body.style.overflow = 'auto';
+    }
+
+    hamburgerBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Simple Contact Form submission simulation
+    document.getElementById("contactForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const msg = document.getElementById("form-message");
+      
+      btn.disabled = true;
+      btn.textContent = "Processing... / ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...";
+      
+      // Simulate API call
+      setTimeout(() => {
+        msg.classList.add("success");
+        this.reset();
+        btn.disabled = false;
+        btn.textContent = "ಕಳುಹಿಸಿ / Send";
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          msg.classList.remove("success");
+        }, 5000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
