@@ -71,29 +71,42 @@ body {
   flex: 1;
   padding: 20px 0;
 }
-.sidebar-nav a {
+.sidebar-nav button {
   display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
   color: #b8c7ce;
-  padding: 12px 20px;
-  text-decoration: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 1rem;
   transition: 0.2s;
+  border-left: 3px solid transparent;
 }
-.sidebar-nav a:hover, .sidebar-nav a.active {
+.sidebar-nav button:hover, .sidebar-nav button.active {
   background: #1e282c;
   color: white;
-  border-left: 3px solid #f07a03;
+  border-left-color: #f07a03;
 }
+
 .main-content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden; /* prevents layout shift */
 }
 .topbar {
   background: #fff;
   padding: 15px 20px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+.topbar h2 {
+  margin: 0;
+  font-size: 1.2rem;
 }
 .topbar button {
   background: #d32f2f;
@@ -108,6 +121,21 @@ body {
   flex: 1;
   overflow-y: auto;
 }
+
+/* Tabs */
+.tab-pane {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+.tab-pane.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Cards & Tables */
 .card {
   background: white;
   padding: 20px;
@@ -126,10 +154,12 @@ th, td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
 }
 th {
   background: #f9f9f9;
   font-weight: 600;
+  white-space: nowrap;
 }
 .btn-sm {
   padding: 5px 10px;
@@ -138,6 +168,7 @@ th {
   cursor: pointer;
   font-size: 0.85rem;
   color: white;
+  margin-right: 5px;
 }
 .btn-edit { background: #1976d2; }
 .btn-delete { background: #d32f2f; }
@@ -159,6 +190,40 @@ th {
   box-sizing: border-box;
 }
 
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-close {
+  float: right;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.modal-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
 @media (max-width: 768px) {
   .admin-layout {
     flex-direction: column;
@@ -171,12 +236,12 @@ th {
     overflow-x: auto;
     padding: 0;
   }
-  .sidebar-nav a {
+  .sidebar-nav button {
     white-space: nowrap;
     border-left: none;
     border-bottom: 3px solid transparent;
   }
-  .sidebar-nav a:hover, .sidebar-nav a.active {
+  .sidebar-nav button:hover, .sidebar-nav button.active {
     border-left: none;
     border-bottom: 3px solid #f07a03;
   }

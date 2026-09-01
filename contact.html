@@ -297,9 +297,11 @@
     hamburgerBtn.addEventListener('click', openMenu);
     closeMenuBtn.addEventListener('click', closeMenu);
     overlay.addEventListener('click', closeMenu);
+  </script>
+  <script type="module">
+    import { supabase } from './src/supabaseClient.js';
 
-    // Simple Contact Form submission simulation
-    document.getElementById("contactForm").addEventListener("submit", function(e){
+    document.getElementById("contactForm").addEventListener("submit", async function(e){
       e.preventDefault();
       const btn = this.querySelector('button[type="submit"]');
       const msg = document.getElementById("form-message");
@@ -307,18 +309,33 @@
       btn.disabled = true;
       btn.textContent = "Processing... / ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿದೆ...";
       
-      // Simulate API call
-      setTimeout(() => {
+      const name = this.name.value;
+      const email = this.email.value;
+      const phone = this.phone.value;
+      const message = this.message.value;
+
+      const { error } = await supabase.from('contact_requests').insert([
+        { name, email, phone, message }
+      ]);
+
+      if (error) {
+        console.error(error);
+        msg.textContent = "ದೋಷ ಉಂಟಾಗಿದೆ! / Error occurred!";
+        msg.style.color = 'red';
+        msg.classList.add("success");
+      } else {
+        msg.textContent = "ಸಂದೇಶ ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ! / Message sent successfully!";
+        msg.style.color = '';
         msg.classList.add("success");
         this.reset();
-        btn.disabled = false;
-        btn.textContent = "ಕಳುಹಿಸಿ / Send";
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-          msg.classList.remove("success");
-        }, 5000);
-      }, 1500);
+      }
+
+      btn.disabled = false;
+      btn.textContent = "ಕಳುಹಿಸಿ / Send";
+      
+      setTimeout(() => {
+        msg.classList.remove("success");
+      }, 5000);
     });
   </script>
 </body>
