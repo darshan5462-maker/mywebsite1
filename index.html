@@ -33,6 +33,7 @@
         <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
         <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
         <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+        <a href="#" id="desktopNavCardBtn" style="display:none; color: #f07a03; font-weight: bold;">ID ಕಾರ್ಡ್</a>
       </nav>
 
       <!-- Mobile Hamburger -->
@@ -52,6 +53,7 @@
     <a href="membership.html">ಸದಸ್ಯತ್ವ</a>
     <a href="gallery.html">ಗ್ಯಾಲರಿ</a>
     <a href="contact.html">ಸಂಪರ್ಕಿಸಿ</a>
+    <a href="#" id="mobileNavCardBtn" style="display:none; color: #f07a03; font-weight: bold;">ID ಕಾರ್ಡ್</a>
   </nav>
 
   <!-- Hero Section -->
@@ -197,6 +199,21 @@
     mobileLinks.forEach(link => {
       link.addEventListener('click', closeMenu);
     });
+
+    // Check for saved member ID
+    const savedId = localStorage.getItem('member_id');
+    if(savedId) {
+      const dBtn = document.getElementById('desktopNavCardBtn');
+      const mBtn = document.getElementById('mobileNavCardBtn');
+      if(dBtn) {
+        dBtn.href = 'card.html?id=' + savedId;
+        dBtn.style.display = 'inline-block';
+      }
+      if(mBtn) {
+        mBtn.href = 'card.html?id=' + savedId;
+        mBtn.style.display = 'block';
+      }
+    }
   </script>
 </body>
 </html>
