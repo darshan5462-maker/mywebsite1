@@ -194,11 +194,27 @@
           <div class="form-grid">
             <div>
               <label>ಶಿಕ್ಷಣ / Qualification</label>
-              <input type="text" name="qualification">
+              <select name="qualification" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+                <option value="SSLC (10th)">SSLC (10th)</option>
+                <option value="PUC (12th)">PUC (12th)</option>
+                <option value="Diploma / ITI">Diploma / ITI</option>
+                <option value="Graduate">ಪದವೀಧರ / Graduate</option>
+                <option value="Post Graduate">ಸ್ನಾತಕೋತ್ತರ / Post Graduate</option>
+                <option value="Other">ಇತರೆ / Other</option>
+              </select>
             </div>
             <div>
               <label>ವೃತ್ತಿ / Profession</label>
-              <input type="text" name="profession">
+              <select name="profession" required>
+                <option value="">ಆಯ್ಕೆಮಾಡಿ / Select</option>
+                <option value="Student">ವಿದ್ಯಾರ್ಥಿ / Student</option>
+                <option value="Farmer">ರೈತ / Farmer</option>
+                <option value="Private Employee">ಖಾಸಗಿ ಉದ್ಯೋಗಿ / Private Employee</option>
+                <option value="Govt Employee">ಸರ್ಕಾರಿ ಉದ್ಯೋಗಿ / Govt Employee</option>
+                <option value="Business">ವ್ಯಾಪಾರ / Business</option>
+                <option value="Other">ಇತರೆ / Other</option>
+              </select>
             </div>
           </div>
 
@@ -426,16 +442,37 @@
     });
 
     const districtTalukMap = {
-      "Bagalkot": ["Bagalkot","Badami","Bilagi","Hungund","Jamkhandi","Mudhol"],
-      "Belagavi": ["Athani","Bailhongal","Belagavi","Chikkodi","Gokak","Hukkeri","Khanapur","Raibag","Ramdurg","Saundatti"],
-      "Vijayapura": ["Basavana Bagewadi","Indi","Muddebihal","Sindagi","Vijayapura"],
-      "Haveri": ["Byadgi","Hangal","Haveri","Hirekerur","Ranebennur","Savanur","Shiggaon"],
-      "Ballari": ["Ballari","Hospet","Hagaribommanahalli","Hadagalli","Kudligi","Sandur","Siruguppa"],
-      "Dharwad": ["Dharwad","Hubballi","Kalghatgi","Kundgol","Navalgund"],
-      "Gadag": ["Gadag","Mundargi","Nargund","Ron","Shirhatti"],
-      "Koppal": ["Gangavathi","Koppal","Kushtagi","Yelburga"],
-      "Raichur": ["Devadurga","Lingasugur","Manvi","Raichur","Sindhanur"],
-      "Yadgir": ["Gurmitkal","Shahapur","Yadgir"]
+      "Bagalkot": ["Bagalkot", "Badami", "Bilagi", "Hungund", "Jamkhandi", "Mudhol", "Ilkal", "Rabkavi Banhatti", "Guledgudda"],
+      "Ballari": ["Ballari", "Kurugodu", "Siruguppa", "Kampli", "Sandur"],
+      "Belagavi": ["Athani", "Bailhongal", "Belagavi", "Chikkodi", "Gokak", "Hukkeri", "Khanapur", "Raibag", "Ramdurg", "Saundatti", "Nippani", "Mudalagi", "Kagawad", "Kittur"],
+      "Bengaluru Rural": ["Devanahalli", "Doddaballapura", "Hoskote", "Nelamangala"],
+      "Bengaluru Urban": ["Bengaluru North", "Bengaluru South", "Bengaluru East", "Anekal", "Yelahanka"],
+      "Bidar": ["Bidar", "Basavakalyan", "Bhalki", "Homnabad", "Aurad", "Chitgoppa", "Kamalnagar", "Hulsoor"],
+      "Chamarajanagar": ["Chamarajanagar", "Gundlupet", "Kollegal", "Yelandur", "Hanur"],
+      "Chikkaballapur": ["Chikkaballapur", "Bagepalli", "Chintamani", "Gauribidanur", "Gudibanda", "Sidlaghatta", "Chelur"],
+      "Chikkamagaluru": ["Chikkamagaluru", "Kadur", "Koppa", "Mudigere", "Narasimharajapura", "Sringeri", "Tarikere", "Ajjampura"],
+      "Chitradurga": ["Chitradurga", "Challakere", "Hiriyur", "Holalkere", "Hosadurga", "Molakalmuru"],
+      "Dakshina Kannada": ["Mangaluru", "Bantwal", "Beltangady", "Puttur", "Sulya", "Moodabidri", "Kadaba"],
+      "Davanagere": ["Davanagere", "Harihar", "Channagiri", "Honnali", "Jagalur", "Nyamathi"],
+      "Dharwad": ["Dharwad", "Hubballi", "Kalghatgi", "Kundgol", "Navalgund", "Alnavar", "Annigeri", "Hubballi City"],
+      "Gadag": ["Gadag", "Mundargi", "Nargund", "Ron", "Shirhatti", "Gajendragad", "Lakshmeshwar"],
+      "Hassan": ["Hassan", "Arsikere", "Alur", "Arkalgud", "Belur", "Channarayapatna", "Holenarasipura", "Sakleshpur"],
+      "Haveri": ["Byadgi", "Hangal", "Haveri", "Hirekerur", "Ranebennur", "Savanur", "Shiggaon", "Rattihalli"],
+      "Kalaburagi": ["Kalaburagi", "Afzalpur", "Aland", "Chincholi", "Chitapur", "Jewargi", "Sedam", "Kamalapur", "Kalagi", "Shahabad", "Yedrami"],
+      "Kodagu": ["Madikeri", "Somwarpet", "Virajpet"],
+      "Kolar": ["Kolar", "Bangarapet", "Malur", "Mulbagal", "Srinivaspur", "KGF"],
+      "Koppal": ["Gangavathi", "Koppal", "Kushtagi", "Yelburga", "Kanakagiri", "Karatagi", "Kukanur"],
+      "Mandya": ["Mandya", "Maddur", "Malavalli", "Srirangapatna", "Krishnarajpet", "Nagamangala", "Pandavapura"],
+      "Mysuru": ["Mysuru", "Hunsur", "Krishnarajanagara", "Nanjangud", "Heggadadevanakote", "T. Narasipura", "Piriyapatna", "Saligrama", "Sargur"],
+      "Raichur": ["Devadurga", "Lingasugur", "Manvi", "Raichur", "Sindhanur", "Maski", "Sirwar"],
+      "Ramanagara": ["Ramanagara", "Channapatna", "Kanakapura", "Magadi"],
+      "Shivamogga": ["Shivamogga", "Bhadravathi", "Hosanagara", "Sagar", "Shikaripura", "Sorab", "Thirthahalli"],
+      "Tumakuru": ["Tumakuru", "Chikkanayakanahalli", "Gubbi", "Koratagere", "Kunigal", "Madhugiri", "Pavagada", "Sira", "Tiptur", "Turuvekere"],
+      "Udupi": ["Udupi", "Kundapura", "Karkala", "Byndoor", "Brahmavara", "Kaup", "Hebri"],
+      "Uttara Kannada": ["Karwar", "Ankola", "Bhatkal", "Dandeli", "Haliyal", "Honnavar", "Joida", "Kumta", "Mundgod", "Siddapur", "Sirsi", "Yellapur"],
+      "Vijayanagara": ["Hospet", "Harapanahalli", "Hoovina Hadagali", "Hagari Bommanahalli", "Kotturu", "Kudligi"],
+      "Vijayapura": ["Basavana Bagewadi", "Indi", "Muddebihal", "Sindagi", "Vijayapura", "Talikota", "Devar Hippargi", "Chadchan", "Babaleshwar", "Kolhar", "Nidagundi", "Tikota"],
+      "Yadgir": ["Gurmitkal", "Shahapur", "Yadgir", "Shorapur", "Hunasagi", "Vadagera"]
     };
 
     const districtSelect = document.getElementById("district");
