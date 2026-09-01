@@ -61,13 +61,25 @@
 
   <a href="index.html" style="margin-top: 20px; background-color: #6c757d;">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ / Return Home</a>
 
-  <script>
+  <script type="module">
+    import { supabase } from './src/supabaseClient.js';
+    
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
+    
     if(id) {
       document.getElementById("statusBtnContainer").innerHTML = `
         <a href="card.html?id=${id}">ಅರ್ಜಿ ಸ್ಥಿತಿ ಪರಿಶೀಲಿಸಿ / Check Application Status</a>
       `;
+
+      // Auto-poll Supabase every 5 seconds to see if Admin approved it
+      setInterval(async () => {
+        const { data, error } = await supabase.from('memberships').select('status').eq('id', id).single();
+        if (data && data.status === 'Approved') {
+          // If approved, automatically redirect to the card!
+          window.location.href = `card.html?id=${id}`;
+        }
+      }, 5000);
     }
   </script>
 </body>
