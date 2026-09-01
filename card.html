@@ -1,516 +1,9 @@
-<!--<!DOCTYPE html>
-<html lang="kn">
-<head>
-  <meta charset="UTF-8">
-  <title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
-  <style>
-    body {
-      font-family: Arial;
-      background: #f0f0f0;
-      padding: 20px;
-    }
-    .card {
-      max-width: 350px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #999;
-    }
-    h2 {
-      text-align: center;
-      color: #2c3e50;
-    }
-    p {
-      font-size: 16px;
-    }
-  </style>
-</head>
-<body>
-
-<div class="card">
-  <h2>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</h2>
-  <p><b>ಹೆಸರು:</b> <span id="name">Loading...</span></p>
-  <p><b>ಮೊಬೈಲ್:</b> <span id="phone">Loading...</span></p>
-  <p><b>ವಿಳಾಸ:</b> <span id="address">Loading...</span></p>
-</div>
-
-<script>
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec?id=" + id)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("name").innerText = data.name;
-    document.getElementById("phone").innerText = data.phone;
-    document.getElementById("address").innerText = data.address;
-  });
-</script>
-
-</body>
-</html>-->
-
-<!-- <!DOCTYPE html>
-<html lang="kn">
-<head>
-<meta charset="UTF-8">
-<title>ಸದಸ್ಯತಾ ಕಾರ್ಡ್</title>
-<link rel="stylesheet" href="card.css">
-</head>
-<body>
-
-<div class="card" id="card">
-  <h2>ಸದಸ್ಯತಾ ಕಾರ್ಡ್</h2>
-  
-<div class="card">
-  
-  <div class="card-header">
-    <h2>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
-        ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h2>
-  </div>
-  <div>
-  <p><strong>ಹೆಸರು:</strong> <span id="name">Loading...</span></p>
-  <p><strong>ಫೋನ್:</strong> <span id="phone">Loading...</span></p>
-  <p><strong>ವಿಳಾಸ:</strong> <span id="address">Loading...</span></p>
-</div>
-
-<button onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
-
-<script>
-const id = new URLSearchParams(window.location.search).get("id");
-
-fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec?id=" + id)
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("name").innerText = data.name;
-    document.getElementById("phone").innerText = data.phone;
-    document.getElementById("address").innerText = data.address;
-  });
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-function downloadPDF() {
-  html2pdf(document.getElementById("card"));
-}
-</script>
-
-</body>
-</html> -->
-
-<!--<!DOCTYPE html>
-<html lang="kn">
-<head>
-<meta charset="UTF-8">
-<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
-
-<style>
-body{
-  margin:0;
-  font-family: "Segoe UI", Arial;
-  background: linear-gradient(135deg,#f5f7fa,#c3cfe2);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-
-/* CARD */
-.card{
-  width:360px;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
-  overflow:hidden;
-}
-
-/* HEADER */
-.card-header{
-  background:linear-gradient(90deg,#ff9933,#ffffff,#138808);
-  text-align:center;
-  padding:14px;
-}
-
-.card-header h2{
-  margin:0;
-  font-size:16px;
-  font-weight:bold;
-}
-
-/* BODY */
-.card-body{
-  padding:20px;
-}
-
-.card-body p{
-  margin:8px 0;
-  font-size:14px;
-}
-
-.label{
-  font-weight:bold;
-  color:#333;
-}
-
-/* FOOTER */
-.card-footer{
-  background:#f2f2f2;
-  text-align:center;
-  padding:10px;
-  font-size:12px;
-}
-
-/* PHOTO PLACEHOLDER */
-.photo{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  background:#ddd;
-  margin:10px auto;
-}
-button {
-  padding: 10px 20px;
-  background-color: brown;
-  font-size: 16px;
-  cursor: pointer;
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-  
-  <div class="card-header">
-    <h2>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
-        ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h2>
-  </div>
-
-  
-  <div class="card-body">
-    <div class="photo"></div>
-
-    <p><span class="label">ಹೆಸರು:</span> <span id="name">Loading...</span></p>
-    <p><span class="label">ಮೊಬೈಲ್:</span> <span id="phone">Loading...</span></p>
-    <p><span class="label">ವಿಳಾಸ:</span> <span id="address">Loading...</span></p>
-    <p><span class="label">ಸದಸ್ಯ ID:</span> <span id="id">Loading...</span></p>
-  </div>
-
-  
-  <div class="card-footer">
-    ಮಾನ್ಯ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್
-  </div>
-</div>
-<button onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
-
-<script>
-/* STEP 3: GET ID FROM URL */
-const params = new URLSearchParams(window.location.search).get("id");
-
-
-/* STEP 4: FETCH DATA FROM GOOGLE SCRIPT */
-fetch("script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec?id=" + id)
-.then(res => res.json())
-.then(data => {
-  document.getElementById("name").innerText = data.name;
-  document.getElementById("phone").innerText = data.phone;
-  document.getElementById("address").innerText = data.address;
-});
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-function downloadPDF() {
-  html2pdf(document.getElementById("card"));
-}
-</script>
-
-</body>
-</html> -->
-
-
-<!--<!DOCTYPE html>
-<html lang="kn">
-<head>
-<meta charset="UTF-8">
-<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
-
-<style>
-body{
-  background:#eee;
-  font-family:Arial;
-}
-.card{
-  width:360px;
-  margin:30px auto;
-  background:#fff;
-  border-radius:15px;
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
-  overflow:hidden;
-}
-.header{
-  background:linear-gradient(90deg,#ff9933,#fff,#138808);
-  text-align:center;
-  padding:12px;
-  font-weight:bold;
-}
-.photo{
-  width:90px;
-  height:90px;
-  border-radius:50%;
-  margin:10px auto;
-  display:block;
-  object-fit:cover;
-  border:2px solid #555;
-}
-.body{
-  padding:15px;
-  font-size:14px;
-}
-.footer{
-  background:#f4f4f4;
-  padding:10px;
-  font-size:12px;
-  text-align:center;
-}
-button{
-  display:block;
-  background-color: brown;
-  margin:15px auto;
-  padding:10px 20px;
-}
-
-</style>
-</head>
-
-<body>
-
-<div id="card" class="card">
-  <div class="header">
-    ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>
-    ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ
-</div>
-
-  <img id="photo" class="photo">
-  <div class="body">
-    <p><b>ಹೆಸರು:</b> <span id="name">loading...</span></p>
-    <p><b>ಮೊಬೈಲ್:</b> <span id="phone"></span></p>
-    <p><b>ವಿಳಾಸ:</b> <span id="address"></span></p>
-    <p><b>ಸದಸ್ಯ ID:</b> <span id="mid"></span></p>
-    <p><b>ಮಾನ್ಯತೆ:</b> 2024 – 2027</p>
-  </div>
-    
-
-
-  <div style="text-align:center; margin-top:10px;">
-  <img id="qrcode" alt="QR Code" width="60">
-</div>
-
-  <div class="footer">
-    ಅಧ್ಯಕ್ಷರ ಸಹಿ ✍<br>
-    (ಅಧಿಕೃತ)
-  </div>
-</div>
-
-<button onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<script>
-const id = new URLSearchParams(location.search).get("id");
-document.getElementById("mid").innerText = id;
-const name = document.getElementById("name");
-const phone = document.getElementById("phone");
-const address = document.getElementById("address");
-
-// load photo
-document.getElementById("photo").src =
-  localStorage.getItem("member_photo");
-
-// fetch member data
-fetch("https://script.google.com/macros/s/AKfycbzPXN_yQl8aOV6XZ0xrhGVGf5us0tGMu0Y-KUuiLzhTCdL6qSRbXA4HK3jSIHiLUHDf/exec?id=" + id)
-.then(r=>r.json())
-.then(d=>{
- document.getElementById("name").innerText = d.name;
-document.getElementById("phone").innerText = d.phone;
-document.getElementById("address").innerText = d.address;
-});
-
-function downloadPDF(){
-  html2pdf(document.getElementById("card"));
-}
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  if (!id) {
-    console.error("ID missing in URL");
-    return;
-  }
-
-  const cardUrl =
-    "https://darshan5462-maker.github.io/mywebsite1/card.html?id=" + id;
-
-  const qrImg = document.getElementById("qrcode");
-
-  qrImg.src =
-    "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
-    encodeURIComponent(cardUrl);
-
-});
-</script>
-
-</body>
-</html>-->
-
-<!--<!DOCTYPE html>
-<html lang="kn">
-<head>
-  <meta charset="UTF-8">
-  <title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ | Membership Card</title>
-
-  <style>
-    body {
-      font-family: "Noto Sans Kannada", Arial, sans-serif;
-      background: #f2f4f7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-
-    .card {
-      width: 350px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      overflow: hidden;
-      text-align: center;
-    }
-
-    .card-header {
-      background: linear-gradient(90deg, #0d47a1, #1976d2);
-      color: #fff;
-      padding: 15px;
-    }
-
-    .card-header h3 {
-      margin: 0;
-      font-size: 16px;
-    }
-
-    .photo {
-      margin-top: 15px;
-    }
-
-    .photo img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #1976d2;
-    }
-
-    .details {
-      padding: 15px;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    .details p {
-      margin: 6px 0;
-    }
-
-    .details span {
-      font-weight: bold;
-      color: #333;
-    }
-
-    .footer {
-      background: #eeeeee;
-      padding: 10px;
-      font-size: 12px;
-      color: #555;
-    }
-
-    .btn {
-      margin: 12px;
-      padding: 10px;
-      width: calc(100% - 24px);
-      background: #1976d2;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      background: #0d47a1;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="card" id="card">
-  <div class="card-header">
-    <h3>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h3>
-  </div>
-
-  <div class="photo">
-    <img id="photo" src="" alt="Member Photo">
-  </div>
-
-  <div class="details">
-    <p>ಹೆಸರು / Name: <span id="name">Loading...</span></p>
-    <p>ಸದಸ್ಯ ID: <span id="mid">Loading...</span></p>
-    <p>ಸದಸ್ಯತ್ವ: <span id="membership">Loading...</span></p>
-    <p>ಮೊಬೈಲ್: <span id="phone">Loading...</span></p>
-  </div>
-
-  <button class="btn" onclick="window.print()">Download / Print</button>
-
-  <div class="footer">
-    Official Membership Card
-  </div>
-</div>
-
-<script>
-  // get saved member ID
-  const id = localStorage.getItem("member_id");
-
-  if (!id) {
-    alert("Member ID not found");
-  }
-
-  fetch("https://script.google.com/macros/s/AKfycbzlOdAiAQGFHiX3_8dQrcY68hBX_wmuDMg9G6pkfc9q6r9sMZHig3zDE-PEAoQW8Qis/exec?id=" + id)
-    .then(res => res.json())
-    .then(d => {
-      document.getElementById("photo").src = d.photo || "";
-      document.getElementById("name").innerText = d.name || "";
-      document.getElementById("mid").innerText = id;
-      document.getElementById("membership").innerText = d.membership || "";
-      document.getElementById("phone").innerText = d.phone || "";
-    })
-    .catch(err => {
-      console.error(err);
-      alert("Failed to load card data");
-    });
-</script>
-
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="kn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್</title>
+<title>ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ | Membership Card</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -539,9 +32,24 @@ body{
   color:var(--dark);
 }
 
+.status-message {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 400px;
+  display: none;
+}
+.status-message h2 { margin-top: 0; }
+.status-pending { color: #f07a03; }
+.status-rejected { color: #d32f2f; }
+.status-error { color: #d32f2f; }
+
 .wrap{
   width:100%;
   max-width:420px;
+  display: none; /* Hidden by default until approved */
 }
 
 /* ===== CARD ===== */
@@ -573,24 +81,6 @@ body{
   font-size:12px;
   color:#111;
   font-weight:600;
-}
-
-/* Logo circle (optional) */
-.badge{
-  position:absolute;
-  left:14px;
-  top:50%;
-  transform:translateY(-50%);
-  width:44px;
-  height:44px;
-  border-radius:50%;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-  color:var(--green);
-  border:2px solid rgba(0,0,0,0.08);
 }
 
 /* ===== BODY ===== */
@@ -648,22 +138,6 @@ body{
   font-weight:600;
   color:#111;
   font-size:13px;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-/* Membership type highlight */
-.membershipTag{
-  display:inline-block;
-  margin-top:6px;
-  padding:6px 10px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:800;
-  background: rgba(255,153,51,0.14);
-  border:1px solid rgba(255,153,51,0.25);
 }
 
 /* ===== QR AREA ===== */
@@ -768,175 +242,158 @@ body{
   transform:translateY(-1px);
   background:#0f6b06;
 }
-
-.btn.secondary{
-  background:#fff;
-  border:1px solid rgba(0,0,0,0.12);
-  color:#111;
-}
-
-.btn.secondary:hover{
-  background:#f2f6fb;
-}
-
-@media(min-width:480px){
-  .btn{ width:auto; }
-}
-
-/* Loading text */
-.loading{
-  text-align:center;
-  padding:22px 10px;
-  font-weight:800;
-  color:#222;
-}
-.small{
-  font-size:12px;
-  color:#666;
-  font-weight:600;
-}
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<div id="statusContainer" class="status-message">
+  <h2 id="statusTitle">Loading...</h2>
+  <p id="statusDesc">Please wait while we fetch your application status.</p>
+</div>
 
-  <div class="card" id="card">
+<div class="wrap" id="cardWrapper">
+  <div class="card" id="cardNode">
     <div class="card-top">
-      <div class="badge">A</div>
-      <h2>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್<br>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h2>
-      <div class="sub">ಮಾನ್ಯ ಸದಸ್ಯತ್ವ ಕಾರ್ಡ್ / Membership Card</div>
+      <h2>ಡಾ. ಬಾಬು ಜಗಜೀವನರಾವ್</h2>
+      <h2>ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</h2>
+      <div class="sub">Official Membership ID</div>
     </div>
-
+    
     <div class="card-body">
-      <div id="loading" class="loading">
-        ಮಾಹಿತಿ ಪಡೆಯಲಾಗುತ್ತಿದೆ... / Loading Member Data...
-        <div class="small">ದಯವಿಟ್ಟು ನಿರೀಕ್ಷಿಸಿ</div>
-      </div>
-
-      <div id="content" style="display:none;">
-        <div class="info">
-          <!-- Left info -->
-          <div>
-            <div class="field">
-              <div class="label">ಹೆಸರು / Name</div>
-              <div class="value" id="name">--</div>
-            </div>
-
-            <div class="field">
-              <div class="label">ಮೊಬೈಲ್ / Phone</div>
-              <div class="value" id="phone">--</div>
-            </div>
-
-            <div class="field">
-              <div class="label">ವಿಳಾಸ / Address</div>
-              <div class="value muted" id="address">--</div>
-            </div>
-
-            <div class="field">
-              <div class="label">ಸದಸ್ಯತ್ವ / Membership</div>
-              <div class="membershipTag" id="membership">--</div>
-            </div>
+      <div class="info">
+        <div class="details">
+          <div class="field">
+            <div class="label">ಹೆಸರು / Name</div>
+            <div class="value" id="cardName">...</div>
           </div>
-
-          <!-- Right photo -->
-          <div class="photoBox">
-            <img id="photo" class="photo" src="" alt="Member Photo"
-              onerror="this.src='https://via.placeholder.com/110x110.png?text=Photo'">
-
-            <div class="midPill">ID: <span id="mid">--</span></div>
+          <div class="field">
+            <div class="label">ಮೊಬೈಲ್ / Mobile</div>
+            <div class="value" id="cardPhone">...</div>
+          </div>
+          <div class="field">
+            <div class="label">ವಿಳಾಸ / Address</div>
+            <div class="value" id="cardAddress">...</div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <div class="label" style="color:var(--orange);">ಸದಸ್ಯತ್ವ / Member Type</div>
+            <div class="value" id="cardType">...</div>
           </div>
         </div>
-
-        <!-- QR + Signature -->
-        <div class="qrArea">
-          <div class="qrBox">
-            <img id="qr" alt="QR Code">
-            <div class="qrText">
-              <strong>Scan for verification</strong>
-              ಪರಿಶೀಲನೆಗಾಗಿ QR Scan ಮಾಡಿ
-            </div>
+        
+        <div class="photoBox">
+          <img id="cardPhoto" class="photo" src="" alt="Photo">
+          <div class="midPill" id="cardShortId">...</div>
+        </div>
+      </div>
+      
+      <div class="qrArea">
+        <div class="qrBox">
+          <img id="cardQr" src="" alt="QR">
+          <div class="qrText">
+            <strong>Scan to Verify</strong>
+            Authentic Member
           </div>
-
-          <div class="signature">
-            <div class="line"></div>
-            <span>ಅಧ್ಯಕ್ಷರ ಸಹಿ</span>
-            <div class="muted">Authorized Sign</div>
-          </div>
+        </div>
+        
+        <div class="signature">
+          <div class="line"></div>
+          <span>ಅಧ್ಯಕ್ಷರು / President</span>
         </div>
       </div>
     </div>
-
+    
     <div class="card-footer">
-      <div>© 2026 | ಕರ್ನಾಟಕ ಆದಿ ಜಾಂಬವ ಅಭಿವೃದ್ದಿ ಸಂಘ</div>
-      <div class="secure">✔ Verified</div>
+      <div>Valid: 2024 - 2027</div>
+      <div class="secure">✓ Verified</div>
     </div>
   </div>
 
   <div class="actions">
-    <button class="btn primary" onclick="downloadPDF()">PDF ಡೌನ್‌ಲೋಡ್</button>
-    <button class="btn secondary" onclick="window.print()">Print</button>
+    <button class="btn primary" onclick="downloadPDF()">Download PDF</button>
   </div>
-
 </div>
 
-<!-- PDF LIBRARY -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script type="module">
+  import { supabase } from './src/supabaseClient.js';
+  
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
 
-<script>
-/* GET MEMBER ID FROM URL */
-const id = new URLSearchParams(window.location.search).get("id");
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgyaJ2NmnG2hRUFKLKPyl5r_iyBG_qRJdjUqEKKDBXi2ah0xmH4PDC-sq8k4lw1brR/exec";
+  const statusContainer = document.getElementById("statusContainer");
+  const statusTitle = document.getElementById("statusTitle");
+  const statusDesc = document.getElementById("statusDesc");
+  const cardWrapper = document.getElementById("cardWrapper");
 
-if(!id){
-  alert("Member ID not found");
-}
-
-/* FETCH MEMBER DATA */
-fetch(SCRIPT_URL + "?id=" + encodeURIComponent(id))
-  .then(res => res.json())
-  .then(data => {
-
-    if(data.status === "error"){
-      throw new Error(data.error || "Unknown error");
+  async function init() {
+    if(!id) {
+      statusContainer.style.display = "block";
+      statusTitle.className = "status-error";
+      statusTitle.innerText = "Error";
+      statusDesc.innerText = "No ID provided in the URL.";
+      return;
     }
 
-    document.getElementById("name").innerText = data.name || "--";
-    document.getElementById("phone").innerText = data.phone || "--";
-    document.getElementById("address").innerText = data.address || "--";
-    document.getElementById("membership").innerText = data.membership || "--";
-    document.getElementById("mid").innerText = id;
+    statusContainer.style.display = "block";
 
-    // Photo fallback
-    document.getElementById("photo").src = data.photo || "https://via.placeholder.com/110x110.png?text=Photo";
+    const { data, error } = await supabase.from('memberships').select('*').eq('id', id).single();
 
-    /* QR CODE => verify.html?id= */
-    const qrData = window.location.origin + "/verify.html?id=" + id;
-    document.getElementById("qr").src =
-      "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + encodeURIComponent(qrData);
+    if (error || !data) {
+      statusTitle.className = "status-error";
+      statusTitle.innerText = "Not Found";
+      statusDesc.innerText = "Application not found. Please check your link.";
+      return;
+    }
 
-    // Show content
-    document.getElementById("loading").style.display = "none";
-    document.getElementById("content").style.display = "block";
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById("loading").innerHTML =
-      "ಮಾಹಿತಿ ಪಡೆಯಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ ❌<br><span class='small'>" + err.message + "</span>";
-  });
+    if (data.status === 'Pending') {
+      statusTitle.className = "status-pending";
+      statusTitle.innerText = "Pending Review";
+      statusDesc.innerText = "Your application and payment are currently being verified by the Admin. Please check back later.";
+    } else if (data.status === 'Rejected') {
+      statusTitle.className = "status-rejected";
+      statusTitle.innerText = "Application Rejected";
+      statusDesc.innerText = "Your application was rejected. This may be due to an invalid UTR or missing information. Please contact the Admin.";
+    } else if (data.status === 'Approved') {
+      // Hide status, show card
+      statusContainer.style.display = "none";
+      cardWrapper.style.display = "block";
 
+      // Fill Card Data
+      document.getElementById("cardName").innerText = data.name;
+      document.getElementById("cardPhone").innerText = data.phone;
+      document.getElementById("cardAddress").innerText = `${data.district}, ${data.taluk}`;
+      document.getElementById("cardType").innerText = data.membership_type;
+      
+      const shortId = data.id.substring(0, 8).toUpperCase();
+      document.getElementById("cardShortId").innerText = `ID: ${shortId}`;
+
+      // Photo
+      if(data.photo_storage_path) {
+        const { data: urlData } = supabase.storage.from('members_photos').getPublicUrl(data.photo_storage_path);
+        document.getElementById("cardPhoto").src = urlData.publicUrl;
+      }
+
+      // QR Code
+      const currentUrl = window.location.href;
+      document.getElementById("cardQr").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
+    }
+  }
+
+  init();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
 function downloadPDF(){
-  html2pdf()
-    .set({
-      margin:0.2,
-      filename:"Membership_Card_" + id + ".pdf",
-      image:{type:"jpeg",quality:0.98},
-      html2canvas:{scale:2, useCORS:true},
-      jsPDF:{unit:"in",format:"a4",orientation:"portrait"}
-    })
-    .from(document.getElementById("card"))
-    .save();
+  const element = document.getElementById("cardNode");
+  const opt = {
+    margin:       0.5,
+    filename:     'Membership_Card.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2, useCORS: true },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(element).save();
 }
 </script>
 

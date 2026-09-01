@@ -12,6 +12,7 @@ export default defineConfig({
         contact: resolve(__dirname, 'contact.html'),
         leadership: resolve(__dirname, 'leadership.html'),
         thanks: resolve(__dirname, 'thanks.html'),
+        card: resolve(__dirname, 'card.html'),
         adminLogin: resolve(__dirname, 'admin/login.html'),
         adminDashboard: resolve(__dirname, 'admin/dashboard.html'),
       }

@@ -92,14 +92,13 @@
                   <tr>
                     <th>Date</th>
                     <th>Name</th>
-                    <th>Phone</th>
                     <th>Type</th>
-                    <th>Transaction ID</th>
+                    <th>Status</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody id="membershipsTableBody">
-                  <tr><td colspan="6">Loading...</td></tr>
+                  <tr><td colspan="5">Loading...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -135,12 +134,39 @@
     </main>
   </div>
 
-  <!-- Image Modal for Memberships -->
-  <div class="modal-overlay" id="imageModal">
+  <!-- Detailed View Modal for Memberships -->
+  <div class="modal-overlay" id="detailsModal">
     <div class="modal-content">
-      <span class="modal-close" id="closeModal">&times;</span>
-      <h3>Applicant Photo</h3>
-      <img id="modalImg" src="" class="modal-img" alt="Applicant Photo">
+      <span class="modal-close" id="closeDetailsModal">&times;</span>
+      <h3 style="margin-top: 0;">Application Details</h3>
+      
+      <div style="text-align: center;">
+        <img id="modalImg" src="" class="modal-img" alt="Applicant Photo">
+        <h4 id="modalName" style="margin: 10px 0 5px 0;">Name</h4>
+        <span id="modalStatusBadge" class="status-badge">Pending</span>
+      </div>
+
+      <div class="details-grid">
+        <p><strong>Father/Husband Name</strong> <span id="modalFather"></span></p>
+        <p><strong>DOB & Gender</strong> <span id="modalDobGender"></span></p>
+        <p><strong>Category & Caste</strong> <span id="modalCategoryCaste"></span></p>
+        <p><strong>Phone</strong> <span id="modalPhone"></span></p>
+        <p><strong>Email</strong> <span id="modalEmail"></span></p>
+        <p><strong>Aadhaar</strong> <span id="modalAadhaar"></span></p>
+        <p><strong>District & Taluk</strong> <span id="modalLocation"></span></p>
+        <p><strong>Panchayat</strong> <span id="modalPanchayat"></span></p>
+        <p><strong>Current Address</strong> <span id="modalCurrentAddr"></span></p>
+        <p><strong>Permanent Address</strong> <span id="modalPermAddr"></span></p>
+        <p><strong>Qualification & Profession</strong> <span id="modalQualProf"></span></p>
+        <p><strong>Membership Type</strong> <span id="modalType"></span></p>
+        <p><strong>Fee Paid</strong> ₹<span id="modalFee"></span></p>
+        <p><strong>Transaction ID (UTR)</strong> <span id="modalUtr"></span></p>
+      </div>
+
+      <div class="modal-actions">
+        <button id="btnReject" class="btn-sm btn-delete" style="padding: 10px 15px;">Reject</button>
+        <button id="btnApprove" class="btn-sm btn-publish" style="padding: 10px 15px;">Approve</button>
+      </div>
     </div>
   </div>
 
@@ -172,9 +198,8 @@
         
         tab.classList.add('active');
         document.getElementById(tab.getAttribute('data-target')).classList.add('active');
-        topbarTitle.innerText = tab.innerText.substring(3); // Remove emoji
+        topbarTitle.innerText = tab.innerText.substring(3);
 
-        // Load data based on tab
         if (tab.getAttribute('data-target') === 'galleryTab') loadGalleryItems();
         if (tab.getAttribute('data-target') === 'membershipsTab') loadMemberships();
         if (tab.getAttribute('data-target') === 'contactsTab') loadContacts();
@@ -263,47 +288,108 @@
       loadGalleryItems();
     }
 
+
     // ==========================================
     // MEMBERSHIPS LOGIC
     // ==========================================
+    let currentMemberships = [];
+    let currentViewingId = null;
+
+    function getStatusBadge(status) {
+      if(status === 'Approved') return '<span class="status-badge status-approved">Approved</span>';
+      if(status === 'Rejected') return '<span class="status-badge status-rejected">Rejected</span>';
+      return '<span class="status-badge status-pending">Pending</span>';
+    }
+
     async function loadMemberships() {
       const tbody = document.getElementById('membershipsTableBody');
       const { data, error } = await supabase.from('memberships').select('*').order('created_at', { ascending: false });
 
-      if (error) return tbody.innerHTML = '<tr><td colspan="6">Error loading data.</td></tr>';
-      if (!data || data.length === 0) return tbody.innerHTML = '<tr><td colspan="6">No applications found.</td></tr>';
+      if (error) return tbody.innerHTML = '<tr><td colspan="5">Error loading data.</td></tr>';
+      if (!data || data.length === 0) return tbody.innerHTML = '<tr><td colspan="5">No applications found.</td></tr>';
+
+      currentMemberships = data;
 
       tbody.innerHTML = data.map(item => `
         <tr>
           <td>${new Date(item.created_at).toLocaleDateString()}</td>
           <td>${item.name}</td>
-          <td>${item.phone}</td>
-          <td>${item.membership_type} (₹${item.membership_fee})</td>
-          <td>${item.transaction_id}</td>
+          <td>${item.membership_type}</td>
+          <td>${getStatusBadge(item.status)}</td>
           <td>
-            <button class="btn-sm btn-edit view-photo-btn" data-path="${item.photo_storage_path}">View Photo</button>
+            <button class="btn-sm btn-edit view-details-btn" data-id="${item.id}">View Details</button>
           </td>
         </tr>
       `).join('');
 
-      document.querySelectorAll('.view-photo-btn').forEach(btn => {
+      document.querySelectorAll('.view-details-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          const path = e.target.getAttribute('data-path');
-          if(path) {
-            const { data } = supabase.storage.from('members_photos').getPublicUrl(path);
-            document.getElementById('modalImg').src = data.publicUrl;
-            document.getElementById('imageModal').classList.add('active');
-          } else {
-            alert("No photo found.");
-          }
+          const id = e.target.getAttribute('data-id');
+          openDetailsModal(id);
         });
       });
     }
 
-    // Close Modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-      document.getElementById('imageModal').classList.remove('active');
+    function openDetailsModal(id) {
+      const app = currentMemberships.find(m => m.id === id);
+      if(!app) return;
+      currentViewingId = id;
+
+      // Photo
+      if(app.photo_storage_path) {
+        const { data } = supabase.storage.from('members_photos').getPublicUrl(app.photo_storage_path);
+        document.getElementById('modalImg').src = data.publicUrl;
+      } else {
+        document.getElementById('modalImg').src = '';
+      }
+
+      // Details
+      document.getElementById('modalName').innerText = app.name;
+      document.getElementById('modalStatusBadge').innerHTML = getStatusBadge(app.status);
+      document.getElementById('modalFather').innerText = app.father_husband_name || '-';
+      document.getElementById('modalDobGender').innerText = `${app.dob || '-'} | ${app.gender || '-'}`;
+      document.getElementById('modalCategoryCaste').innerText = `${app.category || '-'} | ${app.caste || '-'}`;
+      document.getElementById('modalPhone').innerText = app.phone || '-';
+      document.getElementById('modalEmail').innerText = app.email || '-';
+      document.getElementById('modalAadhaar').innerText = app.aadhaar || '-';
+      document.getElementById('modalLocation').innerText = `${app.district || '-'} | ${app.taluk || '-'}`;
+      document.getElementById('modalPanchayat').innerText = app.panchayat || '-';
+      document.getElementById('modalCurrentAddr').innerText = app.current_address || '-';
+      document.getElementById('modalPermAddr').innerText = app.permanent_address || '-';
+      document.getElementById('modalQualProf').innerText = `${app.qualification || '-'} | ${app.profession || '-'}`;
+      document.getElementById('modalType').innerText = app.membership_type || '-';
+      document.getElementById('modalFee').innerText = app.membership_fee || '0';
+      document.getElementById('modalUtr').innerText = app.transaction_id || '-';
+
+      document.getElementById('detailsModal').classList.add('active');
+    }
+
+    document.getElementById('closeDetailsModal').addEventListener('click', () => {
+      document.getElementById('detailsModal').classList.remove('active');
     });
+
+    document.getElementById('btnApprove').addEventListener('click', async () => {
+      if(!confirm("Are you sure you want to Approve this application?")) return;
+      await updateStatus(currentViewingId, 'Approved');
+    });
+
+    document.getElementById('btnReject').addEventListener('click', async () => {
+      if(!confirm("Are you sure you want to Reject this application?")) return;
+      await updateStatus(currentViewingId, 'Rejected');
+    });
+
+    async function updateStatus(id, newStatus) {
+      if(!id) return;
+      const { error } = await supabase.from('memberships').update({ status: newStatus }).eq('id', id);
+      if(error) {
+        alert("Error updating status: " + error.message);
+      } else {
+        alert("Status updated to " + newStatus);
+        document.getElementById('detailsModal').classList.remove('active');
+        loadMemberships();
+      }
+    }
+
 
     // ==========================================
     // CONTACTS LOGIC

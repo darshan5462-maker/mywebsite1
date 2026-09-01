@@ -394,11 +394,15 @@
         };
 
         // Save to Database
-        const { error: dbError } = await supabase.from('memberships').insert([formData]);
+        const { data, error: dbError } = await supabase.from('memberships').insert([formData]).select();
 
         if (dbError) throw dbError;
 
-        window.location.href = "thanks.html";
+        if (data && data.length > 0) {
+          window.location.href = "thanks.html?id=" + data[0].id;
+        } else {
+          window.location.href = "thanks.html";
+        }
 
       } catch (err) {
         console.error(err);

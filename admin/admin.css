@@ -190,6 +190,18 @@ th {
   box-sizing: border-box;
 }
 
+/* Status Badges */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: inline-block;
+}
+.status-pending { background: #fff3cd; color: #856404; }
+.status-approved { background: #d4edda; color: #155724; }
+.status-rejected { background: #f8d7da; color: #721c24; }
+
 /* Modals */
 .modal-overlay {
   position: fixed;
@@ -207,7 +219,7 @@ th {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 600px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
@@ -219,9 +231,34 @@ th {
   font-weight: bold;
 }
 .modal-img {
-  width: 100%;
+  width: 150px;
+  height: 150px;
   border-radius: 8px;
-  margin-top: 10px;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+.details-grid p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.details-grid strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+}
+.modal-actions {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 @media (max-width: 768px) {
@@ -244,5 +281,8 @@ th {
   .sidebar-nav button:hover, .sidebar-nav button.active {
     border-left: none;
     border-bottom: 3px solid #f07a03;
+  }
+  .details-grid {
+    grid-template-columns: 1fr;
   }
 }

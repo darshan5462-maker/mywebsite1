@@ -55,7 +55,20 @@
   <p>ನಿಮ್ಮ ಅರ್ಜಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ. ನಮ್ಮ ತಂಡವು ಅದನ್ನು ಪರಿಶೀಲಿಸಿದ ನಂತರ ನಿಮಗೆ ಖಚಿತಪಡಿಸಲಾಗುವುದು.</p>
   <p>Your application has been successfully submitted. It is currently pending review.</p>
 
-  <a href="index.html">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ / Return Home</a>
+  <div id="statusBtnContainer" style="margin-top: 20px;">
+    <!-- Status button will be injected here if ID exists -->
+  </div>
 
+  <a href="index.html" style="margin-top: 20px; background-color: #6c757d;">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ / Return Home</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if(id) {
+      document.getElementById("statusBtnContainer").innerHTML = `
+        <a href="card.html?id=${id}">ಅರ್ಜಿ ಸ್ಥಿತಿ ಪರಿಶೀಲಿಸಿ / Check Application Status</a>
+      `;
+    }
+  </script>
 </body>
 </html>
