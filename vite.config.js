@@ -10,6 +10,8 @@ export default defineConfig({
         membership: resolve(__dirname, 'membership.html'),
         gallery: resolve(__dirname, 'gallery.html'),
         contact: resolve(__dirname, 'contact.html'),
+        leadership: resolve(__dirname, 'leadership.html'),
+        thanks: resolve(__dirname, 'thanks.html'),
         adminLogin: resolve(__dirname, 'admin/login.html'),
         adminDashboard: resolve(__dirname, 'admin/dashboard.html'),
       }
