@@ -2,56 +2,60 @@
 <html lang="kn">
 <head>
   <meta charset="UTF-8">
-  <title>ಧನ್ಯವಾದಗಳು</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ಧನ್ಯವಾದಗಳು | Thank You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       text-align: center;
-      padding: 60px;
-      font-family: 'Arial', sans-serif;
-      background: #f0f8ff; /* light blue background */
+      padding: 60px 20px;
+      font-family: 'Noto Sans Kannada', 'Arial', sans-serif;
+      background: #f4f6f9;
       color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
     }
 
     h2 {
-      color: #2e8b57; /* sea green */
+      color: #2e8b57;
       font-size: 36px;
       margin-bottom: 20px;
     }
 
     p {
-      font-size: 20px;
+      font-size: 1.2rem;
       margin-bottom: 30px;
+      line-height: 1.6;
     }
 
     a {
       display: inline-block;
       text-decoration: none;
-      background-color: #2e8b57;
+      background-color: #f07a03; /* Saffron matching the theme */
       color: white;
-      padding: 12px 25px;
+      padding: 15px 30px;
       border-radius: 8px;
       font-weight: bold;
       transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
     }
 
     a:hover {
-      background-color: #3cb371; /* medium sea green */
-      transform: scale(1.05);
+      background-color: #d86d02;
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
 
-  <h2>ಧನ್ಯವಾದಗಳು 🙏</h2>
-  <p>ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಕಳುಹಿಸಲಾಗಿದೆ.</p>
- <p>ಕಾರ್ಡ್ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...</p>
+  <h2>ಧನ್ಯವಾದಗಳು 🙏<br>Thank You!</h2>
+  <p>ನಿಮ್ಮ ಅರ್ಜಿಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸಲ್ಲಿಸಲಾಗಿದೆ. ನಮ್ಮ ತಂಡವು ಅದನ್ನು ಪರಿಶೀಲಿಸಿದ ನಂತರ ನಿಮಗೆ ಖಚಿತಪಡಿಸಲಾಗುವುದು.</p>
+  <p>Your application has been successfully submitted. It is currently pending review.</p>
 
-<script>
-const id = localStorage.getItem("member_id");
-setTimeout(()=>{
-  window.location.href = "card.html?id=" + id;
-},3000);
-</script>
+  <a href="index.html">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ / Return Home</a>
 
 </body>
 </html>
