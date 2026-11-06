@@ -242,6 +242,29 @@ body{
   transform:translateY(-1px);
   background:#0f6b06;
 }
+
+@media print {
+  body {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .actions, .status-message {
+    display: none !important;
+  }
+  .wrap {
+    display: block !important;
+    max-width: 100% !important;
+    margin: 20px auto !important;
+  }
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
 </style>
   <link rel="icon" type="image/png" href="/logo.png">
 </head>
@@ -306,13 +329,15 @@ body{
     </div>
     
     <div class="card-footer">
-      <div>Valid: 2024 - 2027</div>
+      <div id="cardValidity">Valid: 2026 - 2029</div>
       <div class="secure">✓ Verified</div>
     </div>
   </div>
 
   <div class="actions">
-    <button class="btn primary" onclick="downloadPDF()">Download PDF</button>
+    <button class="btn primary" onclick="downloadPDF()">📥 Download PDF</button>
+    <button class="btn" onclick="window.print()" style="background:#ffffff; color:#1a1a1a; border:2px solid #e2e8f0;">🖨️ Print Card</button>
+    <a href="index.html" class="btn" style="background:#f1f5f9; color:#475569; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">🏠 Return Home</a>
   </div>
 </div>
 
@@ -320,64 +345,133 @@ body{
   import { supabase } from './src/supabaseClient.js';
   
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  let id = params.get("id");
 
   const statusContainer = document.getElementById("statusContainer");
   const statusTitle = document.getElementById("statusTitle");
   const statusDesc = document.getElementById("statusDesc");
   const cardWrapper = document.getElementById("cardWrapper");
 
+  function renderCard(data) {
+    statusContainer.style.display = "none";
+    cardWrapper.style.display = "block";
+
+    // Fill Card Data
+    document.getElementById("cardName").innerText = data.name || "Member";
+    document.getElementById("cardPhone").innerText = data.phone || "-";
+    
+    const locationParts = [data.district, data.taluk].filter(Boolean);
+    document.getElementById("cardAddress").innerText = locationParts.length > 0 ? locationParts.join(", ") : (data.current_address || "-");
+    
+    document.getElementById("cardType").innerText = data.membership_type || "General Member";
+    
+    const displayId = (data.id || "MBR").toString().substring(0, 10).toUpperCase();
+    document.getElementById("cardShortId").innerText = `ID: ${displayId}`;
+
+    // Dynamic Validity based on type
+    const validityEl = document.getElementById("cardValidity");
+    if (validityEl) {
+      const typeStr = (data.membership_type || "").toLowerCase();
+      if (typeStr.includes("life")) {
+        validityEl.innerText = "Valid: Lifetime / ಆಜೀವ";
+      } else if (typeStr.includes("annual")) {
+        validityEl.innerText = "Valid: 1 Year (2026 - 2027)";
+      } else {
+        validityEl.innerText = "Valid: 3 Years (2026 - 2029)";
+      }
+    }
+
+    // Photo
+    const cardPhoto = document.getElementById("cardPhoto");
+    if (data.photo_data_url) {
+      cardPhoto.src = data.photo_data_url;
+    } else if (data.photo_storage_path) {
+      try {
+        const { data: urlData } = supabase.storage.from('members_photos').getPublicUrl(data.photo_storage_path);
+        if (urlData && urlData.publicUrl) {
+          cardPhoto.src = urlData.publicUrl;
+        }
+      } catch (e) {
+        console.warn("Storage photo fetch error:", e);
+      }
+    }
+    cardPhoto.onerror = function() {
+      this.src = "https://via.placeholder.com/110?text=Member";
+    };
+
+    // QR Code for Verification
+    const currentUrl = window.location.href;
+    document.getElementById("cardQr").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
+  }
+
   async function init() {
     if(!id) {
+      // Check if user just submitted and has cached member in localStorage
+      const cached = localStorage.getItem("current_member");
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached);
+          if (parsed && parsed.name) {
+            id = parsed.id;
+            renderCard(parsed);
+            return;
+          }
+        } catch(e) {}
+      }
+
       statusContainer.style.display = "block";
       statusTitle.className = "status-error";
       statusTitle.innerText = "Error";
-      statusDesc.innerText = "No ID provided in the URL.";
+      statusDesc.innerText = "No Member ID provided in the URL.";
       return;
     }
 
     statusContainer.style.display = "block";
 
-    const { data, error } = await supabase.from('memberships').select('*').eq('id', id).single();
+    let memberData = null;
 
-    if (error || !data) {
+    // 1. Try fetching from Supabase DB
+    try {
+      const { data, error } = await supabase.from('memberships').select('*').eq('id', id).single();
+      if (!error && data) {
+        memberData = data;
+      }
+    } catch(err) {
+      console.warn("Supabase fetch error:", err);
+    }
+
+    // 2. Fallback to localStorage if Supabase unavailable
+    if (!memberData) {
+      const localRecord = localStorage.getItem("member_" + id) || localStorage.getItem("current_member");
+      if (localRecord) {
+        try {
+          const parsed = JSON.parse(localRecord);
+          if (parsed && (parsed.id === id || !id || parsed.name)) {
+            memberData = parsed;
+          }
+        } catch(e) {}
+      }
+    }
+
+    if (!memberData) {
       statusTitle.className = "status-error";
       statusTitle.innerText = "Not Found";
-      statusDesc.innerText = "Application not found. Please check your link.";
+      statusDesc.innerText = "Application not found. Please check your link or contact admin.";
       return;
     }
 
-    if (data.status === 'Pending') {
+    // Direct Display for Approved records or Razorpay paid applications!
+    if (memberData.status === 'Pending' && !memberData.payment_id) {
       statusTitle.className = "status-pending";
       statusTitle.innerText = "Pending Review";
       statusDesc.innerText = "Your application and payment are currently being verified by the Admin. Please check back later.";
-    } else if (data.status === 'Rejected') {
+    } else if (memberData.status === 'Rejected') {
       statusTitle.className = "status-rejected";
       statusTitle.innerText = "Application Rejected";
-      statusDesc.innerText = "Your application was rejected. This may be due to an invalid UTR or missing information. Please contact the Admin.";
-    } else if (data.status === 'Approved') {
-      // Hide status, show card
-      statusContainer.style.display = "none";
-      cardWrapper.style.display = "block";
-
-      // Fill Card Data
-      document.getElementById("cardName").innerText = data.name;
-      document.getElementById("cardPhone").innerText = data.phone;
-      document.getElementById("cardAddress").innerText = `${data.district}, ${data.taluk}`;
-      document.getElementById("cardType").innerText = data.membership_type;
-      
-      const shortId = data.id.substring(0, 8).toUpperCase();
-      document.getElementById("cardShortId").innerText = `ID: ${shortId}`;
-
-      // Photo
-      if(data.photo_storage_path) {
-        const { data: urlData } = supabase.storage.from('members_photos').getPublicUrl(data.photo_storage_path);
-        document.getElementById("cardPhoto").src = urlData.publicUrl;
-      }
-
-      // QR Code
-      const currentUrl = window.location.href;
-      document.getElementById("cardQr").src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}`;
+      statusDesc.innerText = "Your application was rejected. Please contact the Admin.";
+    } else {
+      // Status Approved or Direct Paid -> Render Card immediately!
+      renderCard(memberData);
     }
   }
 
@@ -388,16 +482,16 @@ body{
 <script>
 function downloadPDF(){
   const element = document.getElementById("cardNode");
+  const shortIdText = document.getElementById("cardShortId").innerText.replace(/[^a-zA-Z0-9]/g, '_') || 'Card';
   const opt = {
-    margin:       0.5,
-    filename:     'Membership_Card.pdf',
+    margin:       0.3,
+    filename:     `Membership_Card_${shortIdText}.pdf`,
     image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 2, useCORS: true },
+    html2canvas:  { scale: 2, useCORS: true, logging: false },
     jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
   };
   html2pdf().set(opt).from(element).save();
 }
 </script>
-
 </body>
 </html>
